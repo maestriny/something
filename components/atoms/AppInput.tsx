@@ -60,8 +60,8 @@ export function AppInput({
       >
         <TextInput
           {...rest}
-          textContentType={textContentType ?? (isPassword ? 'newPassword' : 'none')}
-          autoComplete={autoComplete ?? (isPassword ? 'new-password' : 'off')}
+          textContentType={textContentType ?? 'none'}
+          autoComplete={autoComplete ?? 'off'}
           style={[styles.input, style]}
           selectionColor={Colors.inputBorderFocused}
           placeholderTextColor={Colors.placeholder}

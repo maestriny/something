@@ -65,6 +65,7 @@ const de: Translations = {
       passwordRequired: 'Bitte gib ein Passwort ein',
       passwordMin: 'Das Passwort muss mindestens 8 Zeichen lang sein',
       passwordUppercase: 'Das Passwort muss mindestens einen Großbuchstaben enthalten',
+      passwordNumber: 'Das Passwort muss mindestens eine Zahl enthalten',
       passwordSpecial: 'Das Passwort muss mindestens ein Sonderzeichen enthalten',
     },
     toast: {

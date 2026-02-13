@@ -65,6 +65,7 @@ const fr: Translations = {
       passwordRequired: 'Veuillez entrer un mot de passe',
       passwordMin: 'Le mot de passe doit contenir au moins 8 caractères',
       passwordUppercase: 'Le mot de passe doit contenir au moins une lettre majuscule',
+      passwordNumber: 'Le mot de passe doit contenir au moins un chiffre',
       passwordSpecial: 'Le mot de passe doit contenir au moins un caractère spécial',
     },
     toast: {

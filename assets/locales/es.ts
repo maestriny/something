@@ -65,6 +65,7 @@ const es: Translations = {
       passwordRequired: 'Por favor, introduce una contraseña',
       passwordMin: 'La contraseña debe tener al menos 8 caracteres',
       passwordUppercase: 'La contraseña debe contener al menos una letra mayúscula',
+      passwordNumber: 'La contraseña debe contener al menos un número',
       passwordSpecial: 'La contraseña debe contener al menos un carácter especial',
     },
     toast: {

@@ -63,6 +63,7 @@ const en = {
       passwordRequired: 'Please enter a password',
       passwordMin: 'Password should be at least 8 characters',
       passwordUppercase: 'Password needs at least one uppercase letter',
+      passwordNumber: 'Password needs at least one number',
       passwordSpecial: 'Password needs at least one special character',
     },
     toast: {
