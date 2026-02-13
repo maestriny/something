@@ -6,11 +6,13 @@ import { ToastProvider } from '../providers/toast';
 import { Wave } from '../components/atoms/Wave';
 import { Toast } from '../components/atoms/Toast';
 import { useAppFonts } from '../hooks/useAppFonts';
+import { useI18n } from '../hooks/useI18n';
 
 export default function RootLayout() {
   const fontsLoaded = useAppFonts();
-  // don't render anything until fonts are loaded to avoid a flash of unstyled text (not nice)
-  if (!fontsLoaded) {
+  const i18nReady = useI18n();
+
+  if (!fontsLoaded || !i18nReady) {
     return null;
   }
 

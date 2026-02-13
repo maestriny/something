@@ -1,0 +1,81 @@
+import type { Translations } from './en';
+
+const es: Translations = {
+  common: {
+    oops: 'Ups',
+    somethingWentWrong: 'Algo salió mal',
+    emailAlreadyExists: 'Ya existe una cuenta con este correo electrónico',
+    saveFailed: 'Algo salió mal al guardar. Por favor, inténtalo de nuevo.',
+    generalError: 'Algo salió mal. Por favor, inténtalo de nuevo.',
+  },
+  login: {
+    heading: 'Bienvenido de nuevo',
+    subheading: 'Inicia sesión para continuar',
+    labels: {
+      email: 'Correo electrónico',
+      password: 'Contraseña',
+    },
+    placeholders: {
+      email: 'tu@email.com',
+      password: 'Tu contraseña',
+    },
+    button: 'Iniciar sesión',
+    prompt: {
+      message: '¿No tienes una cuenta?',
+      action: 'Regístrate',
+    },
+    validation: {
+      emailRequired: 'Por favor, introduce tu correo electrónico',
+      emailInvalid: 'Por favor, introduce un correo electrónico válido',
+      passwordRequired: 'Por favor, introduce una contraseña',
+    },
+    toast: {
+      errorMessage: 'Hmm, eso no funcionó',
+      errorDescription: 'Revisa tu correo electrónico y contraseña.',
+      successMessage: '¡Bienvenido de nuevo!',
+      successDescription: 'Qué bueno verte, {{username}}.',
+    },
+  },
+  register: {
+    heading: 'Crear cuenta',
+    subheading: 'Empecemos',
+    labels: {
+      username: 'Nombre de usuario',
+      email: 'Correo electrónico',
+      password: 'Contraseña',
+    },
+    placeholders: {
+      username: '¿Cómo quieres que te llamemos?',
+      email: 'tu@email.com',
+      password: 'Al menos 8 caracteres',
+    },
+    button: 'Empezar',
+    prompt: {
+      message: '¿Ya tienes una cuenta?',
+      action: 'Iniciar sesión',
+    },
+    validation: {
+      usernameRequired: 'Por favor, introduce un nombre de usuario',
+      usernameMin: 'El nombre de usuario debe tener al menos 3 caracteres',
+      usernameMax: 'El nombre de usuario no puede superar {{max}} caracteres',
+      usernamePattern: 'Solo letras, números, guiones bajos y guiones',
+      emailRequired: 'Por favor, introduce tu correo electrónico',
+      emailInvalid: 'Por favor, introduce un correo electrónico válido',
+      passwordRequired: 'Por favor, introduce una contraseña',
+      passwordMin: 'La contraseña debe tener al menos 8 caracteres',
+      passwordUppercase: 'La contraseña debe contener al menos una letra mayúscula',
+      passwordSpecial: 'La contraseña debe contener al menos un carácter especial',
+    },
+    toast: {
+      successMessage: '¡Todo listo!',
+      successDescription: 'Tu cuenta ha sido creada.',
+    },
+  },
+  input: {
+    passwordHint: 'Campo de contraseña, el texto está oculto',
+    hidePassword: 'Ocultar contraseña',
+    showPassword: 'Mostrar contraseña',
+  },
+} as const;
+
+export default es;
