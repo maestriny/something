@@ -1,5 +1,5 @@
 {
-  "name": "final-project",
+  "name": "something",
   "version": "1.0.0",
   "main": "expo-router/entry",
   "scripts": {
@@ -37,6 +37,7 @@
     "expo-status-bar": "~3.0.9",
     "i18next": "^25.8.6",
     "react": "19.1.0",
+    "react-dom": "^19.1.0",
     "react-hook-form": "^7.71.1",
     "react-i18next": "^16.5.4",
     "react-native": "0.81.5",
