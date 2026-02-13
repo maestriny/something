@@ -11,7 +11,7 @@ export async function signUp({ email, password, username }: SignUpData) {
   });
   if (error) throw error;
   if (!data.user?.identities?.length) {
-    throw new Error('User already registered'); // will be mapped and properly translated
+    throw Object.assign(new Error(), { code: 'user_already_exists' });
   }
   return data;
 }

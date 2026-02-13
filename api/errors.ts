@@ -1,24 +1,26 @@
-// mapping of supabase error messages to our internal keys for i18n
-// could be done better? maybe
-
-const SUPABASE_ERRORS = {
-  'Invalid login credentials': 'invalidCredentials',
-  'Email not confirmed': 'emailNotConfirmed',
-  'User already registered': 'userAlreadyRegistered',
-  'Email rate limit exceeded': 'rateLimited',
-  'Request rate limit reached': 'rateLimited',
-  'For security purposes, you can only request this once every 60 seconds': 'rateLimited',
-  'Password should be at least 6 characters': 'weakPassword',
-  'User banned': 'userBanned',
-  'Auth session missing': 'sessionExpired',
-  'Invalid Refresh Token: Refresh Token Not Found': 'sessionExpired',
+// map specific error codes from the API to i18n keys for user-friendly error messages
+const CODE_MAP = {
+  invalid_credentials: 'invalidCredentials',
+  email_not_confirmed: 'emailNotConfirmed',
+  user_already_exists: 'userAlreadyRegistered',
+  over_email_send_rate_limit: 'rateLimited',
+  over_request_rate_limit: 'rateLimited',
+  weak_password: 'weakPassword',
+  user_banned: 'userBanned',
+  session_not_found: 'sessionExpired',
+  refresh_token_not_found: 'sessionExpired',
 } as const;
 
-type AuthErrorKey = (typeof SUPABASE_ERRORS)[keyof typeof SUPABASE_ERRORS] | 'defaultError';
+type AuthErrorKey = (typeof CODE_MAP)[keyof typeof CODE_MAP] | 'defaultError';
 
 function resolveKey(error: unknown): AuthErrorKey {
-  if (error instanceof Error) {
-    return SUPABASE_ERRORS[error.message as keyof typeof SUPABASE_ERRORS] ?? 'defaultError';
+  if (
+    typeof error === 'object' &&
+    error !== null &&
+    'code' in error &&
+    typeof error.code === 'string'
+  ) {
+    return CODE_MAP[error.code as keyof typeof CODE_MAP] ?? 'defaultError';
   }
   return 'defaultError';
 }
