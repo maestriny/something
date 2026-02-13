@@ -6,6 +6,7 @@ import {
   type TextInputProps,
 } from 'react-native';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { IconEye, IconEyeClosed } from '@tabler/icons-react-native';
 import { AppText } from './AppText';
 import { Colors, BorderRadius, FontSize, Fonts, Spacing, IconSize, Opacity } from '../../constants/theme';
@@ -27,6 +28,7 @@ export function AppInput({
   autoComplete,
   ...rest
 }: AppInputProps) {
+  const { t } = useTranslation();
   const [isFocused, setIsFocused] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
@@ -59,10 +61,11 @@ export function AppInput({
             !!error && styles.inputError,
             style,
           ]}
+          selectionColor={Colors.inputBorderFocused}
           placeholderTextColor={Colors.placeholder}
           secureTextEntry={isPassword && !showPassword}
           accessibilityLabel={label}
-          accessibilityHint={isPassword ? 'Password field, input is hidden' : undefined}
+          accessibilityHint={isPassword ? t('input.passwordHint') : undefined}
           onFocus={handleFocus}
           onBlur={handleBlur}
         />
@@ -72,7 +75,7 @@ export function AppInput({
             style={styles.toggle}
             hitSlop={Spacing.sm}
             accessibilityRole="button"
-            accessibilityLabel={showPassword ? 'Hide password' : 'Show password'}
+            accessibilityLabel={showPassword ? t('input.hidePassword') : t('input.showPassword')}
           >
             {showPassword ? (
               <IconEyeClosed size={IconSize.md} color={Colors.textMuted} />

@@ -9,33 +9,27 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter, useFocusEffect } from "expo-router";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { AppText } from "../components/atoms/AppText";
 import { AppButton } from "../components/atoms/AppButton";
 import { AppFormInput } from "../components/form/AppFormInput";
 import { AuthPrompt } from "../components/molecules/AuthPrompt";
 import { useWave } from "../providers/waves";
 import { useToast } from "../providers/toast";
-import { z } from "zod";
 import { verifyCredentials } from "../lib/storage";
 import { Colors, Spacing } from "../constants/theme";
 import { useKeyboardScroll } from "../hooks/useKeyboardScroll";
-import { EMAIL_REGEX } from "../lib/utils";
-
-const loginSchema = z.object({
-  email: z
-    .string()
-    .min(1, "Please enter your email")
-    .regex(EMAIL_REGEX, "Please enter a valid email address"),
-  password: z.string().min(1, "Please enter a password"),
-});
-
-type LoginFormData = z.infer<typeof loginSchema>;
+import { createLoginSchema, type LoginFormData } from "../lib/schemas/login";
 
 export default function LoginScreen() {
   const router = useRouter();
   const { setScreen } = useWave();
   const { showToast } = useToast();
+  const { t } = useTranslation();
+
+  const loginSchema = useMemo(() => createLoginSchema(t), [t]);
+
   const {
     control,
     handleSubmit,
@@ -64,20 +58,19 @@ export default function LoginScreen() {
       if (!user) {
         showToast({
           type: "error",
-          message: "Hmm, that didn't work",
-          description: "Check your email and password.",
+          message: t("login.toast.errorMessage"),
+          description: t("login.toast.errorDescription"),
         });
         return;
       }
       showToast({
         type: "success",
-        message: "Welcome back!",
-        description: `Good to see you, ${user.username}.`,
+        message: t("login.toast.successMessage"),
+        description: t("login.toast.successDescription", { username: user.username }),
       });
     } catch (error) {
-      const message =
-        error instanceof Error ? error.message : "Something went wrong";
-      showToast({ type: "error", message: "Oops", description: message });
+      const key = error instanceof Error ? error.message : 'common.somethingWentWrong';
+      showToast({ type: "error", message: t("common.oops"), description: t(key as never) });
     }
   };
 
@@ -86,9 +79,9 @@ export default function LoginScreen() {
       <SafeAreaView style={styles.safeArea}>
         <View style={styles.content}>
           <View style={styles.header}>
-            <AppText variant="heading">Welcome back</AppText>
+            <AppText variant="heading">{t("login.heading")}</AppText>
             <AppText variant="subheading" style={styles.subtitle}>
-              Sign in to continue
+              {t("login.subheading")}
             </AppText>
           </View>
 
@@ -104,8 +97,8 @@ export default function LoginScreen() {
             <AppFormInput
               control={control}
               name="email"
-              label="Email"
-              placeholder="your@email.com"
+              label={t("login.labels.email")}
+              placeholder={t("login.placeholders.email")}
               keyboardType="email-address"
               autoCapitalize="none"
               textContentType="emailAddress"
@@ -115,8 +108,8 @@ export default function LoginScreen() {
             <AppFormInput
               control={control}
               name="password"
-              label="Password"
-              placeholder="Your password"
+              label={t("login.labels.password")}
+              placeholder={t("login.placeholders.password")}
               isPassword
               textContentType="password"
               autoComplete="current-password"
@@ -124,7 +117,7 @@ export default function LoginScreen() {
             />
 
             <AppButton
-              title="Sign In"
+              title={t("login.button")}
               onPress={handleSubmit(onSubmit)}
               isLoading={isSubmitting}
               style={styles.button}
@@ -132,8 +125,8 @@ export default function LoginScreen() {
           </ScrollView>
 
           <AuthPrompt
-            message="Don't have an account?"
-            actionText="Sign Up"
+            message={t("login.prompt.message")}
+            actionText={t("login.prompt.action")}
             onPress={() => router.push("/register")}
           />
         </View>

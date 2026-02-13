@@ -3,44 +3,27 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter, useFocusEffect } from 'expo-router';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { AppText } from '../components/atoms/AppText';
 import { AppButton } from '../components/atoms/AppButton';
 import { AppFormInput } from '../components/form/AppFormInput';
 import { AuthPrompt } from '../components/molecules/AuthPrompt';
 import { useWave } from '../providers/waves';
 import { useToast } from '../providers/toast';
-import { z } from 'zod';
 import { saveUser } from '../lib/storage';
 import { Colors, Spacing } from '../constants/theme';
 import { useKeyboardScroll } from '../hooks/useKeyboardScroll';
-import { USERNAME_REGEX, USERNAME_MAX_LENGTH, EMAIL_REGEX, PASSWORD_REGEX } from '../lib/utils';
-
-const registerSchema = z.object({
-  username: z
-    .string()
-    .min(1, 'Please enter a username')
-    .min(3, 'Username should be at least 3 characters')
-    .max(USERNAME_MAX_LENGTH, `Username can't exceed ${USERNAME_MAX_LENGTH} characters`)
-    .regex(USERNAME_REGEX, 'Only letters, numbers, underscores and hyphens'),
-  email: z
-    .string()
-    .min(1, 'Please enter your email')
-    .regex(EMAIL_REGEX, 'Please enter a valid email address'),
-  password: z
-    .string()
-    .min(1, 'Please enter a password')
-    .min(8, 'Password should be at least 8 characters')
-    .regex(PASSWORD_REGEX.uppercase, 'Password needs at least one uppercase letter')
-    .regex(PASSWORD_REGEX.special, 'Password needs at least one special character'),
-});
-
-type RegisterFormData = z.infer<typeof registerSchema>;
+import { createRegisterSchema, type RegisterFormData } from '../lib/schemas/register';
 
 export default function RegisterScreen() {
   const router = useRouter();
   const { setScreen } = useWave();
   const { showToast } = useToast();
+  const { t } = useTranslation();
+
+  const registerSchema = useMemo(() => createRegisterSchema(t), [t]);
+
   const {
     control,
     handleSubmit,
@@ -73,14 +56,13 @@ export default function RegisterScreen() {
       });
       showToast({
         type: 'success',
-        message: "You're all set!",
-        description: 'Your account has been created.',
+        message: t('register.toast.successMessage'),
+        description: t('register.toast.successDescription'),
       });
       router.replace('/login');
     } catch (error) {
-      const message =
-        error instanceof Error ? error.message : 'Something went wrong';
-      showToast({ type: 'error', message: 'Oops', description: message });
+      const key = error instanceof Error ? error.message : 'common.somethingWentWrong';
+      showToast({ type: 'error', message: t('common.oops'), description: t(key as never) });
     }
   };
 
@@ -89,9 +71,9 @@ export default function RegisterScreen() {
       <SafeAreaView style={styles.safeArea}>
         <View style={styles.content}>
           <View style={styles.header}>
-            <AppText variant="heading">Create account</AppText>
+            <AppText variant="heading">{t('register.heading')}</AppText>
             <AppText variant="subheading" style={styles.subtitle}>
-              Let's get you started
+              {t('register.subheading')}
             </AppText>
           </View>
 
@@ -108,8 +90,8 @@ export default function RegisterScreen() {
             <AppFormInput
               control={control}
               name="username"
-              label="Username"
-              placeholder="What should we call you?"
+              label={t('register.labels.username')}
+              placeholder={t('register.placeholders.username')}
               autoCapitalize="none"
               textContentType="username"
               autoComplete="username"
@@ -118,8 +100,8 @@ export default function RegisterScreen() {
             <AppFormInput
               control={control}
               name="email"
-              label="Email"
-              placeholder="your@email.com"
+              label={t('register.labels.email')}
+              placeholder={t('register.placeholders.email')}
               keyboardType="email-address"
               autoCapitalize="none"
               textContentType="emailAddress"
@@ -129,8 +111,8 @@ export default function RegisterScreen() {
             <AppFormInput
               control={control}
               name="password"
-              label="Password"
-              placeholder="At least 8 characters"
+              label={t('register.labels.password')}
+              placeholder={t('register.placeholders.password')}
               isPassword
               textContentType="newPassword"
               autoComplete="new-password"
@@ -138,7 +120,7 @@ export default function RegisterScreen() {
             />
 
             <AppButton
-              title="Get started"
+              title={t('register.button')}
               onPress={handleSubmit(onSubmit)}
               isLoading={isSubmitting}
               style={styles.button}
@@ -146,8 +128,8 @@ export default function RegisterScreen() {
           </ScrollView>
 
           <AuthPrompt
-            message="Already have an account?"
-            actionText="Sign In"
+            message={t('register.prompt.message')}
+            actionText={t('register.prompt.action')}
             onPress={() => router.back()}
           />
         </View>

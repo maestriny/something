@@ -3,6 +3,12 @@ import type { User } from '../types/auth';
 
 const USERS_KEY = 'registered_users';
 
+const StorageErrors = {
+  EMAIL_EXISTS: 'common.emailAlreadyExists',
+  SAVE_FAILED: 'common.saveFailed',
+  GENERAL: 'common.generalError',
+} as const;
+
 export async function saveUser(user: User): Promise<void> {
   try {
     const existingData = await AsyncStorage.getItem(USERS_KEY);
@@ -12,16 +18,16 @@ export async function saveUser(user: User): Promise<void> {
       (u) => u.email.toLowerCase() === user.email.toLowerCase()
     );
     if (alreadyExists) {
-      throw new Error('An account with this email already exists');
+      throw new Error(StorageErrors.EMAIL_EXISTS);
     }
 
     users.push(user);
     await AsyncStorage.setItem(USERS_KEY, JSON.stringify(users));
   } catch (error) {
-    if (error instanceof Error) {
+    if (error instanceof Error && isStorageError(error.message)) {
       throw error;
     }
-    throw new Error('Something went wrong while saving. Please try again.');
+    throw new Error(StorageErrors.SAVE_FAILED);
   }
 }
 
@@ -41,6 +47,10 @@ export async function verifyCredentials(
 
     return matchedUser ?? null;
   } catch {
-    throw new Error('Something went wrong. Please try again.');
+    throw new Error(StorageErrors.GENERAL);
   }
+}
+
+function isStorageError(message: string): boolean {
+  return Object.values(StorageErrors).includes(message as typeof StorageErrors[keyof typeof StorageErrors]);
 }
