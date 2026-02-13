@@ -19,6 +19,7 @@ export function createRegisterSchema(t: TFunction) {
       .min(1, t('register.validation.passwordRequired'))
       .min(8, t('register.validation.passwordMin'))
       .regex(PASSWORD_REGEX.uppercase, t('register.validation.passwordUppercase'))
+      .regex(PASSWORD_REGEX.number, t('register.validation.passwordNumber'))
       .regex(PASSWORD_REGEX.special, t('register.validation.passwordSpecial')),
   });
 }

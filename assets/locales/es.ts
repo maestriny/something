@@ -5,8 +5,9 @@ const es: Translations = {
     oops: 'Ups',
     somethingWentWrong: 'Algo salió mal',
     emailAlreadyExists: 'Ya existe una cuenta con este correo electrónico',
-    saveFailed: 'Algo salió mal al guardar. Por favor, inténtalo de nuevo.',
     generalError: 'Algo salió mal. Por favor, inténtalo de nuevo.',
+    networkError: 'No se puede conectar. Comprueba tu conexión a internet.',
+    logout: 'Cerrar sesión',
   },
   login: {
     heading: 'Bienvenido de nuevo',
@@ -64,11 +65,46 @@ const es: Translations = {
       passwordRequired: 'Por favor, introduce una contraseña',
       passwordMin: 'La contraseña debe tener al menos 8 caracteres',
       passwordUppercase: 'La contraseña debe contener al menos una letra mayúscula',
+      passwordNumber: 'La contraseña debe contener al menos un número',
       passwordSpecial: 'La contraseña debe contener al menos un carácter especial',
     },
     toast: {
       successMessage: '¡Todo listo!',
       successDescription: 'Tu cuenta ha sido creada.',
+    },
+  },
+  authErrors: {
+    emailNotConfirmed: {
+      title: 'Revisa tu bandeja de entrada',
+      description: '¡Ya casi! Confirma tu correo electrónico para acceder.',
+    },
+    invalidCredentials: {
+      title: 'Hmm, eso no funcionó',
+      description: 'Correo electrónico o contraseña no válidos. Inténtalo de nuevo.',
+    },
+    userAlreadyRegistered: {
+      title: 'Ups',
+      description: 'Ya existe una cuenta asociada a este correo electrónico.',
+    },
+    rateLimited: {
+      title: 'Ve más despacio',
+      description: 'Demasiados intentos. Espera un momento e inténtalo de nuevo.',
+    },
+    weakPassword: {
+      title: 'Contraseña débil',
+      description: 'Tu contraseña es demasiado corta. Elige una más segura.',
+    },
+    userBanned: {
+      title: 'Cuenta suspendida',
+      description: 'Esta cuenta ha sido suspendida. Contacta con soporte para obtener ayuda.',
+    },
+    sessionExpired: {
+      title: 'Sesión expirada',
+      description: 'Tu sesión ha expirado. Inicia sesión de nuevo.',
+    },
+    defaultError: {
+      title: 'Ups',
+      description: 'Algo salió mal. Por favor, inténtalo de nuevo.',
     },
   },
   input: {
