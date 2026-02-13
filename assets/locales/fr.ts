@@ -5,8 +5,9 @@ const fr: Translations = {
     oops: 'Oups',
     somethingWentWrong: 'Quelque chose a mal tourné',
     emailAlreadyExists: 'Un compte avec cette adresse email existe déjà',
-    saveFailed: "Quelque chose a mal tourné lors de l'enregistrement. Veuillez réessayer.",
     generalError: 'Quelque chose a mal tourné. Veuillez réessayer.',
+    networkError: 'Impossible de se connecter. Vérifiez votre connexion internet.',
+    logout: 'Se déconnecter',
   },
   login: {
     heading: 'Bon retour',
@@ -69,6 +70,40 @@ const fr: Translations = {
     toast: {
       successMessage: 'Tout est prêt !',
       successDescription: 'Votre compte a été créé.',
+    },
+  },
+  authErrors: {
+    emailNotConfirmed: {
+      title: 'Vérifiez votre boîte de réception',
+      description: 'On y est presque ! Confirmez votre adresse email pour vous connecter.',
+    },
+    invalidCredentials: {
+      title: "Hmm, ça n'a pas marché",
+      description: 'Email ou mot de passe invalide. Veuillez réessayer.',
+    },
+    userAlreadyRegistered: {
+      title: 'Oups',
+      description: 'Un compte associé à cette adresse email existe déjà.',
+    },
+    rateLimited: {
+      title: 'Doucement',
+      description: 'Trop de tentatives. Patientez un instant et réessayez.',
+    },
+    weakPassword: {
+      title: 'Mot de passe faible',
+      description: 'Votre mot de passe est trop court. Choisissez-en un plus sûr.',
+    },
+    userBanned: {
+      title: 'Compte suspendu',
+      description: "Ce compte a été suspendu. Contactez le support pour obtenir de l'aide.",
+    },
+    sessionExpired: {
+      title: 'Session expirée',
+      description: 'Votre session a expiré. Veuillez vous reconnecter.',
+    },
+    defaultError: {
+      title: 'Oups',
+      description: 'Quelque chose a mal tourné. Veuillez réessayer.',
     },
   },
   input: {

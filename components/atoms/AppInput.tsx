@@ -51,18 +51,18 @@ export function AppInput({
           {label}
         </AppText>
       ) : null}
-      <View style={styles.inputWrapper}>
+      <View
+        style={[
+          styles.inputWrapper,
+          isFocused && styles.inputWrapperFocused,
+          !!error && styles.inputWrapperError,
+        ]}
+      >
         <TextInput
           {...rest}
           textContentType={textContentType ?? (isPassword ? 'newPassword' : 'none')}
           autoComplete={autoComplete ?? (isPassword ? 'new-password' : 'off')}
-          style={[
-            styles.input,
-            isPassword && styles.inputWithToggle,
-            isFocused && styles.inputFocused,
-            !!error && styles.inputError,
-            style,
-          ]}
+          style={[styles.input, style]}
           selectionColor={Colors.inputBorderFocused}
           placeholderTextColor={Colors.placeholder}
           secureTextEntry={isPassword && !showPassword}
@@ -104,37 +104,33 @@ const styles = StyleSheet.create({
     marginBottom: Spacing.xs,
     marginLeft: Spacing.sm,
   },
-  input: {
+  inputWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
     backgroundColor: Colors.inputBackground,
     borderWidth: 1.5,
     borderColor: Colors.inputBorder,
     borderRadius: BorderRadius.lg,
+  },
+  inputWrapperFocused: {
+    borderColor: Colors.inputBorderFocused,
+  },
+  inputWrapperError: {
+    borderColor: Colors.error,
+  },
+  input: {
+    flex: 1,
     paddingHorizontal: Spacing.lg,
     paddingVertical: Spacing.md,
     fontSize: FontSize.md,
     fontFamily: Fonts.regular,
     color: Colors.textPrimary,
   },
-  inputWrapper: {
-    position: 'relative',
-  },
-  inputWithToggle: {
-    paddingRight: Spacing.xl + Spacing.md,
-  },
-  inputFocused: {
-    borderColor: Colors.inputBorderFocused,
-  },
   toggle: {
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
-    right: Spacing.md,
+    paddingRight: Spacing.md,
     justifyContent: 'center',
     alignItems: 'center',
     opacity: Opacity.active,
-  },
-  inputError: {
-    borderColor: Colors.error,
   },
   error: {
     marginTop: Spacing.xs,

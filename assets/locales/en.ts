@@ -3,8 +3,9 @@ const en = {
     oops: 'Oops',
     somethingWentWrong: 'Something went wrong',
     emailAlreadyExists: 'An account with this email already exists',
-    saveFailed: 'Something went wrong while saving. Please try again.',
     generalError: 'Something went wrong. Please try again.',
+    networkError: 'Unable to connect. Please check your internet connection.',
+    logout: 'Sign Out',
   },
   login: {
     heading: 'Welcome back',
@@ -67,6 +68,40 @@ const en = {
     toast: {
       successMessage: "You're all set!",
       successDescription: 'Your account has been created.',
+    },
+  },
+  authErrors: {
+    emailNotConfirmed: {
+      title: 'Check your inbox',
+      description: 'Almost there! Confirm your email address to sign in.',
+    },
+    invalidCredentials: {
+      title: "Hmm, that didn't work",
+      description: 'Invalid email or password. Please try again.',
+    },
+    userAlreadyRegistered: {
+      title: 'Oops',
+      description: 'An account associated with this email already exists.',
+    },
+    rateLimited: {
+      title: 'Slow down',
+      description: 'Too many attempts. Please wait a moment and try again.',
+    },
+    weakPassword: {
+      title: 'Weak password',
+      description: 'Your password is too short. Please choose a stronger one.',
+    },
+    userBanned: {
+      title: 'Account suspended',
+      description: 'This account has been suspended. Contact support for help.',
+    },
+    sessionExpired: {
+      title: 'Session expired',
+      description: 'Your session has expired. Please sign in again.',
+    },
+    defaultError: {
+      title: 'Oops',
+      description: 'Something went wrong. Please try again.',
     },
   },
   input: {

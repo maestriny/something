@@ -5,34 +5,35 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { AppText } from '../components/atoms/AppText';
-import { AppButton } from '../components/atoms/AppButton';
-import { AppFormInput } from '../components/form/AppFormInput';
-import { AuthPrompt } from '../components/molecules/AuthPrompt';
-import { useWave } from '../providers/waves';
-import { useToast } from '../providers/toast';
-import { saveUser } from '../lib/storage';
-import { Colors, Spacing } from '../constants/theme';
-import { useKeyboardScroll } from '../hooks/useKeyboardScroll';
-import { createRegisterSchema, type RegisterFormData } from '../lib/schemas/register';
+import { AppText } from '../../components/atoms/AppText';
+import { AppButton } from '../../components/atoms/AppButton';
+import { AppFormInput } from '../../components/form/AppFormInput';
+import { AuthPrompt } from '../../components/molecules/AuthPrompt';
+import { useWave } from '../../providers/waves';
+import { useToast } from '../../providers/toast';
+import { useAuthStore } from '../../stores/auth';
+import { getAuthError } from '../../api/errors';
+import { Colors, Spacing } from '../../constants/theme';
+import { useKeyboardScroll } from '../../hooks/useKeyboardScroll';
+import { createLoginSchema, type LoginFormData } from '../../lib/schemas/login';
 
-export default function RegisterScreen() {
+export default function LoginScreen() {
   const router = useRouter();
   const { setScreen } = useWave();
   const { showToast } = useToast();
   const { t } = useTranslation();
+  const login = useAuthStore(s => s.login);
 
-  const registerSchema = useMemo(() => createRegisterSchema(t), [t]);
+  const loginSchema = useMemo(() => createLoginSchema(t), [t]);
 
   const {
     control,
     handleSubmit,
     clearErrors,
     formState: { isSubmitting },
-  } = useForm<RegisterFormData>({
-    resolver: zodResolver(registerSchema),
+  } = useForm<LoginFormData>({
+    resolver: zodResolver(loginSchema),
     defaultValues: {
-      username: '',
       email: '',
       password: '',
     },
@@ -42,27 +43,26 @@ export default function RegisterScreen() {
 
   useFocusEffect(
     useCallback(() => {
-      setScreen('register');
+      setScreen('login');
       clearErrors();
     }, [setScreen, clearErrors]),
   );
 
-  const onSubmit = async (data: RegisterFormData) => {
+  const onSubmit = async (data: LoginFormData) => {
     try {
-      await saveUser({
-        username: data.username.trim(),
-        email: data.email.trim(),
-        password: data.password,
-      });
+      const user = await login({ email: data.email, password: data.password });
       showToast({
         type: 'success',
-        message: t('register.toast.successMessage'),
-        description: t('register.toast.successDescription'),
+        message: t('login.toast.successMessage'),
+        description: t('login.toast.successDescription', { username: user.username }),
       });
-      router.replace('/login');
     } catch (error) {
-      const key = error instanceof Error ? error.message : 'common.somethingWentWrong';
-      showToast({ type: 'error', message: t('common.oops'), description: t(key as never) });
+      const { title, description } = getAuthError(error);
+      showToast({
+        type: 'error',
+        message: t(title),
+        description: t(description),
+      });
     }
   };
 
@@ -71,9 +71,9 @@ export default function RegisterScreen() {
       <SafeAreaView style={styles.safeArea}>
         <View style={styles.content}>
           <View style={styles.header}>
-            <AppText variant="heading">{t('register.heading')}</AppText>
+            <AppText variant="heading">{t('login.heading')}</AppText>
             <AppText variant="subheading" style={styles.subtitle}>
-              {t('register.subheading')}
+              {t('login.subheading')}
             </AppText>
           </View>
 
@@ -89,19 +89,9 @@ export default function RegisterScreen() {
           >
             <AppFormInput
               control={control}
-              name="username"
-              label={t('register.labels.username')}
-              placeholder={t('register.placeholders.username')}
-              autoCapitalize="none"
-              textContentType="username"
-              autoComplete="username"
-              returnKeyType="next"
-            />
-            <AppFormInput
-              control={control}
               name="email"
-              label={t('register.labels.email')}
-              placeholder={t('register.placeholders.email')}
+              label={t('login.labels.email')}
+              placeholder={t('login.placeholders.email')}
               keyboardType="email-address"
               autoCapitalize="none"
               textContentType="emailAddress"
@@ -111,16 +101,16 @@ export default function RegisterScreen() {
             <AppFormInput
               control={control}
               name="password"
-              label={t('register.labels.password')}
-              placeholder={t('register.placeholders.password')}
+              label={t('login.labels.password')}
+              placeholder={t('login.placeholders.password')}
               isPassword
-              textContentType="newPassword"
-              autoComplete="new-password"
+              textContentType="password"
+              autoComplete="current-password"
               returnKeyType="done"
             />
 
             <AppButton
-              title={t('register.button')}
+              title={t('login.button')}
               onPress={handleSubmit(onSubmit)}
               isLoading={isSubmitting}
               style={styles.button}
@@ -128,9 +118,9 @@ export default function RegisterScreen() {
           </ScrollView>
 
           <AuthPrompt
-            message={t('register.prompt.message')}
-            actionText={t('register.prompt.action')}
-            onPress={() => router.back()}
+            message={t('login.prompt.message')}
+            actionText={t('login.prompt.action')}
+            onPress={() => router.push('/register')}
           />
         </View>
       </SafeAreaView>

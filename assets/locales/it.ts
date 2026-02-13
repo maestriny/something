@@ -5,8 +5,9 @@ const it: Translations = {
     oops: 'Ops',
     somethingWentWrong: 'Qualcosa è andato storto',
     emailAlreadyExists: 'Esiste già un account con questa email',
-    saveFailed: 'Qualcosa è andato storto durante il salvataggio. Riprova.',
     generalError: 'Qualcosa è andato storto. Riprova.',
+    networkError: 'Impossibile connettersi. Controlla la tua connessione internet.',
+    logout: 'Esci',
   },
   login: {
     heading: 'Bentornato',
@@ -69,6 +70,40 @@ const it: Translations = {
     toast: {
       successMessage: 'Tutto pronto!',
       successDescription: 'Il tuo account è stato creato.',
+    },
+  },
+  authErrors: {
+    emailNotConfirmed: {
+      title: 'Controlla la tua inbox',
+      description: 'Ci siamo quasi! Conferma il tuo indirizzo email per accedere.',
+    },
+    invalidCredentials: {
+      title: 'Hmm, non ha funzionato',
+      description: 'Email o password non validi. Riprova.',
+    },
+    userAlreadyRegistered: {
+      title: 'Ops',
+      description: 'Esiste già un account associato a questa email.',
+    },
+    rateLimited: {
+      title: 'Piano, piano',
+      description: 'Troppi tentativi. Aspetta un momento e riprova.',
+    },
+    weakPassword: {
+      title: 'Password debole',
+      description: 'La password è troppo corta. Scegline una più sicura.',
+    },
+    userBanned: {
+      title: 'Account sospeso',
+      description: 'Questo account è stato sospeso. Contatta il supporto per assistenza.',
+    },
+    sessionExpired: {
+      title: 'Sessione scaduta',
+      description: 'La tua sessione è scaduta. Accedi di nuovo.',
+    },
+    defaultError: {
+      title: 'Ops',
+      description: 'Qualcosa è andato storto. Riprova.',
     },
   },
   input: {

@@ -5,8 +5,9 @@ const de: Translations = {
     oops: 'Hoppla',
     somethingWentWrong: 'Etwas ist schiefgelaufen',
     emailAlreadyExists: 'Ein Konto mit dieser E-Mail-Adresse existiert bereits',
-    saveFailed: 'Beim Speichern ist etwas schiefgelaufen. Bitte versuche es erneut.',
     generalError: 'Etwas ist schiefgelaufen. Bitte versuche es erneut.',
+    networkError: 'Verbindung nicht möglich. Bitte überprüfe deine Internetverbindung.',
+    logout: 'Abmelden',
   },
   login: {
     heading: 'Willkommen zurück',
@@ -69,6 +70,40 @@ const de: Translations = {
     toast: {
       successMessage: 'Alles bereit!',
       successDescription: 'Dein Konto wurde erstellt.',
+    },
+  },
+  authErrors: {
+    emailNotConfirmed: {
+      title: 'Prüfe deinen Posteingang',
+      description: 'Fast geschafft! Bestätige deine E-Mail-Adresse, um dich anzumelden.',
+    },
+    invalidCredentials: {
+      title: 'Hmm, das hat nicht geklappt',
+      description: 'Ungültige E-Mail-Adresse oder Passwort. Bitte versuche es erneut.',
+    },
+    userAlreadyRegistered: {
+      title: 'Hoppla',
+      description: 'Es existiert bereits ein Konto, das mit dieser E-Mail-Adresse verknüpft ist.',
+    },
+    rateLimited: {
+      title: 'Langsam',
+      description: 'Zu viele Versuche. Bitte warte einen Moment und versuche es erneut.',
+    },
+    weakPassword: {
+      title: 'Schwaches Passwort',
+      description: 'Dein Passwort ist zu kurz. Bitte wähle ein stärkeres.',
+    },
+    userBanned: {
+      title: 'Konto gesperrt',
+      description: 'Dieses Konto wurde gesperrt. Kontaktiere den Support für Hilfe.',
+    },
+    sessionExpired: {
+      title: 'Sitzung abgelaufen',
+      description: 'Deine Sitzung ist abgelaufen. Bitte melde dich erneut an.',
+    },
+    defaultError: {
+      title: 'Hoppla',
+      description: 'Etwas ist schiefgelaufen. Bitte versuche es erneut.',
     },
   },
   input: {
