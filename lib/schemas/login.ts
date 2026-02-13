@@ -8,9 +8,7 @@ export function createLoginSchema(t: TFunction) {
       .string()
       .min(1, t('login.validation.emailRequired'))
       .regex(EMAIL_REGEX, t('login.validation.emailInvalid')),
-    password: z
-      .string()
-      .min(1, t('login.validation.passwordRequired')),
+    password: z.string().min(1, t('login.validation.passwordRequired')),
   });
 }
 

@@ -14,11 +14,7 @@ export function AuthPrompt({ message, actionText, onPress }: AuthPromptProps) {
       <AppText variant="body" style={styles.message}>
         {message}
       </AppText>
-      <TouchableOpacity
-        onPress={onPress}
-        accessibilityRole="link"
-        accessibilityLabel={actionText}
-      >
+      <TouchableOpacity onPress={onPress} accessibilityRole="link" accessibilityLabel={actionText}>
         <AppText variant="body" style={styles.link}>
           {actionText}
         </AppText>
