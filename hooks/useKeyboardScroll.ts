@@ -7,10 +7,8 @@ export function useKeyboardScroll(offset: number) {
   const scrollRef = useRef<ScrollView>(null);
 
   useEffect(() => {
-    const showEvent =
-      Platform.OS === 'ios' ? 'keyboardWillShow' : 'keyboardDidShow';
-    const hideEvent =
-      Platform.OS === 'ios' ? 'keyboardWillHide' : 'keyboardDidHide';
+    const showEvent = Platform.OS === 'ios' ? 'keyboardWillShow' : 'keyboardDidShow';
+    const hideEvent = Platform.OS === 'ios' ? 'keyboardWillHide' : 'keyboardDidHide';
 
     const onShow = Keyboard.addListener(showEvent, () => {
       scrollRef.current?.scrollTo({ y: offset, animated: true });

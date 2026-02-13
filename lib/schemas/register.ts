@@ -8,10 +8,7 @@ export function createRegisterSchema(t: TFunction) {
       .string()
       .min(1, t('register.validation.usernameRequired'))
       .min(3, t('register.validation.usernameMin'))
-      .max(
-        USERNAME_MAX_LENGTH,
-        t('register.validation.usernameMax', { max: USERNAME_MAX_LENGTH }),
-      )
+      .max(USERNAME_MAX_LENGTH, t('register.validation.usernameMax', { max: USERNAME_MAX_LENGTH }))
       .regex(USERNAME_REGEX, t('register.validation.usernamePattern')),
     email: z
       .string()

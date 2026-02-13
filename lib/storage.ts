@@ -14,9 +14,7 @@ export async function saveUser(user: User): Promise<void> {
     const existingData = await AsyncStorage.getItem(USERS_KEY);
     const users: User[] = existingData ? JSON.parse(existingData) : [];
 
-    const alreadyExists = users.some(
-      (u) => u.email.toLowerCase() === user.email.toLowerCase()
-    );
+    const alreadyExists = users.some(u => u.email.toLowerCase() === user.email.toLowerCase());
     if (alreadyExists) {
       throw new Error(StorageErrors.EMAIL_EXISTS);
     }
@@ -31,18 +29,19 @@ export async function saveUser(user: User): Promise<void> {
   }
 }
 
-export async function verifyCredentials(
-  credentials: { email: string; password: string }
-): Promise<User | null> {
+export async function verifyCredentials(credentials: {
+  email: string;
+  password: string;
+}): Promise<User | null> {
   try {
     const existingData = await AsyncStorage.getItem(USERS_KEY);
     if (!existingData) return null;
 
     const users: User[] = JSON.parse(existingData);
     const matchedUser = users.find(
-      (u) =>
+      u =>
         u.email.toLowerCase() === credentials.email.toLowerCase() &&
-        u.password === credentials.password
+        u.password === credentials.password,
     );
 
     return matchedUser ?? null;
@@ -52,5 +51,7 @@ export async function verifyCredentials(
 }
 
 function isStorageError(message: string): boolean {
-  return Object.values(StorageErrors).includes(message as typeof StorageErrors[keyof typeof StorageErrors]);
+  return Object.values(StorageErrors).includes(
+    message as (typeof StorageErrors)[keyof typeof StorageErrors],
+  );
 }

@@ -1,0 +1,31 @@
+# Dependencies
+node_modules/
+
+# Expo
+.expo/
+dist/
+
+# Debug logs
+npm-debug.*
+
+# Credentials and keystores
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+
+# Merge originals
+*.orig.*
+
+# Environment variables
+.env
+
+# macOS
+.DS_Store
+
+# Project specific
+claude.md
+
+# Gitleaks
+gitleaks-report.json

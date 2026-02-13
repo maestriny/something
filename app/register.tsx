@@ -44,7 +44,7 @@ export default function RegisterScreen() {
     useCallback(() => {
       setScreen('register');
       clearErrors();
-    }, [setScreen, clearErrors])
+    }, [setScreen, clearErrors]),
   );
 
   const onSubmit = async (data: RegisterFormData) => {

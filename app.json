@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "final-project",
-    "slug": "final-project",
-    "scheme": "final-project",
+    "name": "something",
+    "slug": "something",
+    "scheme": "something",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -28,9 +28,6 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": [
-      "expo-router",
-      "expo-font"
-    ]
+    "plugins": ["expo-router", "expo-font"]
   }
 }

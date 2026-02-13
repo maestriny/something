@@ -15,11 +15,7 @@ interface AppButtonProps extends TouchableOpacityProps {
 export function AppButton({ title, isLoading, style, disabled, ...rest }: AppButtonProps) {
   return (
     <TouchableOpacity
-      style={[
-        styles.button,
-        (disabled || isLoading) && styles.buttonDisabled,
-        style,
-      ]}
+      style={[styles.button, (disabled || isLoading) && styles.buttonDisabled, style]}
       disabled={disabled || isLoading}
       activeOpacity={Opacity.active}
       accessibilityRole="button"

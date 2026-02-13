@@ -1,15 +1,17 @@
-import {
-  TextInput,
-  View,
-  Pressable,
-  StyleSheet,
-  type TextInputProps,
-} from 'react-native';
+import { TextInput, View, Pressable, StyleSheet, type TextInputProps } from 'react-native';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { IconEye, IconEyeClosed } from '@tabler/icons-react-native';
 import { AppText } from './AppText';
-import { Colors, BorderRadius, FontSize, Fonts, Spacing, IconSize, Opacity } from '../../constants/theme';
+import {
+  Colors,
+  BorderRadius,
+  FontSize,
+  Fonts,
+  Spacing,
+  IconSize,
+  Opacity,
+} from '../../constants/theme';
 
 interface AppInputProps extends TextInputProps {
   label?: string;
@@ -32,12 +34,12 @@ export function AppInput({
   const [isFocused, setIsFocused] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleFocus: TextInputProps['onFocus'] = (e) => {
+  const handleFocus: TextInputProps['onFocus'] = e => {
     setIsFocused(true);
     onFocus?.(e);
   };
 
-  const handleBlur: TextInputProps['onBlur'] = (e) => {
+  const handleBlur: TextInputProps['onBlur'] = e => {
     setIsFocused(false);
     onBlur?.(e);
   };
@@ -71,7 +73,7 @@ export function AppInput({
         />
         {isPassword && (
           <Pressable
-            onPress={() => setShowPassword((prev) => !prev)}
+            onPress={() => setShowPassword(prev => !prev)}
             style={styles.toggle}
             hitSlop={Spacing.sm}
             accessibilityRole="button"

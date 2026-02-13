@@ -1,9 +1,11 @@
-
 // convert a quadratic bezier to a cubic bezier (6 values: c1x,c1y,c2x,c2y,ex,ey)
 function quadToCubic(
-  sx: number, sy: number,
-  cpx: number, cpy: number,
-  ex: number, ey: number,
+  sx: number,
+  sy: number,
+  cpx: number,
+  cpy: number,
+  ex: number,
+  ey: number,
 ): number[] {
   return [
     sx + (2 / 3) * (cpx - sx),
@@ -16,10 +18,7 @@ function quadToCubic(
 }
 
 // express a straight line as a degenerate cubic bezier (6 values)
-function lineToCubic(
-  sx: number, sy: number,
-  ex: number, ey: number,
-): number[] {
+function lineToCubic(sx: number, sy: number, ex: number, ey: number): number[] {
   return [
     sx + (ex - sx) / 3,
     sy + (ey - sy) / 3,
@@ -32,10 +31,14 @@ function lineToCubic(
 
 // split a cubic bezier at t=0.5 using de Casteljau
 function splitCubicHalf(
-  sx: number, sy: number,
-  c1x: number, c1y: number,
-  c2x: number, c2y: number,
-  ex: number, ey: number,
+  sx: number,
+  sy: number,
+  c1x: number,
+  c1y: number,
+  c2x: number,
+  c2y: number,
+  ex: number,
+  ey: number,
 ): [number[], number[]] {
   const m01x = (sx + c1x) / 2;
   const m01y = (sy + c1y) / 2;
@@ -58,11 +61,11 @@ function splitCubicHalf(
   ];
 }
 
-
 // primary top wave (used for login): fills from top, wavy bottom edge
 export function primaryTopPoints(w: number, h: number): number[] {
   return [
-    0, 0,
+    0,
+    0,
     ...lineToCubic(0, 0, w, 0),
     ...lineToCubic(w, 0, w, h * 0.6),
     ...quadToCubic(w, h * 0.6, w * 0.78, h, w * 0.5, h * 0.7),
@@ -71,17 +74,23 @@ export function primaryTopPoints(w: number, h: number): number[] {
   ];
 }
 
-
 // secondary top (register)
 export function secondaryTopPoints(w: number, h: number): number[] {
   const cubic = quadToCubic(w, h * 0.58, w * 0.4, h * 1.1, 0, h * 0.52);
   const [first, second] = splitCubicHalf(
-    w, h * 0.58,
-    cubic[0], cubic[1], cubic[2], cubic[3], cubic[4], cubic[5],
+    w,
+    h * 0.58,
+    cubic[0],
+    cubic[1],
+    cubic[2],
+    cubic[3],
+    cubic[4],
+    cubic[5],
   );
 
   return [
-    0, 0,
+    0,
+    0,
     ...lineToCubic(0, 0, w, 0),
     ...lineToCubic(w, 0, w, h * 0.58),
     ...first,
@@ -94,12 +103,19 @@ export function secondaryTopPoints(w: number, h: number): number[] {
 export function primaryBottomPoints(w: number, h: number): number[] {
   const cubic = quadToCubic(0, h * 0.48, w * 0.4, h * 0.1, w, h * 0.42);
   const [first, second] = splitCubicHalf(
-    0, h * 0.48,
-    cubic[0], cubic[1], cubic[2], cubic[3], cubic[4], cubic[5],
+    0,
+    h * 0.48,
+    cubic[0],
+    cubic[1],
+    cubic[2],
+    cubic[3],
+    cubic[4],
+    cubic[5],
   );
 
   return [
-    0, h * 0.48,
+    0,
+    h * 0.48,
     ...first,
     ...second,
     ...lineToCubic(w, h * 0.42, w, h),
@@ -111,7 +127,8 @@ export function primaryBottomPoints(w: number, h: number): number[] {
 // secondary bottom (register)
 export function secondaryBottomPoints(w: number, h: number): number[] {
   return [
-    0, h * 0.24,
+    0,
+    h * 0.24,
     ...quadToCubic(0, h * 0.24, w * 0.18, h * 0.6, w * 0.5, h * 0.3),
     ...quadToCubic(w * 0.5, h * 0.3, w * 0.78, 0, w, h * 0.4),
     ...lineToCubic(w, h * 0.4, w, h),
@@ -121,11 +138,7 @@ export function secondaryBottomPoints(w: number, h: number): number[] {
 }
 
 // interpolate between two sets of 32 path values and build an SVG path string
-export function buildInterpolatedPath(
-  a: number[],
-  b: number[],
-  t: number,
-): string {
+export function buildInterpolatedPath(a: number[], b: number[], t: number): string {
   'worklet';
   const l = (i: number): number => a[i] + (b[i] - a[i]) * t;
 

@@ -1,13 +1,13 @@
-import { Text, type TextProps, StyleSheet, Platform } from "react-native";
-import { Colors, FontSize, Fonts } from "../../constants/theme";
+import { Text, type TextProps, StyleSheet, Platform } from 'react-native';
+import { Colors, FontSize, Fonts } from '../../constants/theme';
 
-type Variant = "heading" | "subheading" | "body" | "caption" | "error";
+type Variant = 'heading' | 'subheading' | 'body' | 'caption' | 'error';
 
 interface AppTextProps extends TextProps {
   variant?: Variant;
 }
 
-export function AppText({ variant = "body", style, ...rest }: AppTextProps) {
+export function AppText({ variant = 'body', style, ...rest }: AppTextProps) {
   return (
     <Text
       style={[styles[variant], Platform.OS === 'android' && { includeFontPadding: false }, style]}
