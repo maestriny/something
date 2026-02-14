@@ -1,5 +1,5 @@
 // convert a quadratic bezier to a cubic bezier (6 values: c1x,c1y,c2x,c2y,ex,ey)
-function quadToCubic(
+export function quadToCubic(
   sx: number,
   sy: number,
   cpx: number,
@@ -18,7 +18,7 @@ function quadToCubic(
 }
 
 // express a straight line as a degenerate cubic bezier (6 values)
-function lineToCubic(sx: number, sy: number, ex: number, ey: number): number[] {
+export function lineToCubic(sx: number, sy: number, ex: number, ey: number): number[] {
   return [
     sx + (ex - sx) / 3,
     sy + (ey - sy) / 3,

@@ -28,9 +28,15 @@ interface WaveProps {
   position: 'top' | 'bottom';
   color?: string;
   height?: number;
+  withEntrance?: boolean;
 }
 
-export function Wave({ position, color = Colors.primaryLight, height = HEIGHT }: WaveProps) {
+export function Wave({
+  position,
+  color = Colors.primaryLight,
+  height = HEIGHT,
+  withEntrance = false,
+}: WaveProps) {
   const { width } = useWindowDimensions();
   const { morphProgress } = useWave();
 
@@ -47,8 +53,9 @@ export function Wave({ position, color = Colors.primaryLight, height = HEIGHT }:
   );
 
   // on first render, position the wave off-screen (above for top wave, below for bottom wave) then animate it into view
-  const translateY = useSharedValue(position === 'top' ? -height : height);
+  const translateY = useSharedValue(withEntrance ? (position === 'top' ? -height : height) : 0);
   useEffect(() => {
+    if (!withEntrance) return;
     translateY.value = withDelay(
       50,
       withTiming(0, {
@@ -56,7 +63,7 @@ export function Wave({ position, color = Colors.primaryLight, height = HEIGHT }:
         easing: Easing.out(Easing.cubic),
       }),
     );
-  }, [translateY]);
+  }, [translateY, withEntrance]);
 
   // interpolate position offset between login (0) and register values
   const registerOffsetY = position === 'top' ? -30 : 40;

@@ -10,9 +10,11 @@ import { AppButton } from '../../components/atoms/AppButton';
 import { AppFormInput } from '../../components/form/AppFormInput';
 import { AuthPrompt } from '../../components/molecules/AuthPrompt';
 import { useWave } from '../../providers/waves';
+import { useWaveTransition } from '../../providers/waveTransition';
 import { useToast } from '../../providers/toast';
 import { useAuthStore } from '../../stores/auth';
 import { getAuthError } from '../../api/errors';
+import { Routes } from '../../constants/routes';
 import { Colors, Spacing } from '../../constants/theme';
 import { useKeyboardScroll } from '../../hooks/useKeyboardScroll';
 import { createLoginSchema, type LoginFormData } from '../../lib/schemas/login';
@@ -20,6 +22,7 @@ import { createLoginSchema, type LoginFormData } from '../../lib/schemas/login';
 export default function LoginScreen() {
   const router = useRouter();
   const { setScreen } = useWave();
+  const { startTransition } = useWaveTransition();
   const { showToast } = useToast();
   const { t } = useTranslation();
   const login = useAuthStore(s => s.login);
@@ -51,11 +54,15 @@ export default function LoginScreen() {
   const onSubmit = async (data: LoginFormData) => {
     try {
       const user = await login({ email: data.email, password: data.password });
-      showToast({
-        type: 'success',
-        message: t('login.toast.successMessage'),
-        description: t('login.toast.successDescription', { username: user.username }),
-      });
+      startTransition(router, Routes.app.home);
+      setTimeout(() => {
+        showToast({
+          type: 'success',
+          message: t('login.toast.successMessage'),
+          description: t('login.toast.successDescription', { username: user.username }),
+          color: Colors.surface,
+        });
+      }, 200);
     } catch (error) {
       const { title, description } = getAuthError(error);
       showToast({

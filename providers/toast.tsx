@@ -7,6 +7,7 @@ interface ToastData {
   message: string;
   description?: string;
   type: ToastType;
+  color?: string;
 }
 
 interface ToastContextValue {

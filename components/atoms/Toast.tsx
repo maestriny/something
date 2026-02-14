@@ -19,7 +19,11 @@ export function Toast() {
       <Animated.View
         entering={FadeIn.duration(300)}
         exiting={FadeOut.duration(200)}
-        style={[styles.toast, { backgroundColor: TOAST_COLORS[toast.type] }, Shadow.soft]}
+        style={[
+          styles.toast,
+          { backgroundColor: toast.color ?? TOAST_COLORS[toast.type] },
+          Shadow.soft,
+        ]}
       >
         <AppText variant="body" style={styles.title}>
           {toast.message}

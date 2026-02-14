@@ -18,8 +18,8 @@ export default function AuthLayout() {
           <Stack.Screen name="login" />
           <Stack.Screen name="register" />
         </Stack>
-        <Wave position="top" />
-        <Wave position="bottom" />
+        <Wave position="top" withEntrance />
+        <Wave position="bottom" color={Colors.peach} withEntrance />
       </View>
     </WaveProvider>
   );

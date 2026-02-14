@@ -1,14 +1,24 @@
 import { View, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { AppText } from '../../components/atoms/AppText';
 import { AppButton } from '../../components/atoms/AppButton';
 import { useAuthStore } from '../../stores/auth';
-import { Colors, Spacing } from '../../constants/theme';
+import { useWaveTransition } from '../../providers/waveTransition';
+import { Routes } from '../../constants/routes';
+import { Spacing } from '../../constants/theme';
 
 export default function HomeScreen() {
   const { user, logout, isLoading } = useAuthStore();
+  const { startTransition } = useWaveTransition();
+  const router = useRouter();
   const { t } = useTranslation();
+
+  const handleLogout = () => {
+    startTransition(router, Routes.auth.login);
+    logout();
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -19,7 +29,7 @@ export default function HomeScreen() {
         </AppText>
         <AppButton
           title={t('common.logout')}
-          onPress={logout}
+          onPress={handleLogout}
           isLoading={isLoading}
           style={styles.button}
         />
@@ -31,7 +41,6 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.background,
   },
   content: {
     flex: 1,
