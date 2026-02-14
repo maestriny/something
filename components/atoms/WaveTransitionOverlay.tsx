@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { StyleSheet, useWindowDimensions } from 'react-native';
 import Animated, { useAnimatedProps, useAnimatedStyle } from 'react-native-reanimated';
 import Svg, { Path } from 'react-native-svg';
-import { Colors } from '../../constants/theme';
+import { WavesColor } from '../../constants/waves';
 import { useWaveTransition } from '../../providers/waveTransition';
 import { buildInterpolatedPath } from '../../lib/wavePaths';
 import {
@@ -38,8 +38,8 @@ export function WaveTransitionOverlay() {
   return (
     <Animated.View style={[styles.overlay, containerStyle]} pointerEvents="none">
       <Svg width={width} height={height} style={StyleSheet.absoluteFill}>
-        <AnimatedPath animatedProps={topPathProps} fill={Colors.primaryLight} />
-        <AnimatedPath animatedProps={bottomPathProps} fill={Colors.peach} />
+        <AnimatedPath animatedProps={topPathProps} fill={WavesColor.top} />
+        <AnimatedPath animatedProps={bottomPathProps} fill={WavesColor.bottom} />
       </Svg>
     </Animated.View>
   );

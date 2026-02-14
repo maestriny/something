@@ -52,6 +52,7 @@ export default function LoginScreen() {
   );
 
   const onSubmit = async (data: LoginFormData) => {
+    Keyboard.dismiss();
     try {
       const user = await login({ email: data.email, password: data.password });
       startTransition(router, Routes.app.home);
@@ -127,7 +128,7 @@ export default function LoginScreen() {
           <AuthPrompt
             message={t('login.prompt.message')}
             actionText={t('login.prompt.action')}
-            onPress={() => router.push('/register')}
+            onPress={() => router.push(Routes.auth.register)}
           />
         </View>
       </SafeAreaView>

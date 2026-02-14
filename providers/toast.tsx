@@ -35,7 +35,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
       clearTimeout(timerRef.current);
     }
     setToast(data);
-    const duration = data.type === 'success' ? 3000 : 4000;
+    const duration = data.type === 'success' ? 1600 : 4000;
     timerRef.current = setTimeout(() => {
       setToast(null);
       timerRef.current = null;

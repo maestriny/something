@@ -9,7 +9,7 @@ import Animated, {
   Easing,
 } from 'react-native-reanimated';
 import Svg, { Path } from 'react-native-svg';
-import { Colors } from '../../constants/theme';
+import { WavesColor, WavesHeight, WavesDuration, WavesRegisterOffset } from '../../constants/waves';
 import { useWave } from '../../providers/waves';
 import {
   primaryTopPoints,
@@ -21,9 +21,6 @@ import {
 
 const AnimatedPath = Animated.createAnimatedComponent(Path);
 
-const HEIGHT = 190;
-const ENTRANCE_DURATION = 1200;
-
 interface WaveProps {
   position: 'top' | 'bottom';
   color?: string;
@@ -33,8 +30,8 @@ interface WaveProps {
 
 export function Wave({
   position,
-  color = Colors.primaryLight,
-  height = HEIGHT,
+  color = WavesColor.top,
+  height = WavesHeight.top,
   withEntrance = false,
 }: WaveProps) {
   const { width } = useWindowDimensions();
@@ -59,14 +56,14 @@ export function Wave({
     translateY.value = withDelay(
       50,
       withTiming(0, {
-        duration: ENTRANCE_DURATION,
+        duration: WavesDuration.entrance,
         easing: Easing.out(Easing.cubic),
       }),
     );
   }, [translateY, withEntrance]);
 
   // interpolate position offset between login (0) and register values
-  const registerOffsetY = position === 'top' ? -30 : 40;
+  const registerOffsetY = position === 'top' ? WavesRegisterOffset.top : WavesRegisterOffset.bottom;
 
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [
@@ -99,6 +96,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
     right: 0,
+    zIndex: 1,
   },
   top: {
     top: 0,

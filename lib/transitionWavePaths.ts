@@ -1,6 +1,5 @@
 import { primaryTopPoints, primaryBottomPoints, quadToCubic, lineToCubic } from './wavePaths';
-
-const WAVE_HEIGHT = 190;
+import { WavesHeight } from '../constants/waves';
 
 // offset all y-coordinates in a 32-number point array
 function offsetY(points: number[], dy: number): number[] {
@@ -9,7 +8,7 @@ function offsetY(points: number[], dy: number): number[] {
 
 // top wave resting: same shape and position as the login screen top wave
 export function transitionTopResting(w: number, _h: number): number[] {
-  return primaryTopPoints(w, WAVE_HEIGHT);
+  return primaryTopPoints(w, WavesHeight.top);
 }
 
 // top wave covering: fills from top to ~62% of screen height with wavy bottom edge
@@ -28,7 +27,7 @@ export function transitionTopCovering(w: number, h: number): number[] {
 
 // bottom wave resting: same shape and position as the login screen bottom wave
 export function transitionBottomResting(w: number, h: number): number[] {
-  return offsetY(primaryBottomPoints(w, WAVE_HEIGHT), h - WAVE_HEIGHT);
+  return offsetY(primaryBottomPoints(w, WavesHeight.bottom), h - WavesHeight.bottom);
 }
 
 // bottom wave covering: fills from ~45% of screen height to bottom with wavy top edge

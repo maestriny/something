@@ -8,6 +8,7 @@ const fr: Translations = {
     generalError: 'Quelque chose a mal tourné. Veuillez réessayer.',
     networkError: 'Impossible de se connecter. Vérifiez votre connexion internet.',
     logout: 'Se déconnecter',
+    back: 'Retour',
   },
   login: {
     heading: 'Bon retour',
@@ -106,6 +107,17 @@ const fr: Translations = {
       title: 'Oups',
       description: 'Quelque chose a mal tourné. Veuillez réessayer.',
     },
+  },
+  todo: {
+    heading: 'To Do',
+    placeholder: 'Ajouter un élément',
+    add: 'Ajouter',
+    completed: 'Compl\u00e9t\u00e9es',
+    emptyHome: 'Rien \u00e0 faire pour le moment.\nAjoute ta premi\u00e8re t\u00e2che !',
+    emptyCompleted: 'Aucune t\u00e2che termin\u00e9e.\nTu vas y arriver !',
+  },
+  settings: {
+    heading: 'Paramètres',
   },
   input: {
     passwordHint: 'Champ mot de passe, le texte est masqué',

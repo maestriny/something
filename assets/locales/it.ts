@@ -8,6 +8,7 @@ const it: Translations = {
     generalError: 'Qualcosa è andato storto. Riprova.',
     networkError: 'Impossibile connettersi. Controlla la tua connessione internet.',
     logout: 'Esci',
+    back: 'Indietro',
   },
   login: {
     heading: 'Bentornato',
@@ -106,6 +107,17 @@ const it: Translations = {
       title: 'Ops',
       description: 'Qualcosa è andato storto. Riprova.',
     },
+  },
+  todo: {
+    heading: 'To Do',
+    placeholder: 'Aggiungi elemento',
+    add: 'Aggiungi',
+    completed: 'Completate',
+    emptyHome: 'Niente da fare per ora.\nAggiungi la tua prima attivit\u00e0!',
+    emptyCompleted: 'Nessuna attivit\u00e0 completata.\nCe la puoi fare!',
+  },
+  settings: {
+    heading: 'Impostazioni',
   },
   input: {
     passwordHint: 'Campo password, il testo è nascosto',

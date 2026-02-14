@@ -2,10 +2,7 @@ import { createContext, useContext, useMemo, useCallback, useRef } from 'react';
 import type { ReactNode } from 'react';
 import { useSharedValue, withTiming, Easing, runOnJS } from 'react-native-reanimated';
 import type { SharedValue } from 'react-native-reanimated';
-
-const COVER_DURATION = 1100;
-const HOLD_DURATION = 100;
-const REVEAL_DURATION = 1200;
+import { WavesDuration } from '../constants/waves';
 
 interface WaveTransitionContextValue {
   coverProgress: SharedValue<number>;
@@ -29,7 +26,7 @@ export function WaveTransitionProvider({ children }: { children: ReactNode }) {
     coverProgress.value = withTiming(
       0,
       {
-        duration: REVEAL_DURATION,
+        duration: WavesDuration.reveal,
         easing: Easing.inOut(Easing.cubic),
       },
       finished => {
@@ -42,7 +39,7 @@ export function WaveTransitionProvider({ children }: { children: ReactNode }) {
 
   const navigateAndReveal = useCallback(() => {
     routerRef.current?.replace(destinationRef.current);
-    setTimeout(startReveal, HOLD_DURATION);
+    setTimeout(startReveal, WavesDuration.hold);
   }, [startReveal]);
 
   const startTransition = useCallback(
@@ -55,7 +52,7 @@ export function WaveTransitionProvider({ children }: { children: ReactNode }) {
       coverProgress.value = withTiming(
         1,
         {
-          duration: COVER_DURATION,
+          duration: WavesDuration.cover,
           easing: Easing.out(Easing.cubic),
         },
         finished => {

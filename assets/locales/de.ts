@@ -8,6 +8,7 @@ const de: Translations = {
     generalError: 'Etwas ist schiefgelaufen. Bitte versuche es erneut.',
     networkError: 'Verbindung nicht möglich. Bitte überprüfe deine Internetverbindung.',
     logout: 'Abmelden',
+    back: 'Zurück',
   },
   login: {
     heading: 'Willkommen zurück',
@@ -106,6 +107,17 @@ const de: Translations = {
       title: 'Hoppla',
       description: 'Etwas ist schiefgelaufen. Bitte versuche es erneut.',
     },
+  },
+  todo: {
+    heading: 'To Do',
+    placeholder: 'Element hinzufügen',
+    add: 'Hinzufügen',
+    completed: 'Abgeschlossen',
+    emptyHome: 'Noch nichts zu tun.\nF\u00fcge deine erste Aufgabe hinzu!',
+    emptyCompleted: 'Noch keine erledigten Aufgaben.\nDu schaffst das!',
+  },
+  settings: {
+    heading: 'Einstellungen',
   },
   input: {
     passwordHint: 'Passwortfeld, Eingabe ist verborgen',
