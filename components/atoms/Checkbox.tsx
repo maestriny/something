@@ -1,6 +1,6 @@
 import { Pressable, StyleSheet } from 'react-native';
 import Animated, { useAnimatedStyle, withTiming, Easing } from 'react-native-reanimated';
-import { Colors } from '../../constants/theme';
+import { Colors } from '@/constants/theme';
 
 const SIZE = 22;
 const BORDER_WIDTH = 1.5;

@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import type { Session } from '@supabase/supabase-js';
-import * as routes from '../api/routes';
-import { type User, type AuthCredentials, type SignUpData, toAppUser } from '../types/auth';
+import * as routes from '@/api/routes';
+import { type User, type AuthCredentials, type SignUpData, toAppUser } from '@/types/auth';
 
 interface AuthState {
   user: User | null;

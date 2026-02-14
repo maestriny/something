@@ -1,7 +1,7 @@
 import { View, StyleSheet } from 'react-native';
 import { Stack } from 'expo-router';
-import { Colors } from '../../constants/theme';
-import { WaveProvider } from '../../providers/waves';
+import { Colors } from '@/constants/theme';
+import { WaveProvider } from '@/providers/waves';
 
 export default function AppLayout() {
   return (

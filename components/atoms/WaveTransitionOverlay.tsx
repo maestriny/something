@@ -2,15 +2,15 @@ import { useMemo } from 'react';
 import { StyleSheet, useWindowDimensions } from 'react-native';
 import Animated, { useAnimatedProps, useAnimatedStyle } from 'react-native-reanimated';
 import Svg, { Path } from 'react-native-svg';
-import { WavesColor } from '../../constants/waves';
-import { useWaveTransition } from '../../providers/waveTransition';
-import { buildInterpolatedPath } from '../../lib/wavePaths';
+import { WavesColor } from '@/constants/waves';
+import { useWaveTransition } from '@/providers/waveTransition';
+import { buildInterpolatedPath } from '@/lib/wavePaths';
 import {
   transitionTopResting,
   transitionTopCovering,
   transitionBottomResting,
   transitionBottomCovering,
-} from '../../lib/transitionWavePaths';
+} from '@/lib/transitionWavePaths';
 
 const AnimatedPath = Animated.createAnimatedComponent(Path);
 

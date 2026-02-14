@@ -8,10 +8,10 @@ import Animated, {
   runOnJS,
   Easing,
 } from 'react-native-reanimated';
-import { Checkbox } from '../atoms/Checkbox';
-import { AppText } from '../atoms/AppText';
-import { Spacing } from '../../constants/theme';
-import type { Todo } from '../../types/todo';
+import { Checkbox } from '@/components/atoms/Checkbox';
+import { AppText } from '@/components/atoms/AppText';
+import { Spacing } from '@/constants/theme';
+import type { Todo } from '@/types/todo';
 
 interface TodoItemProps {
   todo: Todo;

@@ -1,13 +1,13 @@
 import { View, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import { AppText } from '../../components/atoms/AppText';
-import { AppButton } from '../../components/atoms/AppButton';
-import { ScreenLayout } from '../../components/layout/ScreenLayout';
-import { useAuthStore } from '../../stores/auth';
-import { useWaveTransition } from '../../providers/waveTransition';
-import { Routes } from '../../constants/routes';
-import { Spacing } from '../../constants/theme';
+import { AppText } from '@/components/atoms/AppText';
+import { AppButton } from '@/components/atoms/AppButton';
+import { ScreenLayout } from '@/components/layout/ScreenLayout';
+import { useAuthStore } from '@/stores/auth';
+import { useWaveTransition } from '@/providers/waveTransition';
+import { Routes } from '@/constants/routes';
+import { Spacing } from '@/constants/theme';
 
 export default function SettingsScreen() {
   const { logout, isLoading } = useAuthStore();

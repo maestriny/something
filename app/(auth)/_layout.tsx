@@ -1,9 +1,9 @@
 import { View, StyleSheet } from 'react-native';
 import { Stack } from 'expo-router';
-import { Colors } from '../../constants/theme';
-import { WavesColor } from '../../constants/waves';
-import { WaveProvider } from '../../providers/waves';
-import { Wave } from '../../components/atoms/Wave';
+import { Colors } from '@/constants/theme';
+import { WavesColor } from '@/constants/waves';
+import { WaveProvider } from '@/providers/waves';
+import { Wave } from '@/components/atoms/Wave';
 
 export default function AuthLayout() {
   return (

@@ -1,6 +1,6 @@
 import { View, StyleSheet } from 'react-native';
-import { AppText } from '../atoms/AppText';
-import { Spacing } from '../../constants/theme';
+import { AppText } from '@/components/atoms/AppText';
+import { Spacing } from '@/constants/theme';
 
 interface ScreenHeadingProps {
   title: string;

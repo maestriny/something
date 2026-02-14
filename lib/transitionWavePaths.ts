@@ -1,5 +1,5 @@
 import { primaryTopPoints, primaryBottomPoints, quadToCubic, lineToCubic } from './wavePaths';
-import { WavesHeight } from '../constants/waves';
+import { WavesHeight } from '@/constants/waves';
 
 // offset all y-coordinates in a 32-number point array
 function offsetY(points: number[], dy: number): number[] {

@@ -2,8 +2,8 @@ import { View, Pressable, StyleSheet, type StyleProp, type ViewStyle } from 'rea
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { IconArrowLeft, IconSettingsFilled } from '@tabler/icons-react-native';
-import { Routes } from '../../constants/routes';
-import { Colors, Spacing, IconSize, Opacity } from '../../constants/theme';
+import { Routes } from '@/constants/routes';
+import { Colors, Spacing, IconSize, Opacity } from '@/constants/theme';
 import type { ComponentType } from 'react';
 
 function NavButton({

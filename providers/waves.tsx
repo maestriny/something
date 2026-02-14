@@ -1,6 +1,6 @@
 import { createContext, useContext, useMemo, type ReactNode } from 'react';
 import { useSharedValue, withTiming, Easing } from 'react-native-reanimated';
-import { WavesDuration } from '../constants/waves';
+import { WavesDuration } from '@/constants/waves';
 import type { SharedValue } from 'react-native-reanimated';
 
 type AuthScreen = 'login' | 'register';

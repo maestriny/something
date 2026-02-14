@@ -1,9 +1,9 @@
 import { View, StyleSheet } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { NavigationBar } from './NavigationBar';
-import { Wave } from '../atoms/Wave';
-import { Spacing } from '../../constants/theme';
-import { WavesColor, WavesHeight } from '../../constants/waves';
+import { Wave } from '@/components/atoms/Wave';
+import { Spacing } from '@/constants/theme';
+import { WavesColor, WavesHeight } from '@/constants/waves';
 import type { ReactNode } from 'react';
 import { ScreenHeading } from './ScreenHeading';
 

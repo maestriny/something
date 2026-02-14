@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import type { TFunction } from 'i18next';
-import { EMAIL_REGEX } from '../utils';
+import { EMAIL_REGEX } from '@/lib/utils';
 
 export function createLoginSchema(t: TFunction) {
   return z.object({

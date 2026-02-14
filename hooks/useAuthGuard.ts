@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useRouter, useSegments, useNavigationContainerRef } from 'expo-router';
-import { useAuthStore } from '../stores/auth';
-import { useWaveTransition } from '../providers/waveTransition';
-import { Routes, RouteGroups } from '../constants/routes';
+import { useAuthStore } from '@/stores/auth';
+import { useWaveTransition } from '@/providers/waveTransition';
+import { Routes, RouteGroups } from '@/constants/routes';
 
 export function useAuthGuard(isInitialized: boolean) {
   const isAuthenticated = useAuthStore(s => s.isAuthenticated);

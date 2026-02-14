@@ -1,8 +1,8 @@
 import { StyleSheet, View } from 'react-native';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 import { AppText } from './AppText';
-import { useToast } from '../../providers/toast';
-import { Colors, BorderRadius, Spacing, Shadow } from '../../constants/theme';
+import { useToast } from '@/providers/toast';
+import { Colors, BorderRadius, Spacing, Shadow } from '@/constants/theme';
 
 const TOAST_COLORS = {
   success: Colors.green,

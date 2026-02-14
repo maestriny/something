@@ -1,14 +1,14 @@
 import { View, StyleSheet } from 'react-native';
 import { Slot } from 'expo-router';
-import { Colors } from '../constants/theme';
-import { ToastProvider } from '../providers/toast';
-import { WaveTransitionProvider } from '../providers/waveTransition';
-import { Toast } from '../components/atoms/Toast';
-import { WaveTransitionOverlay } from '../components/atoms/WaveTransitionOverlay';
-import { useAppFonts } from '../hooks/useAppFonts';
-import { useI18n } from '../hooks/useI18n';
-import { useAuthSession } from '../hooks/useAuthSession';
-import { useAuthGuard } from '../hooks/useAuthGuard';
+import { Colors } from '@/constants/theme';
+import { ToastProvider } from '@/providers/toast';
+import { WaveTransitionProvider } from '@/providers/waveTransition';
+import { Toast } from '@/components/atoms/Toast';
+import { WaveTransitionOverlay } from '@/components/atoms/WaveTransitionOverlay';
+import { useAppFonts } from '@/hooks/useAppFonts';
+import { useI18n } from '@/hooks/useI18n';
+import { useAuthSession } from '@/hooks/useAuthSession';
+import { useAuthGuard } from '@/hooks/useAuthGuard';
 
 export default function RootLayout() {
   const fontsLoaded = useAppFonts();

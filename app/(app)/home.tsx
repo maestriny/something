@@ -3,13 +3,13 @@ import { useState, useCallback } from 'react';
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { IconChevronDown, IconPlus } from '@tabler/icons-react-native';
-import { AppText } from '../../components/atoms/AppText';
-import { TodoItem } from '../../components/molecules/TodoItem';
-import { ScreenLayout } from '../../components/layout/ScreenLayout';
-import { useTodoStore } from '../../stores/todo';
-import { Routes } from '../../constants/routes';
-import { Colors, Spacing, Fonts, FontSize, IconSize, Opacity } from '../../constants/theme';
-import type { Todo } from '../../types/todo';
+import { AppText } from '@/components/atoms/AppText';
+import { TodoItem } from '@/components/molecules/TodoItem';
+import { ScreenLayout } from '@/components/layout/ScreenLayout';
+import { useTodoStore } from '@/stores/todo';
+import { Routes } from '@/constants/routes';
+import { Colors, Spacing, Fonts, FontSize, IconSize, Opacity } from '@/constants/theme';
+import type { Todo } from '@/types/todo';
 
 export default function HomeScreen() {
   const { t } = useTranslation();

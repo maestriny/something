@@ -1,5 +1,5 @@
 import { Text, type TextProps, StyleSheet, Platform } from 'react-native';
-import { Colors, FontSize, Fonts } from '../../constants/theme';
+import { Colors, FontSize, Fonts } from '@/constants/theme';
 
 type Variant = 'heading' | 'subheading' | 'body' | 'caption' | 'error';
 

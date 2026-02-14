@@ -2,7 +2,7 @@ import { createContext, useContext, useMemo, useCallback, useRef } from 'react';
 import type { ReactNode } from 'react';
 import { useSharedValue, withTiming, Easing, runOnJS } from 'react-native-reanimated';
 import type { SharedValue } from 'react-native-reanimated';
-import { WavesDuration } from '../constants/waves';
+import { WavesDuration } from '@/constants/waves';
 
 interface WaveTransitionContextValue {
   coverProgress: SharedValue<number>;

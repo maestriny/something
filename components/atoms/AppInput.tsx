@@ -11,7 +11,7 @@ import {
   Spacing,
   IconSize,
   Opacity,
-} from '../../constants/theme';
+} from '@/constants/theme';
 
 interface AppInputProps extends TextInputProps {
   label?: string;

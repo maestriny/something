@@ -9,15 +9,15 @@ import Animated, {
   Easing,
 } from 'react-native-reanimated';
 import Svg, { Path } from 'react-native-svg';
-import { WavesColor, WavesHeight, WavesDuration, WavesRegisterOffset } from '../../constants/waves';
-import { useWave } from '../../providers/waves';
+import { WavesColor, WavesHeight, WavesDuration, WavesRegisterOffset } from '@/constants/waves';
+import { useWave } from '@/providers/waves';
 import {
   primaryTopPoints,
   secondaryTopPoints,
   primaryBottomPoints,
   secondaryBottomPoints,
   buildInterpolatedPath,
-} from '../../lib/wavePaths';
+} from '@/lib/wavePaths';
 
 const AnimatedPath = Animated.createAnimatedComponent(Path);
 

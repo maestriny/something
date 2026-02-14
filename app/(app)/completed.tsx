@@ -1,12 +1,12 @@
 import { View, FlatList, StyleSheet } from 'react-native';
 import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import { AppText } from '../../components/atoms/AppText';
-import { TodoItem } from '../../components/molecules/TodoItem';
-import { ScreenLayout } from '../../components/layout/ScreenLayout';
-import { useTodoStore } from '../../stores/todo';
-import { Spacing, FontSize, Colors } from '../../constants/theme';
-import type { Todo } from '../../types/todo';
+import { AppText } from '@/components/atoms/AppText';
+import { TodoItem } from '@/components/molecules/TodoItem';
+import { ScreenLayout } from '@/components/layout/ScreenLayout';
+import { useTodoStore } from '@/stores/todo';
+import { Spacing, FontSize, Colors } from '@/constants/theme';
+import type { Todo } from '@/types/todo';
 
 export default function CompletedScreen() {
   const { t } = useTranslation();
