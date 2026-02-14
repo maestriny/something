@@ -1,5 +1,5 @@
 import { supabase } from './supabase';
-import type { AuthCredentials, SignUpData } from '../types/auth';
+import type { AuthCredentials, SignUpData } from '@/types/auth';
 
 export async function signUp({ email, password, username }: SignUpData) {
   const { data, error } = await supabase.auth.signUp({

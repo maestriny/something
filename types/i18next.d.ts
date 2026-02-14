@@ -1,4 +1,4 @@
-import type { Translations } from '../assets/locales/en';
+import type { Translations } from '@/assets/locales/en';
 
 declare module 'i18next' {
   interface CustomTypeOptions {

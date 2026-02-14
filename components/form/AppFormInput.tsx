@@ -1,6 +1,6 @@
 import { type TextInputProps } from 'react-native';
 import { Controller, type Control, type FieldValues, type Path } from 'react-hook-form';
-import { AppInput } from '../atoms/AppInput';
+import { AppInput } from '@/components/atoms/AppInput';
 
 interface AppFormInputProps<T extends FieldValues> extends Omit<
   TextInputProps,

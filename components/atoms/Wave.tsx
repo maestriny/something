@@ -9,28 +9,31 @@ import Animated, {
   Easing,
 } from 'react-native-reanimated';
 import Svg, { Path } from 'react-native-svg';
-import { Colors } from '../../constants/theme';
-import { useWave } from '../../providers/waves';
+import { WavesColor, WavesHeight, WavesDuration, WavesRegisterOffset } from '@/constants/waves';
+import { useWave } from '@/providers/waves';
 import {
   primaryTopPoints,
   secondaryTopPoints,
   primaryBottomPoints,
   secondaryBottomPoints,
   buildInterpolatedPath,
-} from '../../lib/wavePaths';
+} from '@/lib/wavePaths';
 
 const AnimatedPath = Animated.createAnimatedComponent(Path);
-
-const HEIGHT = 190;
-const ENTRANCE_DURATION = 1200;
 
 interface WaveProps {
   position: 'top' | 'bottom';
   color?: string;
   height?: number;
+  withEntrance?: boolean;
 }
 
-export function Wave({ position, color = Colors.primaryLight, height = HEIGHT }: WaveProps) {
+export function Wave({
+  position,
+  color = WavesColor.top,
+  height = WavesHeight.top,
+  withEntrance = false,
+}: WaveProps) {
   const { width } = useWindowDimensions();
   const { morphProgress } = useWave();
 
@@ -47,19 +50,20 @@ export function Wave({ position, color = Colors.primaryLight, height = HEIGHT }:
   );
 
   // on first render, position the wave off-screen (above for top wave, below for bottom wave) then animate it into view
-  const translateY = useSharedValue(position === 'top' ? -height : height);
+  const translateY = useSharedValue(withEntrance ? (position === 'top' ? -height : height) : 0);
   useEffect(() => {
+    if (!withEntrance) return;
     translateY.value = withDelay(
       50,
       withTiming(0, {
-        duration: ENTRANCE_DURATION,
+        duration: WavesDuration.entrance,
         easing: Easing.out(Easing.cubic),
       }),
     );
-  }, [translateY]);
+  }, [translateY, withEntrance]);
 
   // interpolate position offset between login (0) and register values
-  const registerOffsetY = position === 'top' ? -30 : 40;
+  const registerOffsetY = position === 'top' ? WavesRegisterOffset.top : WavesRegisterOffset.bottom;
 
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [
@@ -92,6 +96,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
     right: 0,
+    zIndex: 1,
   },
   top: {
     top: 0,

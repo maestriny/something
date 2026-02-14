@@ -10,5 +10,7 @@ export const Routes = {
   },
   app: {
     home: '/(app)/home',
+    settings: '/(app)/settings',
+    completed: '/(app)/completed',
   },
 } as const;

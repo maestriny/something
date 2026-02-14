@@ -6,6 +6,7 @@ const en = {
     generalError: 'Something went wrong. Please try again.',
     networkError: 'Unable to connect. Please check your internet connection.',
     logout: 'Sign Out',
+    back: 'Go back',
   },
   login: {
     heading: 'Welcome back',
@@ -104,6 +105,17 @@ const en = {
       title: 'Oops',
       description: 'Something went wrong. Please try again.',
     },
+  },
+  todo: {
+    heading: 'To Do',
+    placeholder: 'Add item',
+    add: 'Add',
+    completed: 'Done',
+    emptyHome: 'Nothing to do yet.\nAdd your first task!',
+    emptyCompleted: 'No completed tasks yet.\nYou got this!',
+  },
+  settings: {
+    heading: 'Settings',
   },
   input: {
     passwordHint: 'Password field, input is hidden',

@@ -1,8 +1,9 @@
 import { View, StyleSheet } from 'react-native';
 import { Stack } from 'expo-router';
-import { Colors } from '../../constants/theme';
-import { WaveProvider } from '../../providers/waves';
-import { Wave } from '../../components/atoms/Wave';
+import { Colors } from '@/constants/theme';
+import { WavesColor } from '@/constants/waves';
+import { WaveProvider } from '@/providers/waves';
+import { Wave } from '@/components/atoms/Wave';
 
 export default function AuthLayout() {
   return (
@@ -18,8 +19,8 @@ export default function AuthLayout() {
           <Stack.Screen name="login" />
           <Stack.Screen name="register" />
         </Stack>
-        <Wave position="top" />
-        <Wave position="bottom" />
+        <Wave position="top" withEntrance />
+        <Wave position="bottom" color={WavesColor.bottom} withEntrance />
       </View>
     </WaveProvider>
   );

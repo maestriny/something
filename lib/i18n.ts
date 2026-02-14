@@ -1,11 +1,11 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import { getLocales } from 'expo-localization';
-import en from '../assets/locales/en';
-import it from '../assets/locales/it';
-import fr from '../assets/locales/fr';
-import es from '../assets/locales/es';
-import de from '../assets/locales/de';
+import en from '@/assets/locales/en';
+import it from '@/assets/locales/it';
+import fr from '@/assets/locales/fr';
+import es from '@/assets/locales/es';
+import de from '@/assets/locales/de';
 
 const SUPPORTED_LANGUAGES = ['en', 'it', 'fr', 'es', 'de'] as const;
 type SupportedLanguage = (typeof SUPPORTED_LANGUAGES)[number];

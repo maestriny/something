@@ -15,6 +15,7 @@ export const Colors = {
   textPrimary: '#1A1A2E',
   textSecondary: '#6B6B80',
   textMuted: '#9B9BAE',
+  textLight: '#6A6A7E',
   error: '#E88B8B',
   inputBackground: '#FFFFFF',
   inputBorder: '#E2E2EE',

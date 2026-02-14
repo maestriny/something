@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import type { TFunction } from 'i18next';
-import { USERNAME_REGEX, USERNAME_MAX_LENGTH, EMAIL_REGEX, PASSWORD_REGEX } from '../utils';
+import { USERNAME_REGEX, USERNAME_MAX_LENGTH, EMAIL_REGEX, PASSWORD_REGEX } from '@/lib/utils';
 
 export function createRegisterSchema(t: TFunction) {
   return z.object({

@@ -8,6 +8,7 @@ const es: Translations = {
     generalError: 'Algo salió mal. Por favor, inténtalo de nuevo.',
     networkError: 'No se puede conectar. Comprueba tu conexión a internet.',
     logout: 'Cerrar sesión',
+    back: 'Volver',
   },
   login: {
     heading: 'Bienvenido de nuevo',
@@ -106,6 +107,17 @@ const es: Translations = {
       title: 'Ups',
       description: 'Algo salió mal. Por favor, inténtalo de nuevo.',
     },
+  },
+  todo: {
+    heading: 'To Do',
+    placeholder: 'Añadir elemento',
+    add: 'Añadir',
+    completed: 'Completadas',
+    emptyHome: 'Nada que hacer a\u00fan.\n\u00a1A\u00f1ade tu primera tarea!',
+    emptyCompleted: 'No hay tareas completadas a\u00fan.\n\u00a1T\u00fa puedes!',
+  },
+  settings: {
+    heading: 'Ajustes',
   },
   input: {
     passwordHint: 'Campo de contraseña, el texto está oculto',

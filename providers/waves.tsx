@@ -1,5 +1,6 @@
 import { createContext, useContext, useMemo, type ReactNode } from 'react';
 import { useSharedValue, withTiming, Easing } from 'react-native-reanimated';
+import { WavesDuration } from '@/constants/waves';
 import type { SharedValue } from 'react-native-reanimated';
 
 type AuthScreen = 'login' | 'register';
@@ -19,7 +20,7 @@ export function WaveProvider({ children }: { children: ReactNode }) {
       morphProgress,
       setScreen: (screen: AuthScreen) => {
         morphProgress.value = withTiming(screen === 'register' ? 1 : 0, {
-          duration: 800,
+          duration: WavesDuration.morph,
           easing: Easing.inOut(Easing.cubic),
         });
       },

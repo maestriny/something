@@ -1,8 +1,8 @@
 import { StyleSheet, View } from 'react-native';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 import { AppText } from './AppText';
-import { useToast } from '../../providers/toast';
-import { Colors, BorderRadius, Spacing, Shadow } from '../../constants/theme';
+import { useToast } from '@/providers/toast';
+import { Colors, BorderRadius, Spacing, Shadow } from '@/constants/theme';
 
 const TOAST_COLORS = {
   success: Colors.green,
@@ -19,7 +19,11 @@ export function Toast() {
       <Animated.View
         entering={FadeIn.duration(300)}
         exiting={FadeOut.duration(200)}
-        style={[styles.toast, { backgroundColor: TOAST_COLORS[toast.type] }, Shadow.soft]}
+        style={[
+          styles.toast,
+          { backgroundColor: toast.color ?? TOAST_COLORS[toast.type] },
+          Shadow.soft,
+        ]}
       >
         <AppText variant="body" style={styles.title}>
           {toast.message}

@@ -1,6 +1,6 @@
 import { View, TouchableOpacity, StyleSheet } from 'react-native';
-import { AppText } from '../atoms/AppText';
-import { Colors, Fonts, Spacing } from '../../constants/theme';
+import { AppText } from '@/components/atoms/AppText';
+import { Colors, Fonts, Spacing } from '@/constants/theme';
 
 interface AuthPromptProps {
   message: string;

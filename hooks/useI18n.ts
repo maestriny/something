@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { initI18n } from '../lib/i18n';
+import { initI18n } from '@/lib/i18n';
 
 export function useI18n(): boolean {
   const [isReady, setIsReady] = useState(false);
