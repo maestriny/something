@@ -40,6 +40,7 @@ export default function HomeScreen() {
     <ScreenLayout
       title={t('todo.heading')}
       rightButton="settings"
+      fadeIn
       footer={
         // link to completed todos
         <Pressable
