@@ -1,5 +1,6 @@
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Slot } from 'expo-router';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Colors } from '@/constants/theme';
 import { ToastProvider } from '@/providers/toast';
 import { WaveTransitionProvider } from '@/providers/waveTransition';
@@ -32,11 +33,11 @@ function RootLayoutContent() {
   useAuthGuard(true);
 
   return (
-    <View style={styles.root}>
+    <GestureHandlerRootView style={styles.root}>
       <Slot />
       <WaveTransitionOverlay />
       <Toast />
-    </View>
+    </GestureHandlerRootView>
   );
 }
 

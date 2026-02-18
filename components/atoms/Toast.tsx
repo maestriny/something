@@ -2,7 +2,7 @@ import { StyleSheet, View } from 'react-native';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 import { AppText } from './AppText';
 import { useToast } from '@/providers/toast';
-import { Colors, BorderRadius, Spacing, Shadow } from '@/constants/theme';
+import { Colors, Fonts, BorderRadius, Spacing, Shadow } from '@/constants/theme';
 
 const TOAST_COLORS = {
   success: Colors.green,
@@ -28,11 +28,11 @@ export function Toast() {
         <AppText variant="body" style={styles.title}>
           {toast.message}
         </AppText>
-        {toast.description ? (
+        {toast.description && (
           <AppText variant="caption" style={styles.description}>
             {toast.description}
           </AppText>
-        ) : null}
+        )}
       </Animated.View>
     </View>
   );
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     paddingVertical: Spacing.md,
   },
   title: {
-    fontFamily: 'Sora-SemiBold',
+    fontFamily: Fonts.semiBold,
     color: Colors.textPrimary,
   },
   description: {

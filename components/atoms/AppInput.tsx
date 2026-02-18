@@ -1,7 +1,8 @@
+import { type ReactNode } from 'react';
 import { TextInput, View, Pressable, StyleSheet, type TextInputProps } from 'react-native';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { IconEye, IconEyeClosed } from '@tabler/icons-react-native';
+import { AppIcon } from './AppIcon';
 import { AppText } from './AppText';
 import {
   Colors,
@@ -17,12 +18,16 @@ interface AppInputProps extends TextInputProps {
   label?: string;
   error?: string;
   isPassword?: boolean;
+  variant?: 'default' | 'minimal';
+  rightSection?: ReactNode;
 }
 
 export function AppInput({
   label,
   error,
   isPassword,
+  variant = 'default',
+  rightSection,
   style,
   onFocus,
   onBlur,
@@ -44,13 +49,32 @@ export function AppInput({
     onBlur?.(e);
   };
 
+  if (variant === 'minimal') {
+    return (
+      // minimal: no label, only underline, no error state, no focus state, optional right section
+      <View style={styles.minimalRow}>
+        <TextInput
+          {...rest}
+          textContentType={textContentType ?? 'none'}
+          autoComplete={autoComplete ?? 'off'}
+          style={[styles.minimalInput, style]}
+          selectionColor={Colors.inputBorderFocused}
+          placeholderTextColor={Colors.placeholder}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+        />
+        {rightSection}
+      </View>
+    );
+  }
+
   return (
     <View style={styles.container}>
-      {label ? (
+      {label && (
         <AppText variant="caption" style={styles.label}>
           {label}
         </AppText>
-      ) : null}
+      )}
       <View
         style={[
           styles.inputWrapper,
@@ -79,19 +103,19 @@ export function AppInput({
             accessibilityRole="button"
             accessibilityLabel={showPassword ? t('input.hidePassword') : t('input.showPassword')}
           >
-            {showPassword ? (
-              <IconEyeClosed size={IconSize.md} color={Colors.textMuted} />
-            ) : (
-              <IconEye size={IconSize.md} color={Colors.textMuted} />
-            )}
+            <AppIcon
+              name={showPassword ? 'IconEyeClosed' : 'IconEye'}
+              size={IconSize.lg}
+              color={Colors.textMuted}
+            />
           </Pressable>
         )}
       </View>
-      {error ? (
+      {error && (
         <AppText variant="error" style={styles.error}>
           {error}
         </AppText>
-      ) : null}
+      )}
     </View>
   );
 }
@@ -131,6 +155,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     opacity: Opacity.active,
+  },
+  minimalRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.inputBorder,
+    paddingBottom: Spacing.sm,
+  },
+  minimalInput: {
+    flex: 1,
+    fontSize: FontSize.md,
+    fontFamily: Fonts.regular,
+    color: Colors.textPrimary,
   },
   error: {
     marginTop: Spacing.xs,

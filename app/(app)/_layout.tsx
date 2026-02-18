@@ -14,7 +14,19 @@ export default function AppLayout() {
             contentStyle: { backgroundColor: Colors.background },
             animation: 'none',
           }}
-        />
+        >
+          <Stack.Screen name="home" />
+          <Stack.Screen name="completed" />
+          <Stack.Screen name="settings" />
+          <Stack.Screen
+            name="todo-detail"
+            options={{
+              presentation: 'transparentModal',
+              animation: 'fade',
+              contentStyle: { backgroundColor: 'transparent' },
+            }}
+          />
+        </Stack>
       </View>
     </WaveProvider>
   );

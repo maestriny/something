@@ -11,11 +11,11 @@ export function ScreenHeading({ title, subtitle }: ScreenHeadingProps) {
   return (
     <View style={styles.container}>
       <AppText variant="heading">{title}</AppText>
-      {subtitle ? (
+      {subtitle && (
         <AppText variant="subheading" style={styles.subtitle}>
           {subtitle}
         </AppText>
-      ) : null}
+      )}
     </View>
   );
 }

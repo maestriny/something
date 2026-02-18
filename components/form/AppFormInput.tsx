@@ -10,6 +10,7 @@ interface AppFormInputProps<T extends FieldValues> extends Omit<
   name: Path<T>;
   label?: string;
   isPassword?: boolean;
+  variant?: 'default' | 'minimal';
 }
 
 export function AppFormInput<T extends FieldValues>({
@@ -17,6 +18,7 @@ export function AppFormInput<T extends FieldValues>({
   name,
   label,
   isPassword,
+  variant,
   ...inputProps
 }: AppFormInputProps<T>) {
   return (
@@ -31,6 +33,7 @@ export function AppFormInput<T extends FieldValues>({
           onBlur={onBlur}
           error={error?.message}
           isPassword={isPassword}
+          variant={variant}
           {...inputProps}
         />
       )}

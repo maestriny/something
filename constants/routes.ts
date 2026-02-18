@@ -12,5 +12,6 @@ export const Routes = {
     home: '/(app)/home',
     settings: '/(app)/settings',
     completed: '/(app)/completed',
+    todoDetail: '/(app)/todo-detail',
   },
 } as const;

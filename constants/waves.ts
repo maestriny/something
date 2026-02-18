@@ -2,7 +2,7 @@ import { Colors } from './theme';
 
 export const WavesHeight = {
   top: 190,
-  bottom: 140,
+  bottom: 100,
 } as const;
 
 export const WavesColor = {
