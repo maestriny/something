@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Modal, Pressable, StyleSheet } from 'react-native';
 import { AppText } from '@/components/atoms/AppText';
 import { AppButton } from '@/components/atoms/AppButton';
@@ -24,6 +24,10 @@ export function LanguagePicker({ visible, onClose }: LanguagePickerProps) {
   const { language, setLanguage } = useLanguageStore();
   const { t } = useTranslation();
   const [selected, setSelected] = useState<SupportedLanguage>(language);
+
+  useEffect(() => {
+    if (visible) setSelected(language);
+  }, [visible, language]);
 
   const handleConfirm = () => {
     setLanguage(selected);

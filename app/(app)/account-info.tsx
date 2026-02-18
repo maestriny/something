@@ -56,6 +56,7 @@ export default function AccountInfoScreen() {
       });
       router.back();
     } catch (error) {
+      // supabase sends the confirmation email but returns 500 — treat as success
       if (emailChanged(data) && (error as { status?: number }).status === 500) {
         showToast({
           type: 'success',

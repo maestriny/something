@@ -43,7 +43,12 @@ export function SettingsRow(props: SettingsRowProps) {
   }
 
   return (
-    <View style={styles.row}>
+    <View
+      style={styles.row}
+      accessibilityRole="switch"
+      accessibilityState={{ checked: props.value }}
+      accessibilityLabel={props.label}
+    >
       {/* left */}
       <AppIcon name={props.icon} size={IconSize.md} color={Colors.textPrimary} />
       <AppText style={styles.label}>{props.label}</AppText>
