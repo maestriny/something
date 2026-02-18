@@ -11,9 +11,17 @@ interface TodoActions {
   addTodo: (text: string) => void;
   toggleTodo: (id: string) => void;
   removeTodo: (id: string) => void;
+  updateTodo: (id: string, updates: Partial<Pick<Todo, 'text' | 'dueDate' | 'categoryId'>>) => void;
+  reorderTodos: (orderedIds: string[]) => void;
+  clearCategory: (categoryId: string) => void;
 }
 
 type TodoStore = TodoState & TodoActions;
+
+// calculate order to place new or toggled items at the front of the list
+function getFirst(todos: Todo[]): number {
+  return todos.reduce((min, todo) => (!todo.done ? Math.min(min, todo.order) : min), 0) - 1;
+}
 
 export const useTodoStore = create<TodoStore>()(
   persist(
@@ -21,27 +29,61 @@ export const useTodoStore = create<TodoStore>()(
       todos: [],
 
       addTodo: text => {
-        const todo: Todo = {
-          id: Date.now().toString(),
-          text,
-          done: false,
-        };
-        set(state => ({ todos: [todo, ...state.todos] }));
+        const now = new Date().toISOString();
+        set(state => {
+          const todo: Todo = {
+            id: Date.now().toString(),
+            text,
+            done: false,
+            createdAt: now,
+            order: getFirst(state.todos),
+          };
+          return { todos: [todo, ...state.todos] };
+        });
       },
 
-      // move toggled item to the front so the most recent action always appears first
       toggleTodo: id => {
         set(state => {
+          // move toggled item to the front so the most recent action always appears first
           const todo = state.todos.find(t => t.id === id);
           if (!todo) return state;
           const rest = state.todos.filter(t => t.id !== id);
-          return { todos: [{ ...todo, done: !todo.done }, ...rest] };
+          const toggled = { ...todo, done: !todo.done };
+          // done->active
+          if (!toggled.done) {
+            toggled.order = getFirst(rest);
+          }
+          // active->done
+          return { todos: [toggled, ...rest] };
         });
       },
 
       removeTodo: id => {
         set(state => ({
           todos: state.todos.filter(todo => todo.id !== id),
+        }));
+      },
+
+      updateTodo: (id, updates) => {
+        set(state => ({
+          todos: state.todos.map(todo => (todo.id === id ? { ...todo, ...updates } : todo)),
+        }));
+      },
+
+      reorderTodos: orderedIds => {
+        set(state => ({
+          todos: state.todos.map(todo => {
+            const newOrder = orderedIds.indexOf(todo.id);
+            return newOrder !== -1 ? { ...todo, order: newOrder } : todo;
+          }),
+        }));
+      },
+
+      clearCategory: categoryId => {
+        set(state => ({
+          todos: state.todos.map(todo =>
+            todo.categoryId === categoryId ? { ...todo, categoryId: undefined } : todo,
+          ),
         }));
       },
     }),

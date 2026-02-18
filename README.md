@@ -5,6 +5,7 @@ A todo app built with React Native and Expo as part of the _Developing Mobile Ap
 ## Features
 
 - Create and manage todos
+- Set due dates and assign tags
 - Mark todos as done and view completed items
 - Multi-language support (EN, IT, DE, ES, FR)
 

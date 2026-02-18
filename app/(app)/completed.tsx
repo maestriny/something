@@ -1,24 +1,35 @@
 import { View, FlatList, StyleSheet } from 'react-native';
 import { useCallback } from 'react';
+import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { AppText } from '@/components/atoms/AppText';
 import { TodoItem } from '@/components/molecules/TodoItem';
 import { ScreenLayout } from '@/components/layout/ScreenLayout';
 import { useTodoStore } from '@/stores/todo';
+import { useDoneTodos } from '@/hooks/useTodos';
+import { Routes } from '@/constants/routes';
 import { Spacing, FontSize, Colors } from '@/constants/theme';
 import type { Todo } from '@/types/todo';
 
 export default function CompletedScreen() {
   const { t } = useTranslation();
+  const router = useRouter();
 
-  const todos = useTodoStore(s => s.todos);
+  const done = useDoneTodos();
   const toggleTodo = useTodoStore(s => s.toggleTodo);
 
-  const done = todos.filter(todo => todo.done);
+  const handlePress = useCallback(
+    (id: string) => {
+      router.push({ pathname: Routes.app.todoDetail, params: { id } });
+    },
+    [router],
+  );
 
   const renderItem = useCallback(
-    ({ item }: { item: Todo }) => <TodoItem todo={item} onToggle={toggleTodo} />,
-    [toggleTodo],
+    ({ item }: { item: Todo }) => (
+      <TodoItem todo={item} onToggle={toggleTodo} onPress={handlePress} />
+    ),
+    [toggleTodo, handlePress],
   );
 
   const keyExtractor = useCallback((item: Todo) => item.id, []);

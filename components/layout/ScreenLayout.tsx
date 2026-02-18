@@ -63,9 +63,7 @@ export function ScreenLayout({
       <Animated.View style={[styles.content, { opacity: fadeAnimation }]}>{children}</Animated.View>
 
       {/* footer */}
-      {footer ? (
-        <View style={[styles.footer, { paddingBottom: insets.bottom }]}>{footer}</View>
-      ) : null}
+      {footer && <View style={[styles.footer, { paddingBottom: insets.bottom }]}>{footer}</View>}
     </View>
   );
 }
@@ -82,7 +80,7 @@ const styles = StyleSheet.create({
   },
   footer: {
     zIndex: 2,
-    marginBottom: Spacing.sm,
     paddingHorizontal: Spacing.lg,
+    marginBottom: -Spacing.xxs,
   },
 });
