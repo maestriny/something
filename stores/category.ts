@@ -47,7 +47,6 @@ export const useCategoryStore = create<CategoryStore>()(
     }),
     {
       name: 'category-storage',
-      version: 1,
       storage: createJSONStorage(() => AsyncStorage),
     },
   ),

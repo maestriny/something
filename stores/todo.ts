@@ -89,7 +89,6 @@ export const useTodoStore = create<TodoStore>()(
     }),
     {
       name: 'todo-storage',
-      version: 1,
       storage: createJSONStorage(() => AsyncStorage),
     },
   ),
