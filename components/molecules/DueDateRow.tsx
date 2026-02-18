@@ -53,7 +53,10 @@ interface DueDatePickerProps {
 function DueDatePicker({ dueDate, onDueDateChange, onToggle }: DueDatePickerProps) {
   const { t } = useTranslation();
   // internal state for selected date, initialized to current due date or today
-  const [date, setDate] = useState<Date>(dueDate ? new Date(dueDate) : new Date());
+  // clamp to today if the due date is in the past (picker has minimumDate=today)
+  const now = new Date();
+  const parsed = dueDate ? new Date(dueDate) : now;
+  const [date, setDate] = useState<Date>(parsed < now ? now : parsed);
 
   const handleDateChange = useCallback((_event: DateTimePickerEvent, selectedDate?: Date) => {
     if (selectedDate) {

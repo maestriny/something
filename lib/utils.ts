@@ -9,6 +9,11 @@ export const PASSWORD_REGEX = {
   special: /[^A-Za-z0-9]/,
 } as const;
 
+export function capitalize(str: string): string {
+  if (!str) return str;
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+}
+
 export function darkenHex(hex: string, amount = 0.15): string {
   const n = parseInt(hex.replace('#', ''), 16);
   const r = Math.max(0, Math.round(((n >> 16) & 0xff) * (1 - amount)));

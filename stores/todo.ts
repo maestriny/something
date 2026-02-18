@@ -13,6 +13,7 @@ interface TodoActions {
   removeTodo: (id: string) => void;
   updateTodo: (id: string, updates: Partial<Pick<Todo, 'text' | 'dueDate' | 'categoryId'>>) => void;
   reorderTodos: (orderedIds: string[]) => void;
+  clearCategory: (categoryId: string) => void;
 }
 
 type TodoStore = TodoState & TodoActions;
@@ -75,6 +76,14 @@ export const useTodoStore = create<TodoStore>()(
             const newOrder = orderedIds.indexOf(todo.id);
             return newOrder !== -1 ? { ...todo, order: newOrder } : todo;
           }),
+        }));
+      },
+
+      clearCategory: categoryId => {
+        set(state => ({
+          todos: state.todos.map(todo =>
+            todo.categoryId === categoryId ? { ...todo, categoryId: undefined } : todo,
+          ),
         }));
       },
     }),

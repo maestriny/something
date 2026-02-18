@@ -10,6 +10,7 @@ import { AppFormColorPicker } from '@/components/form/AppFormColorPicker';
 import { AppFormIconPicker } from '@/components/form/AppFormIconPicker';
 import { useCategoryStore } from '@/stores/category';
 import { categorySchema, type CategoryFormData } from '@/lib/schemas/category';
+import { capitalize } from '@/lib/utils';
 import { CATEGORY_ICON_NAMES } from '@/constants/categories';
 import { Palette, Colors, FontSize, Spacing } from '@/constants/theme';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -42,8 +43,7 @@ export function CategoryForm({ onDone }: CategoryFormProps) {
 
   const handleSave = useCallback(
     (data: CategoryFormData) => {
-      const trimmed = data.name.trim();
-      const name = trimmed.charAt(0).toUpperCase() + trimmed.slice(1);
+      const name = capitalize(data.name.trim());
       const newCat = addCategory({ name, icon: data.icon, color: data.color });
       onDone(newCat);
     },

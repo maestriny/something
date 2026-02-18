@@ -3,6 +3,7 @@ import { persist, createJSONStorage } from 'zustand/middleware';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import type { Category } from '@/types/category';
 import { DEFAULT_CATEGORIES } from '@/constants/categories';
+import { useTodoStore } from '@/stores/todo';
 
 interface CategoryState {
   categories: Category[];
@@ -39,6 +40,7 @@ export const useCategoryStore = create<CategoryStore>()(
         set(state => {
           const category = state.categories.find(cat => cat.id === id);
           if (!category || category.isDefault) return state;
+          useTodoStore.getState().clearCategory(id);
           return { categories: state.categories.filter(cat => cat.id !== id) };
         });
       },

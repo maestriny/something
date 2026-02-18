@@ -130,6 +130,7 @@ export default function TodoDetailScreen() {
                 expanded={expandedSection === 'category'}
                 onToggle={() => toggleSection('category')}
                 onEdit={() => setShowCategoryForm(true)}
+                disabled={todo.done}
               />
             </ScrollView>
 

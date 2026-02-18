@@ -55,7 +55,7 @@ export function AppRow({
             {value ?? displayPlaceholder}
           </AppText>
         )}
-        {onClear && (value || children) ? (
+        {onClear && !disabled && (value || children) ? (
           <Pressable onPress={onClear} hitSlop={8}>
             <AppIcon name="IconX" size={IconSize.xxs + Spacing.xxs} color={Colors.textMuted} />
           </Pressable>
