@@ -153,6 +153,71 @@ const de: Translations = {
   },
   settings: {
     heading: 'Einstellungen',
+    accountInfo: {
+      label: 'Konto',
+      heading: 'Konto',
+      labels: {
+        username: 'Benutzername',
+        email: 'E-Mail',
+      },
+      placeholders: {
+        username: 'Dein Benutzername',
+        email: 'deine@email.com',
+      },
+      validation: {
+        usernameRequired: 'Bitte gib einen Benutzernamen ein',
+        usernameMin: 'Der Benutzername muss mindestens 3 Zeichen lang sein',
+        usernameMax: 'Der Benutzername darf {{max}} Zeichen nicht überschreiten',
+        usernamePattern: 'Nur Buchstaben, Zahlen, Unterstriche und Bindestriche',
+        emailRequired: 'Bitte gib deine E-Mail-Adresse ein',
+        emailInvalid: 'Bitte gib eine gültige E-Mail-Adresse ein',
+      },
+      toast: {
+        successMessage: 'Profil aktualisiert',
+        successDescription: 'Deine Änderungen wurden gespeichert.',
+        emailConfirmation: 'Überprüfe deine E-Mail, um die Änderung zu bestätigen.',
+      },
+    },
+    changePassword: {
+      label: 'Passwort ändern',
+      heading: 'Passwort ändern',
+      labels: {
+        currentPassword: 'Aktuelles Passwort',
+        newPassword: 'Neues Passwort',
+        confirmPassword: 'Passwort bestätigen',
+      },
+      placeholders: {
+        currentPassword: 'Aktuelles Passwort eingeben',
+        newPassword: 'Mindestens 8 Zeichen',
+        confirmPassword: 'Neues Passwort erneut eingeben',
+      },
+      validation: {
+        currentPasswordRequired: 'Bitte gib dein aktuelles Passwort ein',
+        newPasswordRequired: 'Bitte gib ein neues Passwort ein',
+        newPasswordMin: 'Das Passwort muss mindestens 8 Zeichen lang sein',
+        newPasswordUppercase: 'Das Passwort muss mindestens einen Großbuchstaben enthalten',
+        newPasswordNumber: 'Das Passwort muss mindestens eine Zahl enthalten',
+        newPasswordSpecial: 'Das Passwort muss mindestens ein Sonderzeichen enthalten',
+        confirmPasswordRequired: 'Bitte bestätige dein neues Passwort',
+        newPasswordSameAsCurrent: 'Das neue Passwort muss sich vom aktuellen unterscheiden',
+        confirmPasswordMismatch: 'Die Passwörter stimmen nicht überein',
+      },
+      toast: {
+        successMessage: 'Passwort geändert',
+        successDescription: 'Dein Passwort wurde aktualisiert.',
+      },
+    },
+    deleteAccount: {
+      button: 'Konto löschen',
+      confirmTitle: 'Dein Konto löschen?',
+      confirmMessage:
+        'Dies wird dein Konto und alle deine Daten dauerhaft löschen. Diese Aktion kann nicht rückgängig gemacht werden.',
+      confirmYes: 'Löschen',
+      confirmNo: 'Abbrechen',
+    },
+    darkMode: 'Dunkelmodus',
+    notifications: 'Benachrichtigungen',
+    language: 'Sprache',
   },
   input: {
     passwordHint: 'Passwortfeld, Eingabe ist verborgen',

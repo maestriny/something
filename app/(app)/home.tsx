@@ -7,9 +7,12 @@ import { AppIcon } from '@/components/atoms/AppIcon';
 import { AppInput } from '@/components/atoms/AppInput';
 import { AppText } from '@/components/atoms/AppText';
 import { TodoItem } from '@/components/molecules/TodoItem';
+import { QuickMenu } from '@/components/molecules/QuickMenu';
 import { ScreenLayout } from '@/components/layout/ScreenLayout';
 import { useTodoStore } from '@/stores/todo';
+import { useAuthStore } from '@/stores/auth';
 import { useActiveTodos } from '@/hooks/useTodos';
+import { useWaveTransition } from '@/providers/waveTransition';
 import { Routes } from '@/constants/routes';
 import { Colors, Spacing, Fonts, FontSize, Opacity } from '@/constants/theme';
 import type { Todo } from '@/types/todo';
@@ -18,6 +21,18 @@ import { AppButton } from '@/components/atoms/AppButton';
 export default function HomeScreen() {
   const { t } = useTranslation();
   const router = useRouter();
+  const { startTransition } = useWaveTransition();
+  const { user, logout } = useAuthStore();
+
+  // state for quick menu visibility
+  const [showMenu, setShowMenu] = useState(false);
+  // TODO: implement dark mode and persist in storage
+  const [darkMode, setDarkMode] = useState(false);
+
+  const handleQuickLogout = () => {
+    startTransition(router, Routes.auth.login);
+    logout();
+  };
 
   // store and state
   const activeTodos = useActiveTodos();
@@ -71,6 +86,7 @@ export default function HomeScreen() {
     <ScreenLayout
       title={t('todo.heading')}
       rightButton="settings"
+      onSettingsLongPress={() => setShowMenu(true)}
       fadeIn
       footer={
         // link to completed todos
@@ -126,6 +142,17 @@ export default function HomeScreen() {
           ListFooterComponent={<View style={styles.listFooter} />}
         />
       )}
+
+      {/* quick menu for theme settings and logout */}
+      <QuickMenu
+        visible={showMenu}
+        onClose={() => setShowMenu(false)}
+        username={user?.username ?? ''}
+        email={user?.email ?? ''}
+        darkMode={darkMode}
+        onDarkModeChange={setDarkMode}
+        onLogout={handleQuickLogout}
+      />
     </ScreenLayout>
   );
 }

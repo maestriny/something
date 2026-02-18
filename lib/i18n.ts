@@ -48,5 +48,13 @@ export async function initI18n(): Promise<void> {
   });
 }
 
+export const LANGUAGE_LABELS: Record<SupportedLanguage, string> = {
+  en: 'English',
+  it: 'Italiano',
+  fr: 'Français',
+  es: 'Español',
+  de: 'Deutsch',
+};
+
 export { SUPPORTED_LANGUAGES, type SupportedLanguage };
 export default i18n;

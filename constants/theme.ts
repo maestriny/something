@@ -20,12 +20,14 @@ export const Colors = {
   textLight: '#6A6A7E',
   error: '#E88B8B',
   inputBackground: '#FFFFFF',
+  switchTrack: '#E0E0E8',
   inputBorder: '#E2E2EE',
   inputBorderFocused: '#5B5FE699',
   placeholder: '#B0B0C0',
   buttonPrimary: '#1A1A2E',
   buttonText: '#FFFFFF',
   link: '#5B5FE6',
+  overlay: 'rgba(0,0,0,0.3)',
 } as const;
 
 export const Spacing = {

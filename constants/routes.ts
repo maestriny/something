@@ -13,5 +13,7 @@ export const Routes = {
     settings: '/(app)/settings',
     completed: '/(app)/completed',
     todoDetail: '/(app)/todo-detail',
+    accountInfo: '/(app)/account-info',
+    changePassword: '/(app)/change-password',
   },
 } as const;

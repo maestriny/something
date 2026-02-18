@@ -16,6 +16,7 @@ interface ScreenLayoutProps {
   subtitle?: string;
   leftButton?: 'back';
   rightButton?: 'settings';
+  onSettingsLongPress?: () => void;
   footer?: ReactNode;
   fadeIn?: boolean;
   children: ReactNode;
@@ -26,6 +27,7 @@ export function ScreenLayout({
   subtitle,
   leftButton,
   rightButton,
+  onSettingsLongPress,
   footer,
   fadeIn = false,
   children,
@@ -51,7 +53,11 @@ export function ScreenLayout({
 
       {/* navbar */}
       <View style={styles.above}>
-        <NavigationBar leftButton={leftButton} rightButton={rightButton} />
+        <NavigationBar
+          leftButton={leftButton}
+          rightButton={rightButton}
+          onSettingsLongPress={onSettingsLongPress}
+        />
       </View>
 
       {/* heading */}

@@ -7,11 +7,13 @@ import { Colors, Spacing, IconSize, Opacity } from '@/constants/theme';
 
 function NavButton({
   onPress,
+  onLongPress,
   style,
   label,
   icon,
 }: {
   onPress: () => void;
+  onLongPress?: () => void;
   style?: StyleProp<ViewStyle>;
   label: string;
   icon: IconName;
@@ -19,6 +21,7 @@ function NavButton({
   return (
     <Pressable
       onPress={onPress}
+      onLongPress={onLongPress}
       hitSlop={12}
       style={({ pressed }) => [styles.button, style, pressed && { opacity: Opacity.active }]}
       accessibilityRole="button"
@@ -32,9 +35,14 @@ function NavButton({
 interface NavigationBarProps {
   leftButton?: 'back';
   rightButton?: 'settings';
+  onSettingsLongPress?: () => void;
 }
 
-export function NavigationBar({ leftButton, rightButton }: NavigationBarProps) {
+export function NavigationBar({
+  leftButton,
+  rightButton,
+  onSettingsLongPress,
+}: NavigationBarProps) {
   const router = useRouter();
   const { t } = useTranslation();
 
@@ -52,6 +60,7 @@ export function NavigationBar({ leftButton, rightButton }: NavigationBarProps) {
       {rightButton === 'settings' && (
         <NavButton
           onPress={() => router.push(Routes.app.settings)}
+          onLongPress={onSettingsLongPress}
           style={styles.rightButton}
           label={t('settings.heading')}
           icon="IconSettingsFilled"

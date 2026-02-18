@@ -13,6 +13,8 @@ export type AuthCredentials = {
 
 export type SignUpData = AuthCredentials & Pick<User, 'username'>;
 
+export type ProfileUpdate = Omit<User, 'id'>;
+
 export type { Session };
 
 // extracts only the fields we care about from the supabase user object and maps them to our app's User type

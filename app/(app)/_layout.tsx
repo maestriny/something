@@ -18,6 +18,8 @@ export default function AppLayout() {
           <Stack.Screen name="home" />
           <Stack.Screen name="completed" />
           <Stack.Screen name="settings" />
+          <Stack.Screen name="account-info" />
+          <Stack.Screen name="change-password" />
           <Stack.Screen
             name="todo-detail"
             options={{

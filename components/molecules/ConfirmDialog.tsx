@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.semiBold,
     color: Colors.textPrimary,
     textAlign: 'center',
-    marginBottom: Spacing.xs,
+    marginBottom: Spacing.sm,
   },
   message: {
     fontSize: FontSize.sm,
