@@ -1,4 +1,4 @@
-export const USERNAME_REGEX = /^[a-zA-Z0-9][a-zA-Z0-9_-]*[a-zA-Z0-9]$/;
+export const USERNAME_REGEX = /^[a-zA-Z0-9]+(?:\s[a-zA-Z0-9]+)*$/;
 export const USERNAME_MAX_LENGTH = 20;
 
 export const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -12,6 +12,14 @@ export const PASSWORD_REGEX = {
 export function capitalize(str: string): string {
   if (!str) return str;
   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+}
+
+export function getInitials(name: string): string {
+  const trimmed = name.trim();
+  if (!trimmed) return '';
+  const [first, second] = trimmed.split(/\s+/);
+  const initials = second ? first[0] + second[0] : first[0];
+  return initials.toUpperCase();
 }
 
 export function darkenHex(hex: string, amount = 0.15): string {

@@ -42,7 +42,7 @@ export const DEFAULT_CATEGORIES: Category[] = [
     id: 'cat-work',
     name: 'categories.default.work',
     icon: 'IconBriefcase',
-    color: Palette[1],
+    color: Palette[4],
     isDefault: true,
   },
   {
@@ -63,21 +63,21 @@ export const DEFAULT_CATEGORIES: Category[] = [
     id: 'cat-home',
     name: 'categories.default.home',
     icon: 'IconHome',
-    color: Palette[4],
+    color: Palette[5],
     isDefault: true,
   },
   {
     id: 'cat-health',
     name: 'categories.default.health',
     icon: 'IconHeart',
-    color: Palette[5],
+    color: Palette[8],
     isDefault: true,
   },
   {
     id: 'cat-personal',
     name: 'categories.default.personal',
     icon: 'IconUser',
-    color: Palette[6],
+    color: Palette[10],
     isDefault: true,
   },
   {

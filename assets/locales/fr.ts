@@ -61,7 +61,7 @@ const fr: Translations = {
       usernameRequired: "Veuillez entrer un nom d'utilisateur",
       usernameMin: "Le nom d'utilisateur doit contenir au moins 3 caractères",
       usernameMax: "Le nom d'utilisateur ne peut pas dépasser {{max}} caractères",
-      usernamePattern: 'Uniquement lettres, chiffres, tirets bas et tirets',
+      usernamePattern: 'Uniquement lettres, chiffres et espaces',
       emailRequired: 'Veuillez entrer votre email',
       emailInvalid: 'Veuillez entrer une adresse email valide',
       passwordRequired: 'Veuillez entrer un mot de passe',
@@ -152,7 +152,73 @@ const fr: Translations = {
     },
   },
   settings: {
-    heading: 'Param\u00e8tres',
+    heading: 'Paramètres',
+    accountInfo: {
+      label: 'Compte',
+      heading: 'Compte',
+      labels: {
+        username: "Nom d'utilisateur",
+        email: 'Email',
+      },
+      placeholders: {
+        username: "Votre nom d'utilisateur",
+        email: 'votre@email.com',
+      },
+      validation: {
+        usernameRequired: "Veuillez entrer un nom d'utilisateur",
+        usernameMin: "Le nom d'utilisateur doit contenir au moins 3 caractères",
+        usernameMax: "Le nom d'utilisateur ne peut pas dépasser {{max}} caractères",
+        usernamePattern: 'Uniquement lettres, chiffres et espaces',
+        emailRequired: 'Veuillez entrer votre email',
+        emailInvalid: 'Veuillez entrer une adresse email valide',
+      },
+      toast: {
+        successMessage: 'Profil mis à jour',
+        successDescription: 'Vos modifications ont été enregistrées.',
+        emailConfirmation: 'Vérifiez votre email pour confirmer le changement.',
+      },
+    },
+    changePassword: {
+      label: 'Changer le mot de passe',
+      heading: 'Changer le mot de passe',
+      labels: {
+        currentPassword: 'Mot de passe actuel',
+        newPassword: 'Nouveau mot de passe',
+        confirmPassword: 'Confirmer le mot de passe',
+      },
+      placeholders: {
+        currentPassword: 'Entrez le mot de passe actuel',
+        newPassword: 'Au moins 8 caractères',
+        confirmPassword: 'Ressaisissez le nouveau mot de passe',
+      },
+      validation: {
+        currentPasswordRequired: 'Veuillez entrer votre mot de passe actuel',
+        newPasswordRequired: 'Veuillez entrer un nouveau mot de passe',
+        newPasswordMin: 'Le mot de passe doit contenir au moins 8 caractères',
+        newPasswordUppercase: 'Le mot de passe doit contenir au moins une lettre majuscule',
+        newPasswordNumber: 'Le mot de passe doit contenir au moins un chiffre',
+        newPasswordSpecial: 'Le mot de passe doit contenir au moins un caractère spécial',
+        confirmPasswordRequired: 'Veuillez confirmer votre nouveau mot de passe',
+        newPasswordSameAsCurrent:
+          'Le nouveau mot de passe doit être différent du mot de passe actuel',
+        confirmPasswordMismatch: 'Les mots de passe ne correspondent pas',
+      },
+      toast: {
+        successMessage: 'Mot de passe changé',
+        successDescription: 'Votre mot de passe a été mis à jour.',
+      },
+    },
+    deleteAccount: {
+      button: 'Supprimer le compte',
+      confirmTitle: 'Supprimer votre compte ?',
+      confirmMessage:
+        'Cela supprimera définitivement votre compte et toutes vos données. Cette action est irréversible.',
+      confirmYes: 'Supprimer',
+      confirmNo: 'Annuler',
+    },
+    darkMode: 'Mode sombre',
+    notifications: 'Notifications',
+    language: 'Langue',
   },
   input: {
     passwordHint: 'Champ mot de passe, le texte est masqué',

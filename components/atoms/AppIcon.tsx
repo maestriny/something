@@ -2,6 +2,7 @@ import type { ComponentType } from 'react';
 import { IconSize } from '@/constants/theme';
 import {
   IconArrowLeft,
+  IconBell,
   IconBolt,
   IconBook,
   IconBriefcase,
@@ -9,6 +10,7 @@ import {
   IconCar,
   IconCash,
   IconChevronDown,
+  IconChevronRight,
   IconChevronUp,
   IconCoffee,
   IconDeviceGamepad2,
@@ -21,6 +23,8 @@ import {
   IconHome,
   IconLeaf,
   IconListCheck,
+  IconLock,
+  IconMoon,
   IconMusic,
   IconPalette,
   IconPaw,
@@ -36,13 +40,16 @@ import {
   IconTag,
   IconTrash,
   IconUser,
+  IconWorld,
   IconX,
+  IconUserOff,
 } from '@tabler/icons-react-native';
 
 type IconComponent = ComponentType<{ size: number; color: string; strokeWidth?: number }>;
 
 const ICONS = {
   IconArrowLeft,
+  IconBell,
   IconBolt,
   IconBook,
   IconBriefcase,
@@ -50,6 +57,7 @@ const ICONS = {
   IconCar,
   IconCash,
   IconChevronDown,
+  IconChevronRight,
   IconChevronUp,
   IconCoffee,
   IconDeviceGamepad2,
@@ -62,6 +70,8 @@ const ICONS = {
   IconHome,
   IconLeaf,
   IconListCheck,
+  IconLock,
+  IconMoon,
   IconMusic,
   IconPalette,
   IconPaw,
@@ -77,7 +87,9 @@ const ICONS = {
   IconTag,
   IconTrash,
   IconUser,
+  IconWorld,
   IconX,
+  IconUserOff,
 } as const satisfies Record<string, IconComponent>;
 
 export type IconName = keyof typeof ICONS;

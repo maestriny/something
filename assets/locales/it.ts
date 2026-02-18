@@ -61,7 +61,7 @@ const it: Translations = {
       usernameRequired: 'Inserisci un nome utente',
       usernameMin: 'Il nome utente deve avere almeno 3 caratteri',
       usernameMax: 'Il nome utente non può superare {{max}} caratteri',
-      usernamePattern: 'Solo lettere, numeri, trattini bassi e trattini',
+      usernamePattern: 'Solo lettere, numeri e spazi',
       emailRequired: 'Inserisci la tua email',
       emailInvalid: 'Inserisci un indirizzo email valido',
       passwordRequired: 'Inserisci una password',
@@ -153,6 +153,71 @@ const it: Translations = {
   },
   settings: {
     heading: 'Impostazioni',
+    accountInfo: {
+      label: 'Account',
+      heading: 'Account',
+      labels: {
+        username: 'Nome utente',
+        email: 'Email',
+      },
+      placeholders: {
+        username: 'Il tuo nome utente',
+        email: 'tua@email.com',
+      },
+      validation: {
+        usernameRequired: 'Inserisci un nome utente',
+        usernameMin: 'Il nome utente deve avere almeno 3 caratteri',
+        usernameMax: 'Il nome utente non può superare {{max}} caratteri',
+        usernamePattern: 'Solo lettere, numeri e spazi',
+        emailRequired: 'Inserisci la tua email',
+        emailInvalid: 'Inserisci un indirizzo email valido',
+      },
+      toast: {
+        successMessage: 'Profilo aggiornato',
+        successDescription: 'Le modifiche sono state salvate.',
+        emailConfirmation: 'Controlla la tua email per confermare la modifica.',
+      },
+    },
+    changePassword: {
+      label: 'Cambia Password',
+      heading: 'Cambia Password',
+      labels: {
+        currentPassword: 'Password attuale',
+        newPassword: 'Nuova password',
+        confirmPassword: 'Conferma password',
+      },
+      placeholders: {
+        currentPassword: 'Inserisci la password attuale',
+        newPassword: 'Almeno 8 caratteri',
+        confirmPassword: 'Reinserisci la nuova password',
+      },
+      validation: {
+        currentPasswordRequired: 'Inserisci la tua password attuale',
+        newPasswordRequired: 'Inserisci una nuova password',
+        newPasswordMin: 'La password deve avere almeno 8 caratteri',
+        newPasswordUppercase: 'La password deve contenere almeno una lettera maiuscola',
+        newPasswordNumber: 'La password deve contenere almeno un numero',
+        newPasswordSpecial: 'La password deve contenere almeno un carattere speciale',
+        confirmPasswordRequired: 'Conferma la nuova password',
+        newPasswordSameAsCurrent: 'La nuova password deve essere diversa da quella attuale',
+        confirmPasswordMismatch: 'Le password non corrispondono',
+      },
+      toast: {
+        successMessage: 'Password modificata',
+        successDescription: 'La tua password è stata aggiornata.',
+      },
+    },
+    deleteAccount: {
+      button: 'Elimina account',
+      confirmTitle: 'Vuoi eliminare il tuo account?',
+      confirmMessage:
+        "Questo eliminerà permanentemente il tuo account e tutti i tuoi dati. Quest'azione è irreversibile.",
+      confirmYes: 'Elimina',
+      confirmNo: 'Annulla',
+    },
+    darkMode: 'Tema scuro',
+    notifications: 'Notifiche',
+    language: 'Lingua',
   },
   input: {
     passwordHint: 'Campo password, il testo è nascosto',

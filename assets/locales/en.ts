@@ -59,7 +59,7 @@ const en = {
       usernameRequired: 'Please enter a username',
       usernameMin: 'Username should be at least 3 characters',
       usernameMax: "Username can't exceed {{max}} characters",
-      usernamePattern: 'Only letters, numbers, underscores and hyphens',
+      usernamePattern: 'Only letters, numbers and spaces',
       emailRequired: 'Please enter your email',
       emailInvalid: 'Please enter a valid email address',
       passwordRequired: 'Please enter a password',
@@ -151,6 +151,71 @@ const en = {
   },
   settings: {
     heading: 'Settings',
+    accountInfo: {
+      label: 'Account',
+      heading: 'Account',
+      labels: {
+        username: 'Username',
+        email: 'Email',
+      },
+      placeholders: {
+        username: 'Your username',
+        email: 'your@email.com',
+      },
+      validation: {
+        usernameRequired: 'Please enter a username',
+        usernameMin: 'Username should be at least 3 characters',
+        usernameMax: "Username can't exceed {{max}} characters",
+        usernamePattern: 'Only letters, numbers and spaces',
+        emailRequired: 'Please enter your email',
+        emailInvalid: 'Please enter a valid email address',
+      },
+      toast: {
+        successMessage: 'Profile updated',
+        successDescription: 'Your changes have been saved.',
+        emailConfirmation: 'Check your email to confirm the change.',
+      },
+    },
+    changePassword: {
+      label: 'Change Password',
+      heading: 'Change Password',
+      labels: {
+        currentPassword: 'Current Password',
+        newPassword: 'New Password',
+        confirmPassword: 'Confirm Password',
+      },
+      placeholders: {
+        currentPassword: 'Enter current password',
+        newPassword: 'At least 8 characters',
+        confirmPassword: 'Re-enter new password',
+      },
+      validation: {
+        currentPasswordRequired: 'Please enter your current password',
+        newPasswordRequired: 'Please enter a new password',
+        newPasswordMin: 'Password should be at least 8 characters',
+        newPasswordUppercase: 'Password needs at least one uppercase letter',
+        newPasswordNumber: 'Password needs at least one number',
+        newPasswordSpecial: 'Password needs at least one special character',
+        confirmPasswordRequired: 'Please confirm your new password',
+        newPasswordSameAsCurrent: 'New password must be different from current password',
+        confirmPasswordMismatch: 'Passwords do not match',
+      },
+      toast: {
+        successMessage: 'Password changed',
+        successDescription: 'Your password has been updated.',
+      },
+    },
+    deleteAccount: {
+      button: 'Delete Account',
+      confirmTitle: 'Delete your account?',
+      confirmMessage:
+        'This will permanently delete your account and all your data. This action cannot be undone.',
+      confirmYes: 'Delete',
+      confirmNo: 'Cancel',
+    },
+    darkMode: 'Dark Mode',
+    notifications: 'Notifications',
+    language: 'Language',
   },
   input: {
     passwordHint: 'Password field, input is hidden',
