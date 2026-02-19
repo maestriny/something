@@ -12,7 +12,8 @@ import { useCategoryStore } from '@/stores/category';
 import { categorySchema, type CategoryFormData } from '@/lib/schemas/category';
 import { capitalize } from '@/lib/utils';
 import { CATEGORY_ICON_NAMES } from '@/constants/categories';
-import { Palette, Colors, FontSize, Spacing } from '@/constants/theme';
+import { Palette, FontSize, Spacing } from '@/constants/theme';
+import { useTheme } from '@/providers/theme';
 import { ScrollView } from 'react-native-gesture-handler';
 
 interface CategoryFormProps {
@@ -21,6 +22,7 @@ interface CategoryFormProps {
 
 export function CategoryForm({ onDone }: CategoryFormProps) {
   const { t } = useTranslation();
+  const { colors } = useTheme();
   const addCategory = useCategoryStore(s => s.addCategory);
 
   const {
@@ -64,11 +66,15 @@ export function CategoryForm({ onDone }: CategoryFormProps) {
         />
 
         {/* Color Picker */}
-        <AppText style={styles.label}>{t('categories.color')}</AppText>
+        <AppText style={[styles.label, { color: colors.textMuted }]}>
+          {t('categories.color')}
+        </AppText>
         <AppFormColorPicker control={control} name="color" colors={Palette} />
 
         {/* Icon Picker */}
-        <AppText style={styles.label}>{t('categories.icon')}</AppText>
+        <AppText style={[styles.label, { color: colors.textMuted }]}>
+          {t('categories.icon')}
+        </AppText>
         <AppFormIconPicker control={control} name="icon" color={color} />
       </ScrollView>
 
@@ -100,7 +106,6 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: FontSize.xs,
-    color: Colors.textMuted,
     marginTop: Spacing.xs,
   },
   actions: {

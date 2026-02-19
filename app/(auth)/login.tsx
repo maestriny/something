@@ -11,10 +11,11 @@ import { AppFormInput } from '@/components/form/AppFormInput';
 import { AuthPrompt } from '@/components/molecules/AuthPrompt';
 import { useWave } from '@/providers/waves';
 import { useWaveTransition } from '@/providers/waveTransition';
+import { useTheme } from '@/providers/theme';
 import { useAuthStore } from '@/stores/auth';
 import { toast } from '@/lib/toast';
 import { Routes } from '@/constants/routes';
-import { Colors, Spacing } from '@/constants/theme';
+import { Spacing } from '@/constants/theme';
 import { useKeyboardScroll } from '@/hooks/useKeyboardScroll';
 import { createLoginSchema, type LoginFormData } from '@/lib/schemas/login';
 
@@ -22,6 +23,7 @@ export default function LoginScreen() {
   const router = useRouter();
   const { setScreen } = useWave();
   const { startTransition } = useWaveTransition();
+  const { colors } = useTheme();
   const { t } = useTranslation();
   const login = useAuthStore(s => s.login);
 
@@ -59,7 +61,7 @@ export default function LoginScreen() {
           type: 'success',
           message: t('login.toast.successMessage'),
           description: t('login.toast.successDescription', { username: user.username }),
-          color: Colors.surface,
+          color: colors.surface,
         });
       }, 200);
     } catch (error) {
@@ -68,7 +70,10 @@ export default function LoginScreen() {
   };
 
   return (
-    <Pressable style={styles.screen} onPress={Keyboard.dismiss}>
+    <Pressable
+      style={[styles.screen, { backgroundColor: colors.background }]}
+      onPress={Keyboard.dismiss}
+    >
       <SafeAreaView style={styles.safeArea}>
         <View style={styles.content}>
           <View style={styles.header}>
@@ -132,7 +137,6 @@ export default function LoginScreen() {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: Colors.background,
   },
   safeArea: {
     flex: 1,

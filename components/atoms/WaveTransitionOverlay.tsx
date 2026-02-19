@@ -7,8 +7,8 @@ import Animated, {
   runOnJS,
 } from 'react-native-reanimated';
 import Svg, { Path } from 'react-native-svg';
-import { WavesColor } from '@/constants/waves';
 import { useWaveTransition } from '@/providers/waveTransition';
+import { useTheme } from '@/providers/theme';
 import { buildInterpolatedPath } from '@/lib/wavePaths';
 import {
   transitionTopResting,
@@ -22,6 +22,7 @@ const AnimatedPath = Animated.createAnimatedComponent(Path);
 export function WaveTransitionOverlay() {
   const { width, height } = useWindowDimensions();
   const { coverProgress } = useWaveTransition();
+  const { colors } = useTheme();
 
   const topResting = useMemo(() => transitionTopResting(width, height), [width, height]);
   const topCovering = useMemo(() => transitionTopCovering(width, height), [width, height]);
@@ -54,8 +55,8 @@ export function WaveTransitionOverlay() {
       pointerEvents={blocking ? 'auto' : 'none'}
     >
       <Svg width={width} height={height} style={StyleSheet.absoluteFill}>
-        <AnimatedPath animatedProps={topPathProps} fill={WavesColor.top} />
-        <AnimatedPath animatedProps={bottomPathProps} fill={WavesColor.bottom} />
+        <AnimatedPath animatedProps={topPathProps} fill={colors.waveTop} />
+        <AnimatedPath animatedProps={bottomPathProps} fill={colors.waveBottom} />
       </Svg>
     </Animated.View>
   );

@@ -5,7 +5,8 @@ import DateTimePicker, { type DateTimePickerEvent } from '@react-native-communit
 import { AppRow } from '@/components/atoms/AppRow';
 import { AppButton } from '@/components/atoms/AppButton';
 import dayjs from '@/lib/dayjs';
-import { Colors, Spacing } from '@/constants/theme';
+import { Spacing } from '@/constants/theme';
+import { useTheme } from '@/providers/theme';
 
 interface DueDateRowProps {
   dueDate: string | undefined;
@@ -52,6 +53,7 @@ interface DueDatePickerProps {
 
 function DueDatePicker({ dueDate, onDueDateChange, onToggle }: DueDatePickerProps) {
   const { t } = useTranslation();
+  const { colors, isDark } = useTheme();
   // internal state for selected date, initialized to current due date or today
   // clamp to today if the due date is in the past (picker has minimumDate=today)
   const now = new Date();
@@ -79,7 +81,8 @@ function DueDatePicker({ dueDate, onDueDateChange, onToggle }: DueDatePickerProp
           display={Platform.OS === 'ios' ? 'inline' : 'default'}
           minimumDate={new Date()}
           onChange={handleDateChange}
-          accentColor={Colors.primary}
+          accentColor={colors.primary}
+          themeVariant={isDark ? 'dark' : 'light'}
         />
       </View>
 

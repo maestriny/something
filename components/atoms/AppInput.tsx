@@ -1,18 +1,10 @@
-import { type ReactNode } from 'react';
+import { type ReactNode, useState } from 'react';
 import { TextInput, View, Pressable, StyleSheet, type TextInputProps } from 'react-native';
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { AppIcon } from './AppIcon';
 import { AppText } from './AppText';
-import {
-  Colors,
-  BorderRadius,
-  FontSize,
-  Fonts,
-  Spacing,
-  IconSize,
-  Opacity,
-} from '@/constants/theme';
+import { BorderRadius, FontSize, Fonts, Spacing, IconSize, Opacity } from '@/constants/theme';
+import { useTheme } from '@/providers/theme';
 
 interface AppInputProps extends TextInputProps {
   label?: string;
@@ -36,6 +28,7 @@ export function AppInput({
   ...rest
 }: AppInputProps) {
   const { t } = useTranslation();
+  const { colors } = useTheme();
   const [isFocused, setIsFocused] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
@@ -52,14 +45,14 @@ export function AppInput({
   if (variant === 'minimal') {
     return (
       // minimal: no label, only underline, no error state, no focus state, optional right section
-      <View style={styles.minimalRow}>
+      <View style={[styles.minimalRow, { borderBottomColor: colors.inputBorder }]}>
         <TextInput
           {...rest}
           textContentType={textContentType ?? 'none'}
           autoComplete={autoComplete ?? 'off'}
-          style={[styles.minimalInput, style]}
-          selectionColor={Colors.inputBorderFocused}
-          placeholderTextColor={Colors.placeholder}
+          style={[styles.minimalInput, { color: colors.textPrimary }, style]}
+          selectionColor={colors.inputBorderFocused}
+          placeholderTextColor={colors.placeholder}
           onFocus={handleFocus}
           onBlur={handleBlur}
         />
@@ -78,17 +71,18 @@ export function AppInput({
       <View
         style={[
           styles.inputWrapper,
-          isFocused && styles.inputWrapperFocused,
-          !!error && styles.inputWrapperError,
+          { backgroundColor: colors.inputBackground, borderColor: colors.inputBorder },
+          isFocused && { borderColor: colors.inputBorderFocused },
+          !!error && { borderColor: colors.error },
         ]}
       >
         <TextInput
           {...rest}
           textContentType={textContentType ?? 'none'}
           autoComplete={autoComplete ?? 'off'}
-          style={[styles.input, style]}
-          selectionColor={Colors.inputBorderFocused}
-          placeholderTextColor={Colors.placeholder}
+          style={[styles.input, { color: colors.textPrimary }, style]}
+          selectionColor={colors.inputBorderFocused}
+          placeholderTextColor={colors.placeholder}
           secureTextEntry={isPassword && !showPassword}
           accessibilityLabel={label}
           accessibilityHint={isPassword ? t('input.passwordHint') : undefined}
@@ -106,7 +100,7 @@ export function AppInput({
             <AppIcon
               name={showPassword ? 'IconEyeClosed' : 'IconEye'}
               size={IconSize.lg}
-              color={Colors.textMuted}
+              color={colors.textMuted}
             />
           </Pressable>
         )}
@@ -131,16 +125,8 @@ const styles = StyleSheet.create({
   inputWrapper: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: Colors.inputBackground,
     borderWidth: 1.5,
-    borderColor: Colors.inputBorder,
     borderRadius: BorderRadius.lg,
-  },
-  inputWrapperFocused: {
-    borderColor: Colors.inputBorderFocused,
-  },
-  inputWrapperError: {
-    borderColor: Colors.error,
   },
   input: {
     flex: 1,
@@ -148,7 +134,6 @@ const styles = StyleSheet.create({
     paddingVertical: Spacing.md,
     fontSize: FontSize.md,
     fontFamily: Fonts.regular,
-    color: Colors.textPrimary,
   },
   toggle: {
     paddingRight: Spacing.md,
@@ -160,14 +145,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderBottomWidth: 1,
-    borderBottomColor: Colors.inputBorder,
     paddingBottom: Spacing.sm,
   },
   minimalInput: {
     flex: 1,
     fontSize: FontSize.md,
     fontFamily: Fonts.regular,
-    color: Colors.textPrimary,
   },
   error: {
     marginTop: Spacing.xs,

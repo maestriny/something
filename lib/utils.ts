@@ -23,9 +23,25 @@ export function getInitials(name: string): string {
 }
 
 export function darkenHex(hex: string, amount = 0.15): string {
-  const n = parseInt(hex.replace('#', ''), 16);
+  const n = parseInt(hex.replace('#', '').slice(0, 6), 16);
   const r = Math.max(0, Math.round(((n >> 16) & 0xff) * (1 - amount)));
   const g = Math.max(0, Math.round(((n >> 8) & 0xff) * (1 - amount)));
   const b = Math.max(0, Math.round((n & 0xff) * (1 - amount)));
   return `#${((r << 16) | (g << 8) | b).toString(16).padStart(6, '0')}`;
+}
+
+export function lightenHex(hex: string, amount = 0.25): string {
+  const n = parseInt(hex.replace('#', '').slice(0, 6), 16);
+  const r = Math.min(255, Math.round(((n >> 16) & 0xff) + (255 - ((n >> 16) & 0xff)) * amount));
+  const g = Math.min(255, Math.round(((n >> 8) & 0xff) + (255 - ((n >> 8) & 0xff)) * amount));
+  const b = Math.min(255, Math.round((n & 0xff) + (255 - (n & 0xff)) * amount));
+  return `#${((r << 16) | (g << 8) | b).toString(16).padStart(6, '0')}`;
+}
+
+export function setOpacity(hex: string, opacity: number): string {
+  const base = hex.replace('#', '').slice(0, 6);
+  const alphaHex = Math.round(opacity * 255)
+    .toString(16)
+    .padStart(2, '0');
+  return `#${base}${alphaHex}`;
 }

@@ -4,9 +4,10 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { NavigationBar } from './NavigationBar';
 import { Wave } from '@/components/atoms/Wave';
 import { Spacing } from '@/constants/theme';
-import { WavesColor, WavesHeight, WavesDuration } from '@/constants/waves';
+import { WavesHeight, WavesDuration } from '@/constants/waves';
 import type { ReactNode } from 'react';
 import { ScreenHeading } from './ScreenHeading';
+import { useTheme } from '@/providers/theme';
 
 // shared layout for authenticated screens
 // includes background waves, navigation bar, heading, content area, and optional footer
@@ -16,6 +17,7 @@ interface ScreenLayoutProps {
   subtitle?: string;
   leftButton?: 'back';
   rightButton?: 'settings';
+  rightSecondaryButton?: 'completed';
   onSettingsLongPress?: () => void;
   footer?: ReactNode;
   fadeIn?: boolean;
@@ -27,12 +29,14 @@ export function ScreenLayout({
   subtitle,
   leftButton,
   rightButton,
+  rightSecondaryButton,
   onSettingsLongPress,
   footer,
   fadeIn = false,
   children,
 }: ScreenLayoutProps) {
   const insets = useSafeAreaInsets();
+  const { colors } = useTheme();
 
   const fadeAnimation = useRef(new Animated.Value(fadeIn ? 0 : 1)).current;
   useEffect(() => {
@@ -46,16 +50,19 @@ export function ScreenLayout({
   }, [fadeAnimation, fadeIn]);
 
   return (
-    <View style={[styles.container, { paddingTop: insets.top }]}>
+    <View
+      style={[styles.container, { paddingTop: insets.top, backgroundColor: colors.background }]}
+    >
       {/* background waves */}
       <Wave position="top" />
-      <Wave position="bottom" color={WavesColor.bottom} height={WavesHeight.bottom} />
+      <Wave position="bottom" color={colors.waveBottom} height={WavesHeight.bottom} />
 
       {/* navbar */}
       <View style={styles.above}>
         <NavigationBar
           leftButton={leftButton}
           rightButton={rightButton}
+          rightSecondaryButton={rightSecondaryButton}
           onSettingsLongPress={onSettingsLongPress}
         />
       </View>

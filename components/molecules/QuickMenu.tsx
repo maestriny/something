@@ -5,59 +5,51 @@ import { AppText } from '@/components/atoms/AppText';
 import { AppIcon } from '@/components/atoms/AppIcon';
 import { AppButton } from '@/components/atoms/AppButton';
 import { AppSwitch } from '@/components/atoms/AppSwitch';
-import {
-  Colors,
-  Fonts,
-  FontSize,
-  IconSize,
-  Spacing,
-  BorderRadius,
-  Shadow,
-} from '@/constants/theme';
+import { Fonts, FontSize, IconSize, Spacing, BorderRadius } from '@/constants/theme';
+import { useTheme } from '@/providers/theme';
 
 interface QuickMenuProps {
   visible: boolean;
   onClose: () => void;
   username: string;
   email: string;
-  darkMode: boolean;
-  onDarkModeChange: (value: boolean) => void;
   onLogout: () => void;
 }
 
-export function QuickMenu({
-  visible,
-  onClose,
-  username,
-  email,
-  darkMode,
-  onDarkModeChange,
-  onLogout,
-}: QuickMenuProps) {
+export function QuickMenu({ visible, onClose, username, email, onLogout }: QuickMenuProps) {
   const insets = useSafeAreaInsets();
   const { t } = useTranslation();
+  const { colors, isDark, shadow, toggleTheme } = useTheme();
 
   return (
     <Modal visible={visible} transparent animationType="fade" onRequestClose={onClose}>
-      <Pressable style={styles.overlay} onPress={onClose}>
-        <View style={[styles.menu, { top: insets.top + IconSize.xl + Spacing.md }]}>
+      <Pressable style={[styles.overlay, { backgroundColor: colors.overlay }]} onPress={onClose}>
+        <View
+          style={[
+            styles.menu,
+            { top: insets.top + IconSize.xl + Spacing.md, backgroundColor: colors.surface },
+            shadow.soft,
+          ]}
+        >
           {/* user info */}
           <View style={styles.userSection}>
-            <AppText style={styles.username} numberOfLines={1}>
+            <AppText style={[styles.username, { color: colors.textPrimary }]} numberOfLines={1}>
               {username}
             </AppText>
-            <AppText style={styles.email} numberOfLines={1}>
+            <AppText style={[styles.email, { color: colors.textSecondary }]} numberOfLines={1}>
               {email}
             </AppText>
           </View>
 
-          <View style={styles.separator} />
+          <View style={[styles.separator, { backgroundColor: colors.inputBorder }]} />
 
           {/* dark mode toggle */}
           <View style={styles.row}>
-            <AppIcon name="IconMoon" size={IconSize.sm} color={Colors.textPrimary} />
-            <AppText style={styles.rowLabel}>{t('settings.darkMode')}</AppText>
-            <AppSwitch value={darkMode} onValueChange={onDarkModeChange} />
+            <AppIcon name="IconMoon" size={IconSize.sm} color={colors.textPrimary} />
+            <AppText style={[styles.rowLabel, { color: colors.textPrimary }]}>
+              {t('settings.darkMode')}
+            </AppText>
+            <AppSwitch value={isDark} onValueChange={toggleTheme} />
           </View>
 
           {/* logout button */}
@@ -84,12 +76,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: Spacing.lg,
     width: 220,
-    backgroundColor: Colors.surface,
     borderRadius: BorderRadius.md,
     padding: Spacing.md,
-    ...Shadow.soft,
-    shadowOpacity: 0.12,
-    elevation: 4,
   },
   userSection: {
     marginBottom: Spacing.sm,
@@ -97,16 +85,13 @@ const styles = StyleSheet.create({
   username: {
     fontSize: FontSize.sm,
     fontFamily: Fonts.semiBold,
-    color: Colors.textPrimary,
   },
   email: {
     fontSize: FontSize.xs,
-    color: Colors.textSecondary,
     marginTop: Spacing.xxs,
   },
   separator: {
     height: StyleSheet.hairlineWidth,
-    backgroundColor: Colors.inputBorder,
     marginBottom: Spacing.sm,
   },
   row: {
@@ -119,7 +104,6 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: FontSize.sm,
     fontFamily: Fonts.medium,
-    color: Colors.textPrimary,
   },
   logoutButton: {
     marginTop: Spacing.sm,

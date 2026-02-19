@@ -2,8 +2,9 @@ import { Pressable, StyleSheet } from 'react-native';
 import { AppIcon } from '@/components/atoms/AppIcon';
 import { PickerGrid } from '@/components/atoms/PickerGrid';
 import { CATEGORY_ICON_NAMES, type CategoryIconName } from '@/constants/categories';
-import { BorderRadius, Colors, IconSize } from '@/constants/theme';
-import { darkenHex } from '@/lib/utils';
+import { BorderRadius, IconSize } from '@/constants/theme';
+import { darkenHex, lightenHex, setOpacity } from '@/lib/utils';
+import { useTheme } from '@/providers/theme';
 
 interface IconPickerProps {
   selected: CategoryIconName;
@@ -11,7 +12,10 @@ interface IconPickerProps {
   color?: string;
 }
 
-export function IconPicker({ selected, onSelect, color = Colors.primary }: IconPickerProps) {
+export function IconPicker({ selected, onSelect, color }: IconPickerProps) {
+  const { colors, isDark } = useTheme();
+  const baseColor = color ?? colors.primary;
+
   return (
     <PickerGrid>
       {cellSize =>
@@ -28,13 +32,19 @@ export function IconPicker({ selected, onSelect, color = Colors.primary }: IconP
                   height: cellSize,
                   borderRadius: BorderRadius.md,
                 },
-                isSelected && { backgroundColor: `${color}30` },
+                isSelected && { backgroundColor: setOpacity(baseColor, isDark ? 0.25 : 0.19) },
               ]}
             >
               <AppIcon
                 name={name}
                 size={IconSize.md}
-                color={isSelected ? darkenHex(color) : Colors.textMuted}
+                color={
+                  isSelected
+                    ? isDark
+                      ? lightenHex(baseColor)
+                      : darkenHex(baseColor)
+                    : colors.textMuted
+                }
               />
             </Pressable>
           );

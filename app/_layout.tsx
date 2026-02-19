@@ -1,7 +1,8 @@
 import { StyleSheet } from 'react-native';
 import { Slot } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { Colors } from '@/constants/theme';
+import { ThemeProvider, useTheme } from '@/providers/theme';
 import { WaveTransitionProvider } from '@/providers/waveTransition';
 import { Toast } from '@/components/atoms/Toast';
 import { WaveTransitionOverlay } from '@/components/atoms/WaveTransitionOverlay';
@@ -20,17 +21,21 @@ export default function RootLayout() {
   }
 
   return (
-    <WaveTransitionProvider>
-      <RootLayoutContent />
-    </WaveTransitionProvider>
+    <ThemeProvider>
+      <WaveTransitionProvider>
+        <RootLayoutContent />
+      </WaveTransitionProvider>
+    </ThemeProvider>
   );
 }
 
 function RootLayoutContent() {
   useAuthGuard(true);
+  const { colors, isDark } = useTheme();
 
   return (
-    <GestureHandlerRootView style={styles.root}>
+    <GestureHandlerRootView style={[styles.root, { backgroundColor: colors.background }]}>
+      <StatusBar style={isDark ? 'light' : 'dark'} />
       <Slot />
       <WaveTransitionOverlay />
       <Toast />
@@ -41,6 +46,5 @@ function RootLayoutContent() {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: Colors.background,
   },
 });

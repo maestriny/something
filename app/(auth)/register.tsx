@@ -10,9 +10,10 @@ import { AppButton } from '@/components/atoms/AppButton';
 import { AppFormInput } from '@/components/form/AppFormInput';
 import { AuthPrompt } from '@/components/molecules/AuthPrompt';
 import { useWave } from '@/providers/waves';
+import { useTheme } from '@/providers/theme';
 import { useAuthStore } from '@/stores/auth';
 import { toast } from '@/lib/toast';
-import { Colors, Spacing } from '@/constants/theme';
+import { Spacing } from '@/constants/theme';
 import { useKeyboardScroll } from '@/hooks/useKeyboardScroll';
 import { Routes } from '@/constants/routes';
 import { createRegisterSchema, type RegisterFormData } from '@/lib/schemas/register';
@@ -20,6 +21,7 @@ import { createRegisterSchema, type RegisterFormData } from '@/lib/schemas/regis
 export default function RegisterScreen() {
   const router = useRouter();
   const { setScreen } = useWave();
+  const { colors } = useTheme();
   const { t } = useTranslation();
   const registerUser = useAuthStore(s => s.register);
 
@@ -66,7 +68,10 @@ export default function RegisterScreen() {
   };
 
   return (
-    <Pressable style={styles.screen} onPress={Keyboard.dismiss}>
+    <Pressable
+      style={[styles.screen, { backgroundColor: colors.background }]}
+      onPress={Keyboard.dismiss}
+    >
       <SafeAreaView style={styles.safeArea}>
         <View style={styles.content}>
           <View style={styles.header}>
@@ -140,7 +145,6 @@ export default function RegisterScreen() {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: Colors.background,
   },
   safeArea: {
     flex: 1,

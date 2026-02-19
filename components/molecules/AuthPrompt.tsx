@@ -1,6 +1,7 @@
 import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import { AppText } from '@/components/atoms/AppText';
-import { Colors, Fonts, Spacing } from '@/constants/theme';
+import { Fonts, Spacing } from '@/constants/theme';
+import { useTheme } from '@/providers/theme';
 
 interface AuthPromptProps {
   message: string;
@@ -9,13 +10,15 @@ interface AuthPromptProps {
 }
 
 export function AuthPrompt({ message, actionText, onPress }: AuthPromptProps) {
+  const { colors } = useTheme();
+
   return (
     <View style={styles.container}>
-      <AppText variant="body" style={styles.message}>
+      <AppText variant="body" style={{ color: colors.textSecondary }}>
         {message}
       </AppText>
       <TouchableOpacity onPress={onPress} accessibilityRole="link" accessibilityLabel={actionText}>
-        <AppText variant="body" style={styles.link}>
+        <AppText variant="body" style={[styles.link, { color: colors.link }]}>
           {actionText}
         </AppText>
       </TouchableOpacity>
@@ -28,11 +31,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: Spacing.md,
   },
-  message: {
-    color: Colors.textSecondary,
-  },
   link: {
-    color: Colors.link,
     fontFamily: Fonts.semiBold,
     marginTop: Spacing.xs,
   },

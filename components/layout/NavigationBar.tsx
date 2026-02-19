@@ -3,7 +3,8 @@ import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { AppIcon, type IconName } from '@/components/atoms/AppIcon';
 import { Routes } from '@/constants/routes';
-import { Colors, Spacing, IconSize, Opacity } from '@/constants/theme';
+import { Spacing, IconSize, Opacity } from '@/constants/theme';
+import { useTheme } from '@/providers/theme';
 
 function NavButton({
   onPress,
@@ -11,12 +12,14 @@ function NavButton({
   style,
   label,
   icon,
+  color,
 }: {
   onPress: () => void;
   onLongPress?: () => void;
   style?: StyleProp<ViewStyle>;
   label: string;
   icon: IconName;
+  color: string;
 }) {
   return (
     <Pressable
@@ -27,7 +30,7 @@ function NavButton({
       accessibilityRole="button"
       accessibilityLabel={label}
     >
-      <AppIcon name={icon} size={IconSize.xl} color={Colors.textSecondary} />
+      <AppIcon name={icon} size={IconSize.xl} color={color} />
     </Pressable>
   );
 }
@@ -35,37 +38,53 @@ function NavButton({
 interface NavigationBarProps {
   leftButton?: 'back';
   rightButton?: 'settings';
+  rightSecondaryButton?: 'completed';
   onSettingsLongPress?: () => void;
 }
 
 export function NavigationBar({
   leftButton,
   rightButton,
+  rightSecondaryButton,
   onSettingsLongPress,
 }: NavigationBarProps) {
   const router = useRouter();
   const { t } = useTranslation();
+  const { colors } = useTheme();
 
   return (
     <View style={styles.container}>
+      {/* Left: Go Back button */}
       {leftButton === 'back' && (
         <NavButton
           onPress={() => router.back()}
           style={styles.leftButton}
           label={t('common.back')}
           icon="IconArrowLeft"
+          color={colors.textSecondary}
         />
       )}
 
-      {rightButton === 'settings' && (
-        <NavButton
-          onPress={() => router.push(Routes.app.settings)}
-          onLongPress={onSettingsLongPress}
-          style={styles.rightButton}
-          label={t('settings.heading')}
-          icon="IconSettingsFilled"
-        />
-      )}
+      {/* Right: Completed todos + Settings */}
+      <View style={styles.rightGroup}>
+        {rightSecondaryButton === 'completed' && (
+          <NavButton
+            onPress={() => router.push(Routes.app.completed)}
+            label={t('todo.completed')}
+            icon="IconListCheck"
+            color={colors.textSecondary}
+          />
+        )}
+        {rightButton === 'settings' && (
+          <NavButton
+            onPress={() => router.push(Routes.app.settings)}
+            onLongPress={onSettingsLongPress}
+            label={t('settings.heading')}
+            icon="IconSettingsFilled"
+            color={colors.textSecondary}
+          />
+        )}
+      </View>
     </View>
   );
 }
@@ -83,7 +102,11 @@ const styles = StyleSheet.create({
   leftButton: {
     marginLeft: -Spacing.sm,
   },
-  rightButton: {
+  rightGroup: {
+    flexDirection: 'row',
+    alignItems: 'center',
     marginLeft: 'auto',
+    marginRight: -Spacing.xs,
+    gap: Spacing.md,
   },
 });

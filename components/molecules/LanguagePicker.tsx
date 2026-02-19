@@ -6,7 +6,8 @@ import { AppSelect } from '@/components/atoms/AppSelect';
 import { useLanguageStore } from '@/stores/language';
 import { type SupportedLanguage, SUPPORTED_LANGUAGES, LANGUAGE_LABELS } from '@/lib/i18n';
 import { useTranslation } from 'react-i18next';
-import { Colors, Spacing, BorderRadius } from '@/constants/theme';
+import { Spacing, BorderRadius } from '@/constants/theme';
+import { useTheme } from '@/providers/theme';
 
 // create options for picker from supported languages
 // map each language code to its label
@@ -23,6 +24,7 @@ interface LanguagePickerProps {
 export function LanguagePicker({ visible, onClose }: LanguagePickerProps) {
   const { language, setLanguage } = useLanguageStore();
   const { t } = useTranslation();
+  const { colors } = useTheme();
   const [selected, setSelected] = useState<SupportedLanguage>(language);
 
   useEffect(() => {
@@ -35,10 +37,10 @@ export function LanguagePicker({ visible, onClose }: LanguagePickerProps) {
   };
 
   return (
-    <Modal visible={visible} transparent animationType="none">
-      <Pressable style={styles.overlay} onPress={onClose}>
-        <Pressable style={styles.sheet}>
-          <AppText variant="subheading" style={styles.title}>
+    <Modal visible={visible} transparent animationType="none" onRequestClose={onClose}>
+      <Pressable style={[styles.overlay, { backgroundColor: colors.overlay }]} onPress={onClose}>
+        <Pressable style={[styles.sheet, { backgroundColor: colors.surface }]}>
+          <AppText variant="subheading" style={[styles.title, { color: colors.textPrimary }]}>
             {t('settings.language')}
           </AppText>
           <AppSelect value={selected} onValueChange={setSelected} options={languageOptions} />
@@ -53,10 +55,8 @@ const styles = StyleSheet.create({
   overlay: {
     flex: 1,
     justifyContent: 'flex-end',
-    backgroundColor: Colors.overlay,
   },
   sheet: {
-    backgroundColor: Colors.surface,
     borderTopLeftRadius: BorderRadius.lg,
     borderTopRightRadius: BorderRadius.lg,
     padding: Spacing.lg,
@@ -65,6 +65,5 @@ const styles = StyleSheet.create({
   title: {
     textAlign: 'center',
     marginBottom: Spacing.sm,
-    color: Colors.textPrimary,
   },
 });

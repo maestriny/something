@@ -1,6 +1,6 @@
 import { Pressable, StyleSheet } from 'react-native';
 import Animated, { useAnimatedStyle, withTiming, Easing } from 'react-native-reanimated';
-import { Colors } from '@/constants/theme';
+import { useTheme } from '@/providers/theme';
 
 const SIZE = 22;
 const BORDER_WIDTH = 1.5;
@@ -11,6 +11,8 @@ interface CheckboxProps {
 }
 
 export function Checkbox({ checked, onPress }: CheckboxProps) {
+  const { colors } = useTheme();
+
   const fillStyle = useAnimatedStyle(() => ({
     transform: [
       {
@@ -26,12 +28,12 @@ export function Checkbox({ checked, onPress }: CheckboxProps) {
   return (
     <Pressable
       onPress={onPress}
-      style={styles.container}
+      style={[styles.container, { borderColor: colors.textMuted }]}
       hitSlop={8}
       accessibilityRole="checkbox"
       accessibilityState={{ checked }}
     >
-      <Animated.View style={[styles.fill, fillStyle]} />
+      <Animated.View style={[styles.fill, { backgroundColor: colors.primary }, fillStyle]} />
     </Pressable>
   );
 }
@@ -42,7 +44,6 @@ const styles = StyleSheet.create({
     height: SIZE,
     borderRadius: SIZE / 2,
     borderWidth: BORDER_WIDTH,
-    borderColor: Colors.textMuted,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -50,6 +51,5 @@ const styles = StyleSheet.create({
     width: SIZE - BORDER_WIDTH * 2,
     height: SIZE - BORDER_WIDTH * 2,
     borderRadius: (SIZE - BORDER_WIDTH * 2) / 2,
-    backgroundColor: Colors.primary,
   },
 });

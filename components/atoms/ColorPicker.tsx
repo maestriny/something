@@ -1,6 +1,6 @@
 import { View, Pressable, StyleSheet } from 'react-native';
 import { PickerGrid } from '@/components/atoms/PickerGrid';
-import { Colors } from '@/constants/theme';
+import { useTheme } from '@/providers/theme';
 
 interface ColorPickerProps {
   colors: readonly string[];
@@ -11,6 +11,8 @@ interface ColorPickerProps {
 const CIRCLE_SIZE = 28;
 
 export function ColorPicker({ colors, selected, onSelect }: ColorPickerProps) {
+  const { colors: themeColors, shadow } = useTheme();
+
   return (
     <PickerGrid>
       {cellSize =>
@@ -26,7 +28,11 @@ export function ColorPicker({ colors, selected, onSelect }: ColorPickerProps) {
                 style={[
                   styles.circle,
                   { backgroundColor: color },
-                  isSelected && styles.circleSelected,
+                  isSelected && [
+                    styles.circleSelected,
+                    shadow.soft,
+                    { borderColor: themeColors.surface },
+                  ],
                 ]}
               />
             </Pressable>
@@ -49,11 +55,5 @@ const styles = StyleSheet.create({
   },
   circleSelected: {
     borderWidth: 2.5,
-    borderColor: Colors.surface,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.15,
-    shadowRadius: 3,
-    elevation: 2,
   },
 });
