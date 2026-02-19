@@ -2,7 +2,6 @@ import { StyleSheet } from 'react-native';
 import { Slot } from 'expo-router';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Colors } from '@/constants/theme';
-import { ToastProvider } from '@/providers/toast';
 import { WaveTransitionProvider } from '@/providers/waveTransition';
 import { Toast } from '@/components/atoms/Toast';
 import { WaveTransitionOverlay } from '@/components/atoms/WaveTransitionOverlay';
@@ -22,9 +21,7 @@ export default function RootLayout() {
 
   return (
     <WaveTransitionProvider>
-      <ToastProvider>
-        <RootLayoutContent />
-      </ToastProvider>
+      <RootLayoutContent />
     </WaveTransitionProvider>
   );
 }

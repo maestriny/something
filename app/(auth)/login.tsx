@@ -11,9 +11,8 @@ import { AppFormInput } from '@/components/form/AppFormInput';
 import { AuthPrompt } from '@/components/molecules/AuthPrompt';
 import { useWave } from '@/providers/waves';
 import { useWaveTransition } from '@/providers/waveTransition';
-import { useToast } from '@/providers/toast';
 import { useAuthStore } from '@/stores/auth';
-import { getAuthError } from '@/api/errors';
+import { toast } from '@/lib/toast';
 import { Routes } from '@/constants/routes';
 import { Colors, Spacing } from '@/constants/theme';
 import { useKeyboardScroll } from '@/hooks/useKeyboardScroll';
@@ -23,7 +22,6 @@ export default function LoginScreen() {
   const router = useRouter();
   const { setScreen } = useWave();
   const { startTransition } = useWaveTransition();
-  const { showToast } = useToast();
   const { t } = useTranslation();
   const login = useAuthStore(s => s.login);
 
@@ -57,7 +55,7 @@ export default function LoginScreen() {
       const user = await login({ email: data.email, password: data.password });
       startTransition(router, Routes.app.home);
       setTimeout(() => {
-        showToast({
+        toast.show({
           type: 'success',
           message: t('login.toast.successMessage'),
           description: t('login.toast.successDescription', { username: user.username }),
@@ -65,12 +63,7 @@ export default function LoginScreen() {
         });
       }, 200);
     } catch (error) {
-      const { title, description } = getAuthError(error);
-      showToast({
-        type: 'error',
-        message: t(title),
-        description: t(description),
-      });
+      toast.error(error);
     }
   };
 
