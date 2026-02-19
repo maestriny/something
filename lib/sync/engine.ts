@@ -112,6 +112,7 @@ export async function syncAll(): Promise<void> {
     syncStore.clearDeleteQueues();
     syncStore.setLastSyncedAt(new Date().toISOString());
   } catch (error) {
+    //eslint-disable-next-line no-console
     console.warn('[sync] failed:', error);
   } finally {
     syncStore.setSyncing(false);
