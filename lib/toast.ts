@@ -50,7 +50,7 @@ export const toast = {
   subscribe(fn: ToastListener) {
     listener = fn;
     return () => {
-      listener = () => {};
+      if (listener === fn) listener = () => {};
     };
   },
   get current() {
