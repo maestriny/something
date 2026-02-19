@@ -2,7 +2,8 @@ import { View, Pressable, StyleSheet } from 'react-native';
 import { AppText } from '@/components/atoms/AppText';
 import { AppIcon, type IconName } from '@/components/atoms/AppIcon';
 import { AppSwitch } from '@/components/atoms/AppSwitch';
-import { Colors, FontSize, Fonts, IconSize, Spacing, Opacity } from '@/constants/theme';
+import { FontSize, Fonts, IconSize, Spacing, Opacity } from '@/constants/theme';
+import { useTheme } from '@/providers/theme';
 
 // props for pressable settings row (e.g. user info, change password)
 interface PressRowProps {
@@ -25,6 +26,8 @@ interface ToggleRowProps {
 type SettingsRowProps = PressRowProps | ToggleRowProps;
 
 export function SettingsRow(props: SettingsRowProps) {
+  const { colors } = useTheme();
+
   if (props.type === 'press') {
     return (
       <Pressable
@@ -33,11 +36,11 @@ export function SettingsRow(props: SettingsRowProps) {
         accessibilityRole="button"
       >
         {/* left */}
-        <AppIcon name={props.icon} size={IconSize.md} color={Colors.textPrimary} />
-        <AppText style={styles.label}>{props.label}</AppText>
+        <AppIcon name={props.icon} size={IconSize.md} color={colors.textPrimary} />
+        <AppText style={[styles.label, { color: colors.textPrimary }]}>{props.label}</AppText>
 
         {/* right */}
-        <AppIcon name="IconChevronRight" size={IconSize.xs} color={Colors.textPrimary} />
+        <AppIcon name="IconChevronRight" size={IconSize.xs} color={colors.textPrimary} />
       </Pressable>
     );
   }
@@ -50,8 +53,8 @@ export function SettingsRow(props: SettingsRowProps) {
       accessibilityLabel={props.label}
     >
       {/* left */}
-      <AppIcon name={props.icon} size={IconSize.md} color={Colors.textPrimary} />
-      <AppText style={styles.label}>{props.label}</AppText>
+      <AppIcon name={props.icon} size={IconSize.md} color={colors.textPrimary} />
+      <AppText style={[styles.label, { color: colors.textPrimary }]}>{props.label}</AppText>
 
       {/* right */}
       <AppSwitch value={props.value} onValueChange={props.onValueChange} />
@@ -70,6 +73,5 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: FontSize.sm,
     fontFamily: Fonts.medium,
-    color: Colors.textPrimary,
   },
 });

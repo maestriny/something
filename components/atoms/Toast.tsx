@@ -3,15 +3,17 @@ import { StyleSheet, View } from 'react-native';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 import { AppText } from './AppText';
 import { toast } from '@/lib/toast';
-import { Colors, Fonts, BorderRadius, Spacing, Shadow } from '@/constants/theme';
-
-const TOAST_COLORS = {
-  success: Colors.green,
-  error: Colors.error,
-} as const;
+import { Fonts, BorderRadius, Spacing } from '@/constants/theme';
+import { useTheme } from '@/providers/theme';
 
 export function Toast() {
+  const { colors, shadow } = useTheme();
   const data = useSyncExternalStore(toast.subscribe, () => toast.current);
+
+  const toastColors = {
+    success: colors.green,
+    error: colors.error,
+  } as const;
 
   if (!data) return null;
 
@@ -22,15 +24,15 @@ export function Toast() {
         exiting={FadeOut.duration(200)}
         style={[
           styles.toast,
-          { backgroundColor: data.color ?? TOAST_COLORS[data.type] },
-          Shadow.soft,
+          { backgroundColor: data.color ?? toastColors[data.type] },
+          shadow.soft,
         ]}
       >
-        <AppText variant="body" style={styles.title}>
+        <AppText variant="body" style={[styles.title, { color: colors.toastText }]}>
           {data.message}
         </AppText>
         {data.description && (
-          <AppText variant="caption" style={styles.description}>
+          <AppText variant="caption" style={[styles.description, { color: colors.toastText }]}>
             {data.description}
           </AppText>
         )}
@@ -54,10 +56,8 @@ const styles = StyleSheet.create({
   },
   title: {
     fontFamily: Fonts.semiBold,
-    color: Colors.textPrimary,
   },
   description: {
-    color: Colors.textPrimary,
     marginTop: Spacing.xs,
   },
 });

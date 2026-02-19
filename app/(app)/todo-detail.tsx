@@ -12,12 +12,14 @@ import { CategoryForm } from '@/components/molecules/CategoryForm';
 import { useTodoStore } from '@/stores/todo';
 import { useKeyboardHeight } from '@/hooks/useKeyboardHeight';
 import dayjs from '@/lib/dayjs';
-import { Colors, Fonts, FontSize, Spacing } from '@/constants/theme';
+import { Fonts, FontSize, Spacing } from '@/constants/theme';
+import { useTheme } from '@/providers/theme';
 
 export default function TodoDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const { t } = useTranslation();
   const router = useRouter();
+  const { colors } = useTheme();
   const scrollRef = useRef<ScrollView>(null);
 
   const todo = useTodoStore(s => s.todos.find(item => item.id === id));
@@ -86,10 +88,12 @@ export default function TodoDetailScreen() {
                 icon="IconX"
                 iconOnly
                 variant="ghost"
-                color={Colors.textMuted}
+                color={colors.textMuted}
                 onPress={handleClose}
               />
-              <AppText style={styles.createdAt}>{dayjs(todo.createdAt).format('LL')}</AppText>
+              <AppText style={[styles.createdAt, { color: colors.textMuted }]}>
+                {dayjs(todo.createdAt).format('LL')}
+              </AppText>
             </View>
 
             <ScrollView
@@ -104,10 +108,10 @@ export default function TodoDetailScreen() {
                 value={text}
                 onChangeText={setText}
                 placeholder={t('todo.detail.textPlaceholder')}
-                placeholderTextColor={Colors.placeholder}
-                cursorColor={Colors.primary}
-                selectionColor={Colors.primary}
-                style={styles.textInput}
+                placeholderTextColor={colors.placeholder}
+                cursorColor={colors.primary}
+                selectionColor={colors.primary}
+                style={[styles.textInput, { color: colors.textPrimary }]}
                 multiline
                 autoCapitalize="none"
                 maxLength={220}
@@ -146,14 +150,14 @@ export default function TodoDetailScreen() {
             </View>
           </>
         ) : (
-          <View style={styles.formContainer}>
+          <View style={{ backgroundColor: colors.surface }}>
             {/* Category Form subscreen */}
             <View style={[styles.header, styles.formHeader]}>
               <AppButton
                 icon="IconArrowLeft"
                 iconOnly
                 variant="ghost"
-                color={Colors.textMuted}
+                color={colors.textMuted}
                 onPress={() => setShowCategoryForm(false)}
               />
             </View>
@@ -198,18 +202,13 @@ const styles = StyleSheet.create({
   },
   createdAt: {
     fontSize: FontSize.sm,
-    color: Colors.textMuted,
   },
   textInput: {
     fontSize: FontSize.md,
     fontFamily: Fonts.regular,
-    color: Colors.textPrimary,
     minHeight: Spacing.xxl,
     textAlignVertical: 'top',
     marginBottom: Spacing.md,
-  },
-  formContainer: {
-    backgroundColor: Colors.surface,
   },
   formHeader: {
     marginBottom: Spacing.sm,

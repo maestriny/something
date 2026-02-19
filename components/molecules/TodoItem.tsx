@@ -15,7 +15,8 @@ import { useCategoryStore } from '@/stores/category';
 import { useCategoryLabel } from '@/hooks/useCategoryLabel';
 import dayjs from '@/lib/dayjs';
 import { useTranslation } from 'react-i18next';
-import { Colors, Opacity, Spacing } from '@/constants/theme';
+import { Opacity, Spacing } from '@/constants/theme';
+import { useTheme } from '@/providers/theme';
 import type { Todo } from '@/types/todo';
 
 interface TodoItemProps {
@@ -31,6 +32,7 @@ const ANIMATION_DURATION = 500;
 
 export function TodoItem({ todo, onToggle, onPress, drag, isActive }: TodoItemProps) {
   const { t } = useTranslation();
+  const { colors } = useTheme();
   const [isChecked, setIsChecked] = useState(todo.done);
   const opacity = useSharedValue(1);
   const translateX = useSharedValue(0);
@@ -40,7 +42,7 @@ export function TodoItem({ todo, onToggle, onPress, drag, isActive }: TodoItemPr
   const category = todo.categoryId ? categories.find(c => c.id === todo.categoryId) : undefined;
   // due date is urgent if it's within 2 days and not done
   const isUrgent = todo.dueDate && !todo.done && dayjs(todo.dueDate).diff(dayjs(), 'day') <= 2;
-  const dueDateColor = isUrgent ? Colors.error : Colors.textMuted;
+  const dueDateColor = isUrgent ? colors.error : colors.textMuted;
 
   // if due date is today, show "today", otherwise show relative time
   const dueDateLabel = todo.dueDate

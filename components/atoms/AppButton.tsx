@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import {
   View,
   TouchableOpacity,
@@ -8,25 +9,27 @@ import {
 } from 'react-native';
 import { AppIcon, type IconName } from './AppIcon';
 import {
-  Colors,
   BorderRadius,
   FontSize,
   Fonts,
   IconSize,
   Spacing,
   Opacity,
+  type ThemeColors,
 } from '@/constants/theme';
+import { useTheme } from '@/providers/theme';
 
-// color configuration for each variant
-const VARIANTS = {
-  primary: { bg: Colors.buttonPrimary, text: Colors.buttonText },
-  secondary: { bg: Colors.background, text: Colors.textSecondary },
-  destructive: { bg: Colors.error, text: Colors.buttonText },
-  ghost: { bg: undefined, text: Colors.textSecondary },
-  danger: { bg: undefined, text: Colors.error },
-} as const;
+function getVariants(colors: ThemeColors) {
+  return {
+    primary: { bg: colors.buttonPrimary, text: colors.buttonText },
+    secondary: { bg: colors.background, text: colors.textSecondary },
+    destructive: { bg: colors.error, text: colors.buttonText },
+    ghost: { bg: undefined, text: colors.textSecondary },
+    danger: { bg: undefined, text: colors.error },
+  } as const;
+}
 
-type Variant = keyof typeof VARIANTS;
+type Variant = 'primary' | 'secondary' | 'destructive' | 'ghost' | 'danger';
 
 // size configuration for each size
 const SIZES = {
@@ -91,7 +94,10 @@ export function AppButton({
   disabled,
   ...rest
 }: AppButtonProps) {
-  const colorConfig = VARIANTS[variant];
+  const { colors } = useTheme();
+  const variants = useMemo(() => getVariants(colors), [colors]);
+
+  const colorConfig = variants[variant];
   const sizeConfig = SIZES[size];
   const resolvedColor = color ?? colorConfig.text;
   const iconOnlyConfig = sizeConfig.iconOnly;

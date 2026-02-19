@@ -9,8 +9,9 @@ import Animated, {
   Easing,
 } from 'react-native-reanimated';
 import Svg, { Path } from 'react-native-svg';
-import { WavesColor, WavesHeight, WavesDuration, WavesRegisterOffset } from '@/constants/waves';
+import { WavesHeight, WavesDuration, WavesRegisterOffset } from '@/constants/waves';
 import { useWave } from '@/providers/waves';
+import { useTheme } from '@/providers/theme';
 import {
   primaryTopPoints,
   secondaryTopPoints,
@@ -30,12 +31,15 @@ interface WaveProps {
 
 export function Wave({
   position,
-  color = WavesColor.top,
+  color,
   height = WavesHeight.top,
   withEntrance = false,
 }: WaveProps) {
   const { width } = useWindowDimensions();
   const { morphProgress } = useWave();
+  const { colors } = useTheme();
+
+  const baseColor = color ?? colors.waveTop;
 
   // preset start and end points for the wave paths
   const startPoints = useMemo(
@@ -85,7 +89,7 @@ export function Wave({
       importantForAccessibility="no-hide-descendants"
     >
       <Svg width={width} height={height}>
-        <AnimatedPath animatedProps={animatedProps} fill={color} />
+        <AnimatedPath animatedProps={animatedProps} fill={baseColor} />
       </Svg>
     </Animated.View>
   );

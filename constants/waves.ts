@@ -1,13 +1,6 @@
-import { Colors } from './theme';
-
 export const WavesHeight = {
   top: 190,
   bottom: 100,
-} as const;
-
-export const WavesColor = {
-  top: Colors.primaryLight,
-  bottom: Colors.peach,
 } as const;
 
 export const WavesDuration = {

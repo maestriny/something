@@ -1,17 +1,19 @@
 import { View, StyleSheet } from 'react-native';
 import { Stack } from 'expo-router';
-import { Colors } from '@/constants/theme';
 import { WaveProvider } from '@/providers/waves';
+import { useTheme } from '@/providers/theme';
 
 export default function AppLayout() {
+  const { colors } = useTheme();
+
   return (
     <WaveProvider>
-      <View style={styles.root}>
+      <View style={[styles.root, { backgroundColor: colors.background }]}>
         <Stack
           initialRouteName="home"
           screenOptions={{
             headerShown: false,
-            contentStyle: { backgroundColor: Colors.background },
+            contentStyle: { backgroundColor: colors.background },
             animation: 'none',
           }}
         >
@@ -37,6 +39,5 @@ export default function AppLayout() {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: Colors.background,
   },
 });

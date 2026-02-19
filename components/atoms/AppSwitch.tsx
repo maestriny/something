@@ -1,6 +1,6 @@
 import { Switch } from 'react-native';
 import * as Haptics from 'expo-haptics';
-import { Colors } from '@/constants/theme';
+import { useTheme } from '@/providers/theme';
 
 interface AppSwitchProps {
   value: boolean;
@@ -8,6 +8,8 @@ interface AppSwitchProps {
 }
 
 export function AppSwitch({ value, onValueChange }: AppSwitchProps) {
+  const { colors } = useTheme();
+
   return (
     <Switch
       value={value}
@@ -15,8 +17,8 @@ export function AppSwitch({ value, onValueChange }: AppSwitchProps) {
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
         onValueChange(v);
       }}
-      trackColor={{ false: Colors.switchTrack, true: Colors.primary }}
-      thumbColor={Colors.surface}
+      trackColor={{ false: colors.switchTrack, true: colors.primary }}
+      thumbColor={colors.surface}
     />
   );
 }

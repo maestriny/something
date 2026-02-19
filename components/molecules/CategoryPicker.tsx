@@ -5,8 +5,9 @@ import { AppButton } from '@/components/atoms/AppButton';
 import { AppTag } from '@/components/atoms/AppTag';
 import { ConfirmDialog } from '@/components/molecules/ConfirmDialog';
 import { useCategoryStore } from '@/stores/category';
-import { Colors, Spacing } from '@/constants/theme';
+import { Spacing } from '@/constants/theme';
 import { useCategoryLabel } from '@/hooks/useCategoryLabel';
+import { useTheme } from '@/providers/theme';
 import type { Category } from '@/types/category';
 
 interface CategoryPickerProps {
@@ -17,6 +18,7 @@ interface CategoryPickerProps {
 
 export function CategoryPicker({ selectedId, onSelect, onEdit }: CategoryPickerProps) {
   const { t } = useTranslation();
+  const { colors } = useTheme();
   const categoryLabel = useCategoryLabel();
   const categories = useCategoryStore(s => s.categories);
   const removeCategory = useCategoryStore(s => s.removeCategory);
@@ -46,7 +48,7 @@ export function CategoryPicker({ selectedId, onSelect, onEdit }: CategoryPickerP
       icon="IconPlus"
       size="md"
       variant="secondary"
-      color={Colors.textMuted}
+      color={colors.textMuted}
       onPress={onEdit}
     />
   );
@@ -75,7 +77,7 @@ export function CategoryPicker({ selectedId, onSelect, onEdit }: CategoryPickerP
                   icon="IconX"
                   size="sm"
                   variant="secondary"
-                  color={Colors.textMuted}
+                  color={colors.textMuted}
                   hitSlop={4}
                   onPress={() => setToDelete(category)}
                   style={styles.removeButton}

@@ -8,12 +8,14 @@ import { ScreenLayout } from '@/components/layout/ScreenLayout';
 import { useTodoStore } from '@/stores/todo';
 import { useDoneTodos } from '@/hooks/useTodos';
 import { Routes } from '@/constants/routes';
-import { Spacing, FontSize, Colors } from '@/constants/theme';
+import { Spacing, FontSize } from '@/constants/theme';
+import { useTheme } from '@/providers/theme';
 import type { Todo } from '@/types/todo';
 
 export default function CompletedScreen() {
   const { t } = useTranslation();
   const router = useRouter();
+  const { colors } = useTheme();
 
   const done = useDoneTodos();
   const toggleTodo = useTodoStore(s => s.toggleTodo);
@@ -43,7 +45,11 @@ export default function CompletedScreen() {
         contentContainerStyle={[styles.list, done.length === 0 && styles.listEmpty]}
         showsVerticalScrollIndicator={false}
         scrollEnabled={done.length > 0}
-        ListEmptyComponent={<AppText style={styles.emptyText}>{t('todo.emptyCompleted')}</AppText>}
+        ListEmptyComponent={
+          <AppText style={[styles.emptyText, { color: colors.textSecondary }]}>
+            {t('todo.emptyCompleted')}
+          </AppText>
+        }
         ListFooterComponent={<View style={styles.listFooter} />}
       />
     </ScreenLayout>
@@ -63,7 +69,6 @@ const styles = StyleSheet.create({
   emptyText: {
     textAlign: 'center',
     fontSize: FontSize.md,
-    color: Colors.textSecondary,
     lineHeight: FontSize.md * 1.6,
   },
   listFooter: {

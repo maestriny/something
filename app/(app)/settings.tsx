@@ -9,18 +9,19 @@ import { LanguagePicker } from '@/components/molecules/LanguagePicker';
 import { ScreenLayout } from '@/components/layout/ScreenLayout';
 import { useAuthStore } from '@/stores/auth';
 import { useWaveTransition } from '@/providers/waveTransition';
+import { useTheme } from '@/providers/theme';
 import { Routes } from '@/constants/routes';
-import { Colors, Fonts, FontSize, IconSize, Spacing } from '@/constants/theme';
-import { getInitials } from '@/lib/utils';
+import { Fonts, FontSize, IconSize, Spacing } from '@/constants/theme';
+import { getInitials, setOpacity } from '@/lib/utils';
 
 export default function SettingsScreen() {
   const { logout, isLoading, user } = useAuthStore();
   const { startTransition } = useWaveTransition();
+  const { colors, isDark, toggleTheme } = useTheme();
   const router = useRouter();
   const { t } = useTranslation();
 
-  // TODO: dark mode and notifications are just placeholders for now
-  const [darkMode, setDarkMode] = useState(false);
+  // TODO: notifications is just a placeholder for now
   const [notifications, setNotifications] = useState(true);
   const [showLangPicker, setShowLangPicker] = useState(false);
 
@@ -38,13 +39,17 @@ export default function SettingsScreen() {
       <View style={styles.content}>
         <View style={styles.profile}>
           {/* Avatar with initials */}
-          <View style={styles.avatar}>
-            <AppText style={styles.initials}>{getInitials(user?.username ?? '')}</AppText>
+          <View style={[styles.avatar, { backgroundColor: setOpacity(colors.primary, 0.2) }]}>
+            <AppText style={[styles.initials, { color: colors.primary }]}>
+              {getInitials(user?.username ?? '')}
+            </AppText>
           </View>
           {/* Username + Email */}
           <View style={styles.profileInfo}>
-            <AppText style={styles.username}>{user?.username}</AppText>
-            <AppText style={styles.email}>{user?.email}</AppText>
+            <AppText style={[styles.username, { color: colors.textPrimary }]}>
+              {user?.username}
+            </AppText>
+            <AppText style={[styles.email, { color: colors.textSecondary }]}>{user?.email}</AppText>
           </View>
         </View>
 
@@ -70,8 +75,8 @@ export default function SettingsScreen() {
             type="toggle"
             icon="IconMoon"
             label={t('settings.darkMode')}
-            value={darkMode}
-            onValueChange={setDarkMode}
+            value={isDark}
+            onValueChange={toggleTheme}
           />
 
           {/* Notifications */}
@@ -122,14 +127,12 @@ const styles = StyleSheet.create({
     width: IconSize.xl * 2,
     height: IconSize.xl * 2,
     borderRadius: IconSize.xl,
-    backgroundColor: `${Colors.primary}33`,
     alignItems: 'center',
     justifyContent: 'center',
   },
   initials: {
     fontSize: FontSize.lg,
     fontFamily: Fonts.semiBold,
-    color: Colors.primary,
   },
   profileInfo: {
     flex: 1,
@@ -137,11 +140,9 @@ const styles = StyleSheet.create({
   username: {
     fontSize: FontSize.md,
     fontFamily: Fonts.semiBold,
-    color: Colors.textPrimary,
   },
   email: {
     fontSize: FontSize.xs,
-    color: Colors.textSecondary,
     marginTop: Spacing.xxs,
   },
   rows: {

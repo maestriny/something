@@ -1,34 +1,6 @@
 import { rs } from '@/lib/responsive';
 
-export const Colors = {
-  // primary palette
-  primary: '#5B5FE6',
-  primaryLight: '#C8C8F4',
-  peach: '#FFBE98',
-  peachLight: '#FFF0E5',
-  blue: '#A8D8EA',
-  blueDeep: '#7EC8E3',
-  green: '#C1E1C1',
-  yellow: '#F5D76E',
-
-  // functional
-  background: '#F7F7FB',
-  surface: '#FFFFFF',
-  textPrimary: '#1A1A2E',
-  textSecondary: '#6B6B80',
-  textMuted: '#9B9BAE',
-  textLight: '#6A6A7E',
-  error: '#E88B8B',
-  inputBackground: '#FFFFFF',
-  switchTrack: '#E0E0E8',
-  inputBorder: '#E2E2EE',
-  inputBorderFocused: '#5B5FE699',
-  placeholder: '#B0B0C0',
-  buttonPrimary: '#1A1A2E',
-  buttonText: '#FFFFFF',
-  link: '#5B5FE6',
-  overlay: 'rgba(0,0,0,0.3)',
-} as const;
+export { colorSchemes, type ThemeColors } from './colors';
 
 export const Spacing = {
   xxs: 2,
@@ -98,13 +70,3 @@ export const Palette = [
   '#D4B8E0',
   '#E8C8C8',
 ] as const;
-
-export const Shadow = {
-  soft: {
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.06,
-    shadowRadius: 8,
-    elevation: 2,
-  },
-} as const;

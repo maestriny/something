@@ -2,7 +2,8 @@ import type { ReactNode } from 'react';
 import { View, Pressable, StyleSheet, type StyleProp, type ViewStyle } from 'react-native';
 import Animated, { FadeIn } from 'react-native-reanimated';
 import { BlurView } from 'expo-blur';
-import { Colors, BorderRadius, Spacing, Shadow } from '@/constants/theme';
+import { BorderRadius, Spacing } from '@/constants/theme';
+import { useTheme } from '@/providers/theme';
 
 interface AppCardProps {
   onClose: () => void;
@@ -21,6 +22,8 @@ export function AppCard({
   style,
   children,
 }: AppCardProps) {
+  const { colors, isDark, shadow } = useTheme();
+
   // if animated, use Animated.View
   // otherwise use regular View
   const Root = animated ? Animated.View : View;
@@ -29,12 +32,19 @@ export function AppCard({
   return (
     // overlay with blur and pressable to close when tapping outside the card
     <Root entering={animated ? FadeIn.duration(200) : undefined} style={styles.overlay}>
-      <BlurView intensity={blurIntensity} tint="light" style={StyleSheet.absoluteFill} />
+      <BlurView
+        intensity={blurIntensity}
+        tint={isDark ? 'dark' : 'light'}
+        style={StyleSheet.absoluteFill}
+      />
       <Pressable style={StyleSheet.absoluteFill} onPress={onClose} />
 
       {/* Card */}
       <View style={[styles.container, containerStyle]}>
-        <Card entering={animated ? FadeIn.duration(250) : undefined} style={[styles.card, style]}>
+        <Card
+          entering={animated ? FadeIn.duration(250) : undefined}
+          style={[styles.card, { backgroundColor: colors.surface }, shadow.soft, style]}
+        >
           {children}
         </Card>
       </View>
@@ -51,10 +61,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   card: {
-    backgroundColor: Colors.surface,
     borderRadius: BorderRadius.xl,
     paddingHorizontal: Spacing.lg,
     paddingVertical: Spacing.lg,
-    ...Shadow.soft,
   },
 });

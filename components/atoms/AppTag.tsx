@@ -1,8 +1,9 @@
 import { Pressable, StyleSheet, View } from 'react-native';
 import { AppText } from '@/components/atoms/AppText';
 import { AppIcon, type IconName } from '@/components/atoms/AppIcon';
-import { BorderRadius, Colors, FontSize, IconSize, Opacity, Spacing } from '@/constants/theme';
-import { darkenHex } from '@/lib/utils';
+import { BorderRadius, FontSize, IconSize, Opacity, Spacing } from '@/constants/theme';
+import { darkenHex, lightenHex, setOpacity } from '@/lib/utils';
+import { useTheme } from '@/providers/theme';
 
 interface AppTagProps {
   icon: IconName;
@@ -23,12 +24,13 @@ export function AppTag({
   selected,
   onPress,
 }: AppTagProps) {
+  const { colors, isDark } = useTheme();
   const isSubtle = variant === 'subtle';
   const isSmall = size === 'sm';
   const hasLabel = label && label.length > 0;
-  const baseColor = color ?? Colors.textMuted;
+  const baseColor = color ?? colors.textMuted;
   const iconSize = isSmall ? IconSize.xs : IconSize.sm;
-  const iconColor = isSubtle ? baseColor : darkenHex(baseColor);
+  const iconColor = isSubtle ? baseColor : isDark ? lightenHex(baseColor) : darkenHex(baseColor);
 
   const content = (
     <View
@@ -36,7 +38,7 @@ export function AppTag({
         styles.container,
         isSmall && styles.containerSm,
         isSubtle && styles.containerSubtle,
-        !isSubtle && color && { backgroundColor: `${color}40` },
+        !isSubtle && color && { backgroundColor: setOpacity(color, isDark ? 0.4 : 0.25) },
         !hasLabel && styles.containerIconOnly,
         selected && color && { borderColor: color },
       ]}
@@ -48,7 +50,12 @@ export function AppTag({
       {hasLabel && (
         <AppText
           numberOfLines={1}
-          style={[styles.label, isSmall && styles.labelSm, isSubtle && { color: baseColor }]}
+          style={[
+            styles.label,
+            { color: colors.textPrimary },
+            isSmall && styles.labelSm,
+            isSubtle && { color: baseColor },
+          ]}
         >
           {label}
         </AppText>
@@ -102,7 +109,6 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: FontSize.sm,
-    color: Colors.textPrimary,
     flexShrink: 1,
   },
   labelSm: {
