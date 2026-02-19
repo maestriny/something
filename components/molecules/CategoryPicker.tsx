@@ -70,7 +70,7 @@ export function CategoryPicker({ selectedId, onSelect, onEdit }: CategoryPickerP
                 selected={isSelected}
                 onPress={() => handleTagPress(category)}
               />
-              {!category.isDefault && (
+              {!category.is_default && (
                 // remove button for non-default categories (default ones can't be deleted)
                 <AppButton
                   iconOnly

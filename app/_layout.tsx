@@ -10,6 +10,7 @@ import { useAppFonts } from '@/hooks/useAppFonts';
 import { useI18n } from '@/hooks/useI18n';
 import { useAuthSession } from '@/hooks/useAuthSession';
 import { useAuthGuard } from '@/hooks/useAuthGuard';
+import { useSync } from '@/hooks/useSync';
 
 export default function RootLayout() {
   const fontsLoaded = useAppFonts();
@@ -31,6 +32,7 @@ export default function RootLayout() {
 
 function RootLayoutContent() {
   useAuthGuard(true);
+  useSync();
   const { colors, isDark } = useTheme();
 
   return (

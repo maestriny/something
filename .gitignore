@@ -5,6 +5,10 @@ node_modules/
 .expo/
 dist/
 
+# Native build directories
+android/
+ios/
+
 # Debug logs
 npm-debug.*
 

@@ -5,5 +5,5 @@ import type { Category } from '@/types/category';
 export function useCategoryLabel() {
   const { t } = useTranslation();
   return (category: Category) =>
-    category.isDefault ? (t as (k: string) => string)(category.name) : category.name;
+    category.is_default ? (t as (k: string) => string)(category.name) : category.name;
 }
