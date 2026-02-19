@@ -39,16 +39,16 @@ export function TodoItem({ todo, onToggle, onPress, drag, isActive }: TodoItemPr
   const { width } = useWindowDimensions();
   const categories = useCategoryStore(s => s.categories);
   const categoryLabel = useCategoryLabel();
-  const category = todo.categoryId ? categories.find(c => c.id === todo.categoryId) : undefined;
+  const category = todo.category_id ? categories.find(c => c.id === todo.category_id) : undefined;
   // due date is urgent if it's within 2 days and not done
-  const isUrgent = todo.dueDate && !todo.done && dayjs(todo.dueDate).diff(dayjs(), 'day') <= 2;
+  const isUrgent = todo.due_date && !todo.done && dayjs(todo.due_date).diff(dayjs(), 'day') <= 2;
   const dueDateColor = isUrgent ? colors.error : colors.textMuted;
 
   // if due date is today, show "today", otherwise show relative time
-  const dueDateLabel = todo.dueDate
-    ? dayjs(todo.dueDate).isToday()
+  const dueDateLabel = todo.due_date
+    ? dayjs(todo.due_date).isToday()
       ? t('todo.detail.today')
-      : dayjs(todo.dueDate).fromNow()
+      : dayjs(todo.due_date).fromNow()
     : '';
 
   const handleToggle = useCallback(() => {
@@ -106,7 +106,7 @@ export function TodoItem({ todo, onToggle, onPress, drag, isActive }: TodoItemPr
         <AppText style={styles.text}>{todo.text}</AppText>
 
         {/* category and due date tags */}
-        {(category || todo.dueDate) && (
+        {(category || todo.due_date) && (
           <View style={styles.tags}>
             {category && (
               <AppTag
@@ -116,7 +116,7 @@ export function TodoItem({ todo, onToggle, onPress, drag, isActive }: TodoItemPr
                 size="sm"
               />
             )}
-            {todo.dueDate && (
+            {todo.due_date && (
               <AppTag
                 icon="IconCalendar"
                 label={dueDateLabel}

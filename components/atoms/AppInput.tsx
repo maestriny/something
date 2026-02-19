@@ -1,4 +1,4 @@
-import { type ReactNode, useState } from 'react';
+import { type ReactNode, useState, forwardRef } from 'react';
 import { TextInput, View, Pressable, StyleSheet, type TextInputProps } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { AppIcon } from './AppIcon';
@@ -14,19 +14,22 @@ interface AppInputProps extends TextInputProps {
   rightSection?: ReactNode;
 }
 
-export function AppInput({
-  label,
-  error,
-  isPassword,
-  variant = 'default',
-  rightSection,
-  style,
-  onFocus,
-  onBlur,
-  textContentType,
-  autoComplete,
-  ...rest
-}: AppInputProps) {
+export const AppInput = forwardRef<TextInput, AppInputProps>(function AppInput(
+  {
+    label,
+    error,
+    isPassword,
+    variant = 'default',
+    rightSection,
+    style,
+    onFocus,
+    onBlur,
+    textContentType,
+    autoComplete,
+    ...rest
+  }: AppInputProps,
+  ref,
+) {
   const { t } = useTranslation();
   const { colors } = useTheme();
   const [isFocused, setIsFocused] = useState(false);
@@ -47,6 +50,7 @@ export function AppInput({
       // minimal: no label, only underline, no error state, no focus state, optional right section
       <View style={[styles.minimalRow, { borderBottomColor: colors.inputBorder }]}>
         <TextInput
+          ref={ref}
           {...rest}
           textContentType={textContentType ?? 'none'}
           autoComplete={autoComplete ?? 'off'}
@@ -77,6 +81,7 @@ export function AppInput({
         ]}
       >
         <TextInput
+          ref={ref}
           {...rest}
           textContentType={textContentType ?? 'none'}
           autoComplete={autoComplete ?? 'off'}
@@ -112,7 +117,7 @@ export function AppInput({
       )}
     </View>
   );
-}
+});
 
 const styles = StyleSheet.create({
   container: {

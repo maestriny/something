@@ -45,3 +45,8 @@ export function setOpacity(hex: string, opacity: number): string {
     .padStart(2, '0');
   return `#${base}${alphaHex}`;
 }
+
+// parse timestamp to ms for safe comparison (handles both "Z" and "+00:00" formats)
+export function toMs(timestamp: string): number {
+  return new Date(timestamp).getTime();
+}

@@ -1,5 +1,5 @@
-import { View, StyleSheet } from 'react-native';
-import { useState, useCallback } from 'react';
+import { View, TextInput, StyleSheet } from 'react-native';
+import { useState, useCallback, useRef } from 'react';
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import DraggableFlatList, { type RenderItemParams } from 'react-native-draggable-flatlist';
@@ -33,6 +33,9 @@ export default function HomeScreen() {
     logout();
   };
 
+  // ref for the text input to focus when clicking add with empty input
+  const inputRef = useRef<TextInput>(null);
+
   // store and state
   const activeTodos = useActiveTodos();
   const addTodo = useTodoStore(s => s.addTodo);
@@ -40,10 +43,13 @@ export default function HomeScreen() {
   const reorderTodos = useTodoStore(s => s.reorderTodos);
   const [inputText, setInputText] = useState('');
 
-  // trim input and add new todo
+  // trim input and add new todo, or focus input if empty
   const handleAdd = useCallback(() => {
     const trimmed = inputText.trim();
-    if (!trimmed) return;
+    if (!trimmed) {
+      inputRef.current?.focus();
+      return;
+    }
     addTodo(trimmed);
     setInputText('');
   }, [inputText, addTodo]);
@@ -92,6 +98,7 @@ export default function HomeScreen() {
       {/* input + add button for new todo item */}
       <View style={styles.inputRow}>
         <AppInput
+          ref={inputRef}
           variant="minimal"
           value={inputText}
           onChangeText={setInputText}

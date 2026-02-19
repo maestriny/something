@@ -8,6 +8,10 @@ import {
   type ProfileUpdate,
   toAppUser,
 } from '@/types/auth';
+import { useTodoStore } from '@/stores/todo';
+import { useCategoryStore } from '@/stores/category';
+import { useSyncStore } from '@/stores/sync';
+import { DEFAULT_CATEGORIES } from '@/constants/categories';
 
 interface AuthState {
   user: User | null;
@@ -87,6 +91,9 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
     try {
       await routes.signOut();
     } finally {
+      useTodoStore.getState()._replace([]);
+      useCategoryStore.getState()._replace(DEFAULT_CATEGORIES);
+      useSyncStore.getState().reset();
       set({
         user: null,
         session: null,

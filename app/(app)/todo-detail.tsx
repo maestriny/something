@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect, useRef } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import { View, TextInput, ScrollView, Keyboard, StyleSheet } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
@@ -28,26 +28,24 @@ export default function TodoDetailScreen() {
 
   // local state for editable fields
   const [text, setText] = useState(todo?.text ?? '');
-  const [dueDate, setDueDate] = useState<string | undefined>(todo?.dueDate);
-  const [categoryId, setCategoryId] = useState<string | undefined>(todo?.categoryId);
+  const [dueDate, setDueDate] = useState<string | undefined>(todo?.due_date ?? undefined);
+  const [categoryId, setCategoryId] = useState<string | undefined>(todo?.category_id ?? undefined);
   // currently expanded section
   const [expandedSection, setExpandedSection] = useState<'date' | 'category' | null>(null);
   const [showCategoryForm, setShowCategoryForm] = useState(false);
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const keyboardHeight = useKeyboardHeight();
 
-  useEffect(() => {
-    if (!todo) {
-      router.back();
-    }
-  }, [todo, router]);
-
   // save changes and go back to home screen
   const handleClose = useCallback(() => {
     if (!todo) return;
     const trimmed = text.trim();
     if (trimmed) {
-      updateTodo(todo.id, { text: trimmed, dueDate, categoryId });
+      updateTodo(todo.id, {
+        text: trimmed,
+        due_date: dueDate || null,
+        category_id: categoryId || null,
+      });
     }
     router.back();
   }, [todo, text, dueDate, categoryId, updateTodo, router]);
@@ -92,7 +90,7 @@ export default function TodoDetailScreen() {
                 onPress={handleClose}
               />
               <AppText style={[styles.createdAt, { color: colors.textMuted }]}>
-                {dayjs(todo.createdAt).format('LL')}
+                {dayjs(todo.created_at).format('LL')}
               </AppText>
             </View>
 
