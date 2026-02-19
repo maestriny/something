@@ -3,6 +3,7 @@ import { useTodoStore } from '@/stores/todo';
 import { useCategoryStore } from '@/stores/category';
 import { useSyncStore } from '@/stores/sync';
 import { useAuthStore } from '@/stores/auth';
+import { toMs } from '@/lib/utils';
 
 interface Syncable {
   id: string;
@@ -23,6 +24,7 @@ function merge<T extends Syncable>(
 ): MergeResult<T> {
   const remoteMap = new Map(remote.map(r => [r.id, r]));
   const pendingSet = new Set(deleteQueue);
+  const lastSyncMs = lastSyncedAt ? toMs(lastSyncedAt) : null;
   const merged: T[] = [];
   const toPush: T[] = [];
 
@@ -33,7 +35,7 @@ function merge<T extends Syncable>(
 
     if (!remoteItem) {
       // not on the server yet
-      if (!lastSyncedAt || localItem.updated_at > lastSyncedAt) {
+      if (!lastSyncMs || toMs(localItem.updated_at) > lastSyncMs) {
         // created or edited offline —> push it to the server
         toPush.push(localItem);
         merged.push(localItem);
@@ -41,8 +43,10 @@ function merge<T extends Syncable>(
       // else:  existed before sync but got deleted on another device -> drop it
     } else {
       // both sides have it —> keep the most recent version
-      if (localItem.updated_at >= remoteItem.updated_at) {
-        if (localItem.updated_at > remoteItem.updated_at) {
+      const localMs = toMs(localItem.updated_at);
+      const remoteMs = toMs(remoteItem.updated_at);
+      if (localMs >= remoteMs) {
+        if (localMs > remoteMs) {
           // local is newer —> send it up
           toPush.push(localItem);
         }

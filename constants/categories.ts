@@ -30,7 +30,7 @@ export const CATEGORY_ICON_NAMES = [
 
 export type CategoryIconName = (typeof CATEGORY_ICON_NAMES)[number];
 
-// fixed edited_at for default categories so they don't get treated as new/updated items on every sync
+// fixed updated_at for default categories so they don't get treated as new/updated items on every sync
 const DEFAULT_UPDATED_AT = '2025-01-01T00:00:00.000Z';
 
 export const DEFAULT_CATEGORIES: Category[] = [
