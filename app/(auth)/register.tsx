@@ -10,9 +10,8 @@ import { AppButton } from '@/components/atoms/AppButton';
 import { AppFormInput } from '@/components/form/AppFormInput';
 import { AuthPrompt } from '@/components/molecules/AuthPrompt';
 import { useWave } from '@/providers/waves';
-import { useToast } from '@/providers/toast';
 import { useAuthStore } from '@/stores/auth';
-import { getAuthError } from '@/api/errors';
+import { toast } from '@/lib/toast';
 import { Colors, Spacing } from '@/constants/theme';
 import { useKeyboardScroll } from '@/hooks/useKeyboardScroll';
 import { Routes } from '@/constants/routes';
@@ -21,7 +20,6 @@ import { createRegisterSchema, type RegisterFormData } from '@/lib/schemas/regis
 export default function RegisterScreen() {
   const router = useRouter();
   const { setScreen } = useWave();
-  const { showToast } = useToast();
   const { t } = useTranslation();
   const registerUser = useAuthStore(s => s.register);
 
@@ -57,19 +55,13 @@ export default function RegisterScreen() {
         email: data.email.trim(),
         password: data.password,
       });
-      showToast({
-        type: 'success',
+      toast.success({
         message: t('register.toast.successMessage'),
         description: t('register.toast.successDescription'),
       });
       router.replace(Routes.auth.login);
     } catch (error) {
-      const { title, description } = getAuthError(error);
-      showToast({
-        type: 'error',
-        message: t(title),
-        description: t(description),
-      });
+      toast.error(error);
     }
   };
 

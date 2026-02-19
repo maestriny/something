@@ -9,9 +9,8 @@ import { AppFormInput } from '@/components/form/AppFormInput';
 import { ConfirmDialog } from '@/components/molecules/ConfirmDialog';
 import { ScreenLayout } from '@/components/layout/ScreenLayout';
 import { useAuthStore } from '@/stores/auth';
-import { useToast } from '@/providers/toast';
 import { useWaveTransition } from '@/providers/waveTransition';
-import { getAuthError } from '@/api/errors';
+import { toast } from '@/lib/toast';
 import { Routes } from '@/constants/routes';
 import { Spacing } from '@/constants/theme';
 import { createAccountInfoSchema, type AccountInfoFormData } from '@/lib/schemas/accountInfo';
@@ -19,7 +18,6 @@ import { createAccountInfoSchema, type AccountInfoFormData } from '@/lib/schemas
 export default function AccountInfoScreen() {
   const router = useRouter();
   const { t } = useTranslation();
-  const { showToast } = useToast();
   const { startTransition } = useWaveTransition();
   const user = useAuthStore(s => s.user);
   const updateProfile = useAuthStore(s => s.updateProfile);
@@ -47,8 +45,7 @@ export default function AccountInfoScreen() {
     Keyboard.dismiss();
     try {
       await updateProfile({ username: data.username, email: data.email });
-      showToast({
-        type: 'success',
+      toast.success({
         message: t('settings.accountInfo.toast.successMessage'),
         description: emailChanged(data)
           ? t('settings.accountInfo.toast.emailConfirmation')
@@ -58,20 +55,14 @@ export default function AccountInfoScreen() {
     } catch (error) {
       // supabase sends the confirmation email but returns 500 — treat as success
       if (emailChanged(data) && (error as { status?: number }).status === 500) {
-        showToast({
-          type: 'success',
+        toast.success({
           message: t('settings.accountInfo.toast.successMessage'),
           description: t('settings.accountInfo.toast.emailConfirmation'),
         });
         router.back();
         return;
       }
-      const { title, description } = getAuthError(error);
-      showToast({
-        type: 'error',
-        message: t(title),
-        description: t(description),
-      });
+      toast.error(error);
     }
   };
 
@@ -81,12 +72,7 @@ export default function AccountInfoScreen() {
       startTransition(router, Routes.auth.login);
       await deleteAccount();
     } catch (error) {
-      const { title, description } = getAuthError(error);
-      showToast({
-        type: 'error',
-        message: t(title),
-        description: t(description),
-      });
+      toast.error(error);
     }
   };
 

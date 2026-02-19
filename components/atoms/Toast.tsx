@@ -1,7 +1,8 @@
+import { useSyncExternalStore } from 'react';
 import { StyleSheet, View } from 'react-native';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 import { AppText } from './AppText';
-import { useToast } from '@/providers/toast';
+import { toast } from '@/lib/toast';
 import { Colors, Fonts, BorderRadius, Spacing, Shadow } from '@/constants/theme';
 
 const TOAST_COLORS = {
@@ -10,9 +11,9 @@ const TOAST_COLORS = {
 } as const;
 
 export function Toast() {
-  const { toast } = useToast();
+  const data = useSyncExternalStore(toast.subscribe, () => toast.current);
 
-  if (!toast) return null;
+  if (!data) return null;
 
   return (
     <View style={styles.overlay} pointerEvents="box-none">
@@ -21,16 +22,16 @@ export function Toast() {
         exiting={FadeOut.duration(200)}
         style={[
           styles.toast,
-          { backgroundColor: toast.color ?? TOAST_COLORS[toast.type] },
+          { backgroundColor: data.color ?? TOAST_COLORS[data.type] },
           Shadow.soft,
         ]}
       >
         <AppText variant="body" style={styles.title}>
-          {toast.message}
+          {data.message}
         </AppText>
-        {toast.description && (
+        {data.description && (
           <AppText variant="caption" style={styles.description}>
-            {toast.description}
+            {data.description}
           </AppText>
         )}
       </Animated.View>

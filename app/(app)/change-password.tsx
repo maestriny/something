@@ -8,8 +8,7 @@ import { AppButton } from '@/components/atoms/AppButton';
 import { AppFormInput } from '@/components/form/AppFormInput';
 import { ScreenLayout } from '@/components/layout/ScreenLayout';
 import { useAuthStore } from '@/stores/auth';
-import { useToast } from '@/providers/toast';
-import { getAuthError } from '@/api/errors';
+import { toast } from '@/lib/toast';
 import { Spacing } from '@/constants/theme';
 import { useKeyboardScroll } from '@/hooks/useKeyboardScroll';
 import {
@@ -20,7 +19,6 @@ import {
 export default function ChangePasswordScreen() {
   const router = useRouter();
   const { t } = useTranslation();
-  const { showToast } = useToast();
   const updatePassword = useAuthStore(s => s.updatePassword);
 
   const scrollRef = useKeyboardScroll(Spacing.xl);
@@ -46,19 +44,13 @@ export default function ChangePasswordScreen() {
         currentPassword: data.currentPassword,
         newPassword: data.newPassword,
       });
-      showToast({
-        type: 'success',
+      toast.success({
         message: t('settings.changePassword.toast.successMessage'),
         description: t('settings.changePassword.toast.successDescription'),
       });
       router.back();
     } catch (error) {
-      const { title, description } = getAuthError(error);
-      showToast({
-        type: 'error',
-        message: t(title),
-        description: t(description),
-      });
+      toast.error(error);
     }
   };
 
