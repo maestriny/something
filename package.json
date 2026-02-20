@@ -30,7 +30,7 @@
     "@react-native-community/netinfo": "11.4.1",
     "@react-native-picker/picker": "2.11.1",
     "@supabase/supabase-js": "^2.95.3",
-    "@tabler/icons-react-native": "^3.36.1",
+    "@tabler/icons-react-native": "^3.37.1",
     "dayjs": "^1.11.19",
     "expo": "~54.0.33",
     "expo-blur": "~15.0.8",
