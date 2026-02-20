@@ -55,7 +55,11 @@ export default function ChangePasswordScreen() {
   };
 
   return (
-    <ScreenLayout title={t('settings.changePassword.heading')} leftButton="back">
+    <ScreenLayout
+      title={t('settings.changePassword.heading')}
+      subtitle={t('settings.changePassword.subheading')}
+      leftButton="back"
+    >
       <ScrollView
         ref={scrollRef}
         style={styles.scroll}
@@ -119,7 +123,7 @@ const styles = StyleSheet.create({
   },
   content: {
     paddingHorizontal: Spacing.lg,
-    paddingTop: Spacing.xxl,
+    paddingTop: Spacing.xl + Spacing.xs,
   },
   button: {
     marginTop: Spacing.sm,

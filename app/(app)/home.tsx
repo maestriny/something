@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
   emptyContainer: {
     flex: 1,
     justifyContent: 'center',
-    paddingBottom: Spacing.xxl * 2,
+    paddingBottom: Spacing.xxl * 4,
   },
   emptyText: {
     textAlign: 'center',

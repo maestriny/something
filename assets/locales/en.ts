@@ -108,7 +108,7 @@ const en = {
     },
   },
   todo: {
-    heading: 'To Do',
+    heading: 'To do',
     placeholder: 'Add item',
     add: 'Add',
     completed: 'Done',
@@ -154,6 +154,7 @@ const en = {
     accountInfo: {
       label: 'Account',
       heading: 'Account',
+      subheading: "Here's what we know about you",
       labels: {
         username: 'Username',
         email: 'Email',
@@ -177,8 +178,9 @@ const en = {
       },
     },
     changePassword: {
-      label: 'Change Password',
-      heading: 'Change Password',
+      label: 'Change password',
+      heading: 'Change password',
+      subheading: 'Keep your account secure',
       labels: {
         currentPassword: 'Current Password',
         newPassword: 'New Password',

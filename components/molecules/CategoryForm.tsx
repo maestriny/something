@@ -53,8 +53,8 @@ export function CategoryForm({ onDone }: CategoryFormProps) {
   );
 
   return (
-    <View style={styles.form}>
-      <ScrollView>
+    <View style={[styles.form, { backgroundColor: colors.surface }]}>
+      <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
         {/* Category name */}
         <AppFormInput
           control={control}
@@ -62,7 +62,6 @@ export function CategoryForm({ onDone }: CategoryFormProps) {
           variant="minimal"
           placeholder={t('categories.namePlaceholder')}
           maxLength={20}
-          autoFocus
         />
 
         {/* Color Picker */}
@@ -100,18 +99,19 @@ export function CategoryForm({ onDone }: CategoryFormProps) {
 
 const styles = StyleSheet.create({
   form: {
-    paddingTop: Spacing.md - Spacing.xxs,
-    paddingHorizontal: Spacing.md,
+    paddingHorizontal: Spacing.sm,
     gap: Spacing.sm,
   },
   label: {
     fontSize: FontSize.xs,
     marginTop: Spacing.xs,
   },
+  scrollContent: {
+    marginTop: Spacing.md,
+  },
   actions: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
     gap: Spacing.md,
-    marginTop: Spacing.sm,
   },
 });
