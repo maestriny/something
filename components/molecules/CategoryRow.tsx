@@ -1,4 +1,5 @@
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
+import Animated, { FadeIn } from 'react-native-reanimated';
 import { useTranslation } from 'react-i18next';
 import { AppRow } from '@/components/atoms/AppRow';
 import { AppTag } from '@/components/atoms/AppTag';
@@ -6,6 +7,7 @@ import { CategoryPicker } from '@/components/molecules/CategoryPicker';
 import { useCategoryStore } from '@/stores/category';
 import { useCategoryLabel } from '@/hooks/useCategoryLabel';
 import { Spacing } from '@/constants/theme';
+import { useTheme } from '@/providers/theme';
 
 interface CategoryRowProps {
   categoryId: string | undefined;
@@ -25,6 +27,7 @@ export function CategoryRow({
   disabled,
 }: CategoryRowProps) {
   const { t } = useTranslation();
+  const { colors } = useTheme();
   const categoryLabel = useCategoryLabel();
   const categories = useCategoryStore(s => s.categories);
 
@@ -54,9 +57,12 @@ export function CategoryRow({
 
       {/* Category picker */}
       {expanded && (
-        <View style={styles.pickerContainer}>
+        <Animated.View
+          entering={FadeIn.duration(200)}
+          style={[styles.pickerContainer, { backgroundColor: colors.surface }]}
+        >
           <CategoryPicker selectedId={categoryId} onSelect={onCategoryChange} onEdit={onEdit} />
-        </View>
+        </Animated.View>
       )}
     </>
   );

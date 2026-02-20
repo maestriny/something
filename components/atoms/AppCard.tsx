@@ -1,6 +1,13 @@
 import type { ReactNode } from 'react';
-import { View, Pressable, StyleSheet, type StyleProp, type ViewStyle } from 'react-native';
-import Animated, { FadeIn } from 'react-native-reanimated';
+import {
+  View,
+  Pressable,
+  StyleSheet,
+  type LayoutChangeEvent,
+  type StyleProp,
+  type ViewStyle,
+} from 'react-native';
+import Animated, { type AnimatedStyle, FadeIn } from 'react-native-reanimated';
 import { BlurView } from 'expo-blur';
 import { BorderRadius, Spacing } from '@/constants/theme';
 import { useTheme } from '@/providers/theme';
@@ -9,8 +16,9 @@ interface AppCardProps {
   onClose: () => void;
   blurIntensity?: number;
   animated?: boolean;
-  containerStyle?: StyleProp<ViewStyle>;
+  containerStyle?: StyleProp<AnimatedStyle<ViewStyle>>;
   style?: StyleProp<ViewStyle>;
+  onCardLayout?: (event: LayoutChangeEvent) => void;
   children: ReactNode;
 }
 
@@ -20,6 +28,7 @@ export function AppCard({
   animated,
   containerStyle,
   style,
+  onCardLayout,
   children,
 }: AppCardProps) {
   const { colors, isDark, shadow } = useTheme();
@@ -40,14 +49,15 @@ export function AppCard({
       <Pressable style={StyleSheet.absoluteFill} onPress={onClose} />
 
       {/* Card */}
-      <View style={[styles.container, containerStyle]}>
+      <Animated.View style={[styles.container, containerStyle]}>
         <Card
+          onLayout={onCardLayout}
           entering={animated ? FadeIn.duration(250) : undefined}
-          style={[styles.card, { backgroundColor: colors.surface }, shadow.soft, style]}
+          style={[styles.shadowWrapper, shadow.soft, style]}
         >
-          {children}
+          <View style={[styles.card, { backgroundColor: colors.surface }]}>{children}</View>
         </Card>
-      </View>
+      </Animated.View>
     </Root>
   );
 }
@@ -60,9 +70,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
   },
+  shadowWrapper: {
+    borderRadius: BorderRadius.xl,
+  },
   card: {
     borderRadius: BorderRadius.xl,
     paddingHorizontal: Spacing.lg,
     paddingVertical: Spacing.lg,
+    overflow: 'hidden',
   },
 });

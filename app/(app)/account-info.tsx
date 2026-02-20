@@ -77,7 +77,11 @@ export default function AccountInfoScreen() {
   };
 
   return (
-    <ScreenLayout title={t('settings.accountInfo.heading')} leftButton="back">
+    <ScreenLayout
+      title={t('settings.accountInfo.heading')}
+      subtitle={t('settings.accountInfo.subheading')}
+      leftButton="back"
+    >
       <ScrollView
         style={styles.scroll}
         contentContainerStyle={styles.content}
@@ -147,7 +151,7 @@ const styles = StyleSheet.create({
   content: {
     flexGrow: 1,
     paddingHorizontal: Spacing.lg,
-    paddingTop: Spacing.xxl,
+    paddingTop: Spacing.xl + Spacing.xs,
   },
   button: {
     marginTop: Spacing.sm,

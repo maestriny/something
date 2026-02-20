@@ -1,5 +1,5 @@
 export const WavesHeight = {
-  top: 190,
+  top: 180,
   bottom: 100,
 } as const;
 

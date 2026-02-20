@@ -1,5 +1,6 @@
 import { useCallback, useState } from 'react';
 import { View, Platform, StyleSheet } from 'react-native';
+import Animated, { FadeIn } from 'react-native-reanimated';
 import { useTranslation } from 'react-i18next';
 import DateTimePicker, { type DateTimePickerEvent } from '@react-native-community/datetimepicker';
 import { AppRow } from '@/components/atoms/AppRow';
@@ -39,7 +40,9 @@ export function DueDateRow({
       />
 
       {expanded && (
-        <DueDatePicker dueDate={dueDate} onDueDateChange={onDueDateChange} onToggle={onToggle} />
+        <Animated.View entering={FadeIn.duration(200)}>
+          <DueDatePicker dueDate={dueDate} onDueDateChange={onDueDateChange} onToggle={onToggle} />
+        </Animated.View>
       )}
     </>
   );
@@ -74,7 +77,7 @@ function DueDatePicker({ dueDate, onDueDateChange, onToggle }: DueDatePickerProp
   return (
     <>
       {/* Date picker */}
-      <View style={styles.datePickerWrapper}>
+      <View style={[styles.datePickerWrapper, { backgroundColor: colors.surface }]}>
         <DateTimePicker
           value={date}
           mode="date"

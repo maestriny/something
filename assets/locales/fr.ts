@@ -110,7 +110,7 @@ const fr: Translations = {
     },
   },
   todo: {
-    heading: 'To Do',
+    heading: 'To do',
     placeholder: 'Ajouter un \u00e9l\u00e9ment',
     add: 'Ajouter',
     completed: 'Compl\u00e9t\u00e9es',
@@ -156,6 +156,7 @@ const fr: Translations = {
     accountInfo: {
       label: 'Compte',
       heading: 'Compte',
+      subheading: 'Voici ce que nous savons de vous',
       labels: {
         username: "Nom d'utilisateur",
         email: 'Email',
@@ -181,6 +182,7 @@ const fr: Translations = {
     changePassword: {
       label: 'Changer le mot de passe',
       heading: 'Changer le mot de passe',
+      subheading: 'Protégez votre compte',
       labels: {
         currentPassword: 'Mot de passe actuel',
         newPassword: 'Nouveau mot de passe',

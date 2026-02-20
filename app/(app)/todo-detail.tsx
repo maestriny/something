@@ -10,10 +10,11 @@ import { DueDateRow } from '@/components/molecules/DueDateRow';
 import { CategoryRow } from '@/components/molecules/CategoryRow';
 import { CategoryForm } from '@/components/molecules/CategoryForm';
 import { useTodoStore } from '@/stores/todo';
-import { useKeyboardHeight } from '@/hooks/useKeyboardHeight';
+import Animated, { FadeIn } from 'react-native-reanimated';
 import dayjs from '@/lib/dayjs';
 import { Fonts, FontSize, Spacing } from '@/constants/theme';
 import { useTheme } from '@/providers/theme';
+import { useKeyboardShift } from '@/hooks/useKeyboardShift';
 
 export default function TodoDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -34,7 +35,7 @@ export default function TodoDetailScreen() {
   const [expandedSection, setExpandedSection] = useState<'date' | 'category' | null>(null);
   const [showCategoryForm, setShowCategoryForm] = useState(false);
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
-  const keyboardHeight = useKeyboardHeight();
+  const { animatedStyle: containerAnimatedStyle, onLayout: onCardLayout } = useKeyboardShift();
 
   // save changes and go back to home screen
   const handleClose = useCallback(() => {
@@ -70,12 +71,8 @@ export default function TodoDetailScreen() {
       <AppCard
         onClose={handleClose}
         animated
-        containerStyle={
-          keyboardHeight > 0 && {
-            justifyContent: 'flex-end',
-            paddingBottom: keyboardHeight + Spacing.lg,
-          }
-        }
+        containerStyle={containerAnimatedStyle}
+        onCardLayout={onCardLayout}
         style={styles.card}
       >
         {!showCategoryForm ? (
@@ -96,10 +93,11 @@ export default function TodoDetailScreen() {
 
             <ScrollView
               ref={scrollRef}
-              scrollEnabled={expandedSection !== null} // only allow scrolling when a section is expanded
+              scrollEnabled
               showsVerticalScrollIndicator={false}
               keyboardShouldPersistTaps="handled"
               style={styles.scrollView}
+              contentContainerStyle={styles.scrollContent}
             >
               {/* Todo text */}
               <TextInput
@@ -113,7 +111,6 @@ export default function TodoDetailScreen() {
                 multiline
                 autoCapitalize="none"
                 maxLength={220}
-                autoFocus
               />
 
               {/* Due date row */}
@@ -148,7 +145,10 @@ export default function TodoDetailScreen() {
             </View>
           </>
         ) : (
-          <View style={{ backgroundColor: colors.surface }}>
+          <Animated.View
+            entering={FadeIn.duration(200)}
+            style={{ backgroundColor: colors.surface }}
+          >
             {/* Category Form subscreen */}
             <View style={[styles.header, styles.formHeader]}>
               <AppButton
@@ -165,7 +165,7 @@ export default function TodoDetailScreen() {
                 setShowCategoryForm(false);
               }}
             />
-          </View>
+          </Animated.View>
         )}
       </AppCard>
 
@@ -190,13 +190,16 @@ const styles = StyleSheet.create({
     maxHeight: '90%',
   },
   scrollView: {
-    flexGrow: 0,
+    flexShrink: 1,
+  },
+  scrollContent: {
+    marginVertical: Spacing.lg,
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: Spacing.xl,
+    marginBottom: Spacing.sm,
   },
   createdAt: {
     fontSize: FontSize.sm,
@@ -206,7 +209,7 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.regular,
     minHeight: Spacing.xxl,
     textAlignVertical: 'top',
-    marginBottom: Spacing.md,
+    marginBottom: Spacing.sm,
   },
   formHeader: {
     marginBottom: Spacing.sm,
@@ -215,6 +218,5 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    marginTop: Spacing.xl,
   },
 });
