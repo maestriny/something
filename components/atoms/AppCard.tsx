@@ -53,9 +53,9 @@ export function AppCard({
         <Card
           onLayout={onCardLayout}
           entering={animated ? FadeIn.duration(250) : undefined}
-          style={[styles.card, { backgroundColor: colors.surface }, shadow.soft, style]}
+          style={[styles.shadowWrapper, shadow.soft, style]}
         >
-          {children}
+          <View style={[styles.card, { backgroundColor: colors.surface }]}>{children}</View>
         </Card>
       </Animated.View>
     </Root>
@@ -69,6 +69,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
+  },
+  shadowWrapper: {
+    borderRadius: BorderRadius.xl,
   },
   card: {
     borderRadius: BorderRadius.xl,
