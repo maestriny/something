@@ -87,7 +87,7 @@ async function scheduleMorningBriefing(pendingTodos: Todo[]): Promise<void> {
     content: {
       title: i18n.t('notifications.morningBriefing.title'),
       body,
-      ...(Platform.OS === 'android' && { channelId: CHANNEL_DAILY }),
+      ...(Platform.OS === 'android' ? { channelId: CHANNEL_DAILY } : {}),
     },
     trigger: {
       type: Notifications.SchedulableTriggerInputTypes.DAILY,
@@ -113,7 +113,7 @@ function scheduleAtMorning(
     content: {
       title: i18n.t(titleKey),
       body: i18n.t(bodyKey, { task: taskText }),
-      ...(Platform.OS === 'android' && { channelId: CHANNEL_REMINDER }),
+      ...(Platform.OS === 'android' ? { channelId: CHANNEL_REMINDER } : {}),
     },
     trigger: {
       type: Notifications.SchedulableTriggerInputTypes.DATE,

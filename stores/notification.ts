@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface NotificationState {
   enabled: boolean;
+  hasHydrated: boolean;
 }
 
 interface NotificationActions {
@@ -16,12 +17,17 @@ export const useNotificationStore = create<NotificationStore>()(
   persist(
     set => ({
       enabled: true,
+      hasHydrated: false,
 
       setEnabled: (enabled: boolean) => set({ enabled }),
     }),
     {
       name: 'notification-storage',
       storage: createJSONStorage(() => AsyncStorage),
+      partialize: ({ hasHydrated, ...rest }) => rest,
+      onRehydrateStorage: () => () => {
+        useNotificationStore.setState({ hasHydrated: true });
+      },
     },
   ),
 );
