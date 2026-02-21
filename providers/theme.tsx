@@ -17,7 +17,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   const preference = useThemeStore(s => s.preference);
   const setPreference = useThemeStore(s => s.setPreference);
 
-  const isDark = systemScheme === 'dark' || preference === 'dark';
+  const isDark = preference === 'system' ? systemScheme === 'dark' : preference === 'dark';
 
   const colors = isDark ? colorSchemes.dark : colorSchemes.light;
 
@@ -35,8 +35,8 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   );
 
   const toggleTheme = useCallback(() => {
-    setPreference(preference === 'dark' ? 'system' : 'dark');
-  }, [preference, setPreference]);
+    setPreference(preference !== 'system' ? 'system' : isDark ? 'light' : 'dark');
+  }, [preference, isDark, setPreference]);
 
   const value = useMemo<ThemeContextValue>(
     () => ({ colors, isDark, shadow, toggleTheme }),
