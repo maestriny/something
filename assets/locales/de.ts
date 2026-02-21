@@ -43,12 +43,12 @@ const de: Translations = {
     heading: 'Konto erstellen',
     subheading: 'Lass uns loslegen',
     labels: {
-      username: 'Benutzername',
+      username: 'Name',
       email: 'E-Mail',
       password: 'Passwort',
     },
     placeholders: {
-      username: 'Wie sollen wir dich nennen?',
+      username: 'Dein Name',
       email: 'deine@email.com',
       password: 'Mindestens 8 Zeichen',
     },
@@ -158,11 +158,11 @@ const de: Translations = {
       heading: 'Konto',
       subheading: 'Das wissen wir über dich',
       labels: {
-        username: 'Benutzername',
+        username: 'Name',
         email: 'E-Mail',
       },
       placeholders: {
-        username: 'Dein Benutzername',
+        username: 'Dein Name',
         email: 'deine@email.com',
       },
       validation: {
@@ -220,6 +220,25 @@ const de: Translations = {
     darkMode: 'Dunkelmodus',
     notifications: 'Benachrichtigungen',
     language: 'Sprache',
+  },
+  notifications: {
+    channels: {
+      daily: 'Tägliche Übersicht',
+      reminder: 'Aufgaben-Erinnerungen',
+    },
+    morningBriefing: {
+      title: 'Guten Morgen!',
+      body: 'Du hast heute {{total}} Aufgaben auf deiner Liste.',
+      bodyWithUrgent: 'Du hast heute {{total}} Dinge zu tun, {{urgent}} davon laufen bald ab.',
+    },
+    taskDueTomorrow: {
+      title: 'Kleine Erinnerung',
+      body: '"{{task}}" ist morgen fällig. Du hast noch Zeit!',
+    },
+    taskOverdue: {
+      title: 'Etwas verpasst?',
+      body: '"{{task}}" war gestern fällig. Es ist noch nicht zu spät!',
+    },
   },
   input: {
     passwordHint: 'Passwortfeld, Eingabe ist verborgen',

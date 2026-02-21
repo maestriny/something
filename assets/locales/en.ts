@@ -41,12 +41,12 @@ const en = {
     heading: 'Create account',
     subheading: "Let's get you started",
     labels: {
-      username: 'Username',
+      username: 'Name',
       email: 'Email',
       password: 'Password',
     },
     placeholders: {
-      username: 'What should we call you?',
+      username: 'Your name',
       email: 'your@email.com',
       password: 'At least 8 characters',
     },
@@ -156,11 +156,11 @@ const en = {
       heading: 'Account',
       subheading: "Here's what we know about you",
       labels: {
-        username: 'Username',
+        username: 'Name',
         email: 'Email',
       },
       placeholders: {
-        username: 'Your username',
+        username: 'Your name',
         email: 'your@email.com',
       },
       validation: {
@@ -218,6 +218,25 @@ const en = {
     darkMode: 'Dark Mode',
     notifications: 'Notifications',
     language: 'Language',
+  },
+  notifications: {
+    channels: {
+      daily: 'Daily Briefing',
+      reminder: 'Task Reminders',
+    },
+    morningBriefing: {
+      title: 'Good morning!',
+      body: 'You have {{total}} tasks on your list today.',
+      bodyWithUrgent: 'You have {{total}} things to do today, {{urgent}} are due soon.',
+    },
+    taskDueTomorrow: {
+      title: 'Gentle reminder',
+      body: '"{{task}}" is due tomorrow. You still have time!',
+    },
+    taskOverdue: {
+      title: 'Did you miss something?',
+      body: '"{{task}}" was due yesterday. Still time to get it done!',
+    },
   },
   input: {
     passwordHint: 'Password field, input is hidden',

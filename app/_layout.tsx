@@ -9,6 +9,7 @@ import { WaveTransitionOverlay } from '@/components/atoms/WaveTransitionOverlay'
 import { useAppReady } from '@/hooks/useAppReady';
 import { useAuthGuard } from '@/hooks/useAuthGuard';
 import { useSync } from '@/hooks/useSync';
+import { useNotifications } from '@/hooks/useNotifications';
 
 export default function RootLayout() {
   const isReady = useAppReady();
@@ -29,6 +30,7 @@ export default function RootLayout() {
 function RootLayoutContent() {
   useAuthGuard(true);
   useSync();
+  useNotifications();
   const { colors, isDark } = useTheme();
 
   return (

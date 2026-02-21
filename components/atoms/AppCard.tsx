@@ -49,7 +49,7 @@ export function AppCard({
       <Pressable style={StyleSheet.absoluteFill} onPress={onClose} />
 
       {/* Card */}
-      <Animated.View style={[styles.container, containerStyle]}>
+      <Animated.View style={[styles.container, containerStyle]} pointerEvents="box-none">
         <Card
           onLayout={onCardLayout}
           entering={animated ? FadeIn.duration(250) : undefined}

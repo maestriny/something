@@ -1,3 +1,7 @@
+import dayjs from '@/lib/dayjs';
+import { URGENT_THRESHOLD_DAYS } from '@/constants/notifications';
+import type { Todo } from '@/types/todo';
+
 export const USERNAME_REGEX = /^[a-zA-Z0-9]+(?:\s[a-zA-Z0-9]+)*$/;
 export const USERNAME_MAX_LENGTH = 20;
 
@@ -8,6 +12,14 @@ export const PASSWORD_REGEX = {
   number: /[0-9]/,
   special: /[^A-Za-z0-9]/,
 } as const;
+
+export function isUrgent(todo: Todo): boolean {
+  return (
+    todo.due_date !== null &&
+    !todo.done &&
+    dayjs(todo.due_date).diff(dayjs(), 'day') <= URGENT_THRESHOLD_DAYS
+  );
+}
 
 export function capitalize(str: string): string {
   if (!str) return str;

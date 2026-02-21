@@ -109,7 +109,7 @@ export default function TodoDetailScreen() {
                 selectionColor={colors.primary}
                 style={[styles.textInput, { color: colors.textPrimary }]}
                 multiline
-                autoCapitalize="none"
+                autoCapitalize="sentences"
                 maxLength={220}
               />
 

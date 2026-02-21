@@ -43,12 +43,12 @@ const fr: Translations = {
     heading: 'Créer un compte',
     subheading: 'Commençons',
     labels: {
-      username: "Nom d'utilisateur",
+      username: 'Nom',
       email: 'Email',
       password: 'Mot de passe',
     },
     placeholders: {
-      username: 'Quel petit nom pour toi ?',
+      username: 'Ton nom',
       email: 'votre@email.com',
       password: 'Au moins 8 caractères',
     },
@@ -158,11 +158,11 @@ const fr: Translations = {
       heading: 'Compte',
       subheading: 'Voici ce que nous savons de vous',
       labels: {
-        username: "Nom d'utilisateur",
+        username: 'Nom',
         email: 'Email',
       },
       placeholders: {
-        username: "Votre nom d'utilisateur",
+        username: 'Ton nom',
         email: 'votre@email.com',
       },
       validation: {
@@ -221,6 +221,26 @@ const fr: Translations = {
     darkMode: 'Mode sombre',
     notifications: 'Notifications',
     language: 'Langue',
+  },
+  notifications: {
+    channels: {
+      daily: 'Résumé quotidien',
+      reminder: 'Rappels de tâches',
+    },
+    morningBriefing: {
+      title: 'Bonjour !',
+      body: "Tu as {{total}} tâches sur ta liste aujourd'hui.",
+      bodyWithUrgent:
+        "Tu as {{total}} choses à faire aujourd'hui, dont {{urgent}} arrivent à échéance.",
+    },
+    taskDueTomorrow: {
+      title: 'Petit rappel',
+      body: '"{{task}}" est pour demain. Tu as encore le temps !',
+    },
+    taskOverdue: {
+      title: 'Tu as oublié quelque chose ?',
+      body: '"{{task}}" devait être faite hier. Il est encore temps !',
+    },
   },
   input: {
     passwordHint: 'Champ mot de passe, le texte est masqué',
