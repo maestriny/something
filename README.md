@@ -2,9 +2,11 @@
 
 A tiny todo app built with React Native and Expo.
 
+<p>
   <img src="assets/splash-icon.png" alt="Splash light" width="180" />
   &nbsp;&nbsp;&nbsp;&nbsp;
   <img src="assets/splash-icon-dark.png" alt="Splash dark" width="180" />
+</p>
 
 ## Features
 
