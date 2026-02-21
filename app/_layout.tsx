@@ -6,18 +6,14 @@ import { ThemeProvider, useTheme } from '@/providers/theme';
 import { WaveTransitionProvider } from '@/providers/waveTransition';
 import { Toast } from '@/components/atoms/Toast';
 import { WaveTransitionOverlay } from '@/components/atoms/WaveTransitionOverlay';
-import { useAppFonts } from '@/hooks/useAppFonts';
-import { useI18n } from '@/hooks/useI18n';
-import { useAuthSession } from '@/hooks/useAuthSession';
+import { useAppReady } from '@/hooks/useAppReady';
 import { useAuthGuard } from '@/hooks/useAuthGuard';
 import { useSync } from '@/hooks/useSync';
 
 export default function RootLayout() {
-  const fontsLoaded = useAppFonts();
-  const i18nReady = useI18n();
-  const isSessionReady = useAuthSession();
+  const isReady = useAppReady();
 
-  if (!fontsLoaded || !i18nReady || !isSessionReady) {
+  if (!isReady) {
     return null;
   }
 

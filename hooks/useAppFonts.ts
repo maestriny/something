@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 
@@ -15,12 +14,6 @@ export function useAppFonts() {
     'Sora-Bold': require('../assets/fonts/Sora-Bold.ttf'),
     'Sora-ExtraBold': require('../assets/fonts/Sora-ExtraBold.ttf'),
   });
-
-  useEffect(() => {
-    if (fontsLoaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [fontsLoaded]);
 
   return fontsLoaded;
 }
