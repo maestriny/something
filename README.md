@@ -1,4 +1,4 @@
-# <img src="assets/logos.png" alt="something logo" width="40" style="margin-right: 8px; vertical-align: middle;" /> something (todo)
+# <img src="assets/logos.png" alt="something logo" width="40" align="center" />  something (todo)
 
 A tiny todo app built with React Native and Expo.
 
