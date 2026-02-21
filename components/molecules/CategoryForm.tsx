@@ -62,6 +62,7 @@ export function CategoryForm({ onDone }: CategoryFormProps) {
           variant="minimal"
           placeholder={t('categories.namePlaceholder')}
           maxLength={20}
+          autoCapitalize="sentences"
         />
 
         {/* Color Picker */}

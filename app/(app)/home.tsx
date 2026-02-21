@@ -105,7 +105,7 @@ export default function HomeScreen() {
           placeholder={t('todo.placeholder')}
           onSubmitEditing={handleAdd}
           returnKeyType="done"
-          autoCapitalize="none"
+          autoCapitalize="sentences"
           maxLength={220}
           rightSection={
             <AppButton

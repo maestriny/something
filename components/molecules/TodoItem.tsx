@@ -14,6 +14,7 @@ import { AppTag } from '@/components/atoms/AppTag';
 import { useCategoryStore } from '@/stores/category';
 import { useCategoryLabel } from '@/hooks/useCategoryLabel';
 import dayjs from '@/lib/dayjs';
+import { isUrgent } from '@/lib/utils';
 import { useTranslation } from 'react-i18next';
 import { Opacity, Spacing } from '@/constants/theme';
 import { useTheme } from '@/providers/theme';
@@ -40,9 +41,7 @@ export function TodoItem({ todo, onToggle, onPress, drag, isActive }: TodoItemPr
   const categories = useCategoryStore(s => s.categories);
   const categoryLabel = useCategoryLabel();
   const category = todo.category_id ? categories.find(c => c.id === todo.category_id) : undefined;
-  // due date is urgent if it's within 2 days and not done
-  const isUrgent = todo.due_date && !todo.done && dayjs(todo.due_date).diff(dayjs(), 'day') <= 2;
-  const dueDateColor = isUrgent ? colors.error : colors.textMuted;
+  const dueDateColor = isUrgent(todo) ? colors.error : colors.textMuted;
 
   // if due date is today, show "today", otherwise show relative time
   const dueDateLabel = todo.due_date

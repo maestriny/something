@@ -10,6 +10,7 @@ A tiny todo app built with React Native and Expo.
 - Cloud sync with Supabase (multi-device support)
 - Multi-language support (EN, IT, DE, ES, FR)
 - Dark mode support
+- Smart notifications (daily briefing, due date reminders, overdue nudges)
 
 ## Tech Stack
 

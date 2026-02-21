@@ -8,6 +8,7 @@ import { SettingsRow } from '@/components/atoms/SettingsRow';
 import { LanguagePicker } from '@/components/molecules/LanguagePicker';
 import { ScreenLayout } from '@/components/layout/ScreenLayout';
 import { useAuthStore } from '@/stores/auth';
+import { useNotificationStore } from '@/stores/notification';
 import { useWaveTransition } from '@/providers/waveTransition';
 import { useTheme } from '@/providers/theme';
 import { Routes } from '@/constants/routes';
@@ -21,8 +22,8 @@ export default function SettingsScreen() {
   const router = useRouter();
   const { t } = useTranslation();
 
-  // TODO: notifications is just a placeholder for now
-  const [notifications, setNotifications] = useState(true);
+  const notifications = useNotificationStore(s => s.enabled);
+  const setNotifications = useNotificationStore(s => s.setEnabled);
   const [showLangPicker, setShowLangPicker] = useState(false);
 
   const handleLogout = () => {

@@ -43,12 +43,12 @@ const es: Translations = {
     heading: 'Crear cuenta',
     subheading: 'Empecemos',
     labels: {
-      username: 'Nombre de usuario',
+      username: 'Nombre',
       email: 'Correo electrónico',
       password: 'Contraseña',
     },
     placeholders: {
-      username: '¿Cómo quieres que te llamemos?',
+      username: 'Tu nombre',
       email: 'tu@email.com',
       password: 'Al menos 8 caracteres',
     },
@@ -158,11 +158,11 @@ const es: Translations = {
       heading: 'Cuenta',
       subheading: 'Esto es lo que sabemos de ti',
       labels: {
-        username: 'Nombre de usuario',
+        username: 'Nombre',
         email: 'Correo electrónico',
       },
       placeholders: {
-        username: 'Tu nombre de usuario',
+        username: 'Tu nombre',
         email: 'tu@email.com',
       },
       validation: {
@@ -220,6 +220,25 @@ const es: Translations = {
     darkMode: 'Modo oscuro',
     notifications: 'Notificaciones',
     language: 'Idioma',
+  },
+  notifications: {
+    channels: {
+      daily: 'Resumen diario',
+      reminder: 'Recordatorios de tareas',
+    },
+    morningBriefing: {
+      title: '¡Buenos días!',
+      body: 'Tienes {{total}} tareas en tu lista hoy.',
+      bodyWithUrgent: 'Hoy tienes {{total}} cosas por hacer, {{urgent}} están por vencer.',
+    },
+    taskDueTomorrow: {
+      title: 'Pequeño recordatorio',
+      body: '"{{task}}" vence mañana. ¡Aún tienes tiempo!',
+    },
+    taskOverdue: {
+      title: '¿Se te pasó algo?',
+      body: '"{{task}}" venció ayer. ¡Todavía estás a tiempo!',
+    },
   },
   input: {
     passwordHint: 'Campo de contraseña, el texto está oculto',
