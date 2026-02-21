@@ -35,8 +35,8 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   );
 
   const toggleTheme = useCallback(() => {
-    setPreference(isDark ? 'light' : 'dark');
-  }, [isDark, setPreference]);
+    setPreference(preference !== 'system' ? 'system' : isDark ? 'light' : 'dark');
+  }, [preference, isDark, setPreference]);
 
   const value = useMemo<ThemeContextValue>(
     () => ({ colors, isDark, shadow, toggleTheme }),

@@ -18,6 +18,13 @@ import { useKeyboardShift } from '@/hooks/useKeyboardShift';
 
 export default function TodoDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
+
+  if (!id) return null;
+
+  return <TodoDetailContent key={id} id={id} />;
+}
+
+function TodoDetailContent({ id }: { id: string }) {
   const { t } = useTranslation();
   const router = useRouter();
   const { colors } = useTheme();
