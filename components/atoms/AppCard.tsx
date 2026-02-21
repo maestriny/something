@@ -3,6 +3,7 @@ import {
   View,
   Pressable,
   StyleSheet,
+  Platform,
   type LayoutChangeEvent,
   type StyleProp,
   type ViewStyle,
@@ -41,11 +42,15 @@ export function AppCard({
   return (
     // overlay with blur and pressable to close when tapping outside the card
     <Root entering={animated ? FadeIn.duration(200) : undefined} style={styles.overlay}>
-      <BlurView
-        intensity={blurIntensity}
-        tint={isDark ? 'dark' : 'light'}
-        style={StyleSheet.absoluteFill}
-      />
+      {Platform.OS === 'ios' ? (
+        <BlurView
+          intensity={blurIntensity}
+          tint={isDark ? 'dark' : 'light'}
+          style={StyleSheet.absoluteFill}
+        />
+      ) : (
+        <View style={[StyleSheet.absoluteFill, { backgroundColor: colors.overlay }]} />
+      )}
       <Pressable style={StyleSheet.absoluteFill} onPress={onClose} />
 
       {/* Card */}

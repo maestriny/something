@@ -1,4 +1,4 @@
-import { View, StyleSheet, Animated } from 'react-native';
+import { View, StyleSheet, Animated, Platform } from 'react-native';
 import { useEffect, useRef } from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { NavigationBar } from './NavigationBar';
@@ -51,7 +51,13 @@ export function ScreenLayout({
 
   return (
     <View
-      style={[styles.container, { paddingTop: insets.top, backgroundColor: colors.background }]}
+      style={[
+        styles.container,
+        {
+          paddingTop: insets.top + (Platform.OS === 'android' ? Spacing.lg + Spacing.xxs : 0),
+          backgroundColor: colors.background,
+        },
+      ]}
     >
       {/* background waves */}
       <Wave position="top" />

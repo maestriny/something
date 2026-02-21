@@ -63,11 +63,21 @@ function DueDatePicker({ dueDate, onDueDateChange, onToggle }: DueDatePickerProp
   const parsed = dueDate ? new Date(dueDate) : now;
   const [date, setDate] = useState<Date>(parsed < now ? now : parsed);
 
-  const handleDateChange = useCallback((_event: DateTimePickerEvent, selectedDate?: Date) => {
-    if (selectedDate) {
-      setDate(selectedDate);
-    }
-  }, []);
+  const handleDateChange = useCallback(
+    (event: DateTimePickerEvent, selectedDate?: Date) => {
+      if (Platform.OS === 'android') {
+        if (event.type === 'set' && selectedDate) {
+          onDueDateChange(selectedDate.toISOString());
+        }
+        onToggle();
+        return;
+      }
+      if (selectedDate) {
+        setDate(selectedDate);
+      }
+    },
+    [onDueDateChange, onToggle],
+  );
 
   const handleConfirm = useCallback(() => {
     onDueDateChange(date.toISOString());
@@ -89,14 +99,16 @@ function DueDatePicker({ dueDate, onDueDateChange, onToggle }: DueDatePickerProp
         />
       </View>
 
-      {/* Confirm button */}
-      <AppButton
-        title={t('common.confirm')}
-        variant="primary"
-        size="md"
-        onPress={handleConfirm}
-        style={styles.confirm}
-      />
+      {/* Confirm button (ios only, android confirms via native modal) */}
+      {Platform.OS === 'ios' && (
+        <AppButton
+          title={t('common.confirm')}
+          variant="primary"
+          size="md"
+          onPress={handleConfirm}
+          style={styles.confirm}
+        />
+      )}
     </>
   );
 }
